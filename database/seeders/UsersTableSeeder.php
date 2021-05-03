@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+use Faker\Factory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -14,11 +15,18 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create();
+
         DB::table('users')->insert([
-            'name' => 'Admin Admin',
-            'email' => 'admin@argon.com',
+            'name' => 'Admin',
+            'email' => 'admin@localhost.com',
             'email_verified_at' => now(),
             'password' => Hash::make('secret'),
+            'first_name' => $faker->firstNameMale,
+            'last_name' => $faker->lastName,
+            'phone' => $faker->phoneNumber,
+            'birth_date' => $faker->date(),
+            'gender' => 'Masculino',
             'created_at' => now(),
             'updated_at' => now()
         ]);
