@@ -8,8 +8,10 @@
             <div class="card">
               <!-- Card header -->
               <div class="card-header border-0 d-flex justify-content-between">
-                <h3 class="mb-0">Lista de estudiantes</h3>
-                <a href= {{ url('student/create', []) }}  class="btn btn-primary"><span class="fa fa-plus"></span> Nuevo alumno</a>
+                <h3 class="mb-0">Lista de los turnos</h3>
+                <a class="btn btn-primary" href={{ url('school/turn/new', []) }}>
+                    <span class="fa fa-plus text-white"> Añadir nuevo turno</span>
+                </a>
               </div>
               <!-- Light table -->
               <div class="table-responsive">
@@ -17,36 +19,18 @@
                   <thead class="thead-light">
                     <tr>
                       <th scope="col" class="sort" data-sort="name">Id</th>
-                      <th scope="col" class="sort" data-sort="budget">Codigo</th>
-                      <th scope="col" class="sort" data-sort="status">Nombres</th>
-                      <th scope="col" class="sort" data-sort="status">Apellidos</th>
-                      <th scope="col" class="sort" data-sort="status">Telefono</th>
-                      <th scope="col" class="sort" data-sort="status">Fecha de nacimiento</th>
-                      <th scope="col"></th>
+                      <th scope="col" class="sort" data-sort="budget">Nombre del turno</th>
                     </tr>
                   </thead>
                   <tbody class="list">
-                    @foreach ($students as $student)
+                    @foreach ($turns as $student)
                     <tr>
                       <th scope="row">
                         {{$student->id}}
                       </th>
                       <th scope="row">
-                        {{$student->code}}
+                        {{$student->name}}
                       </th>
-                      <th scope="row">
-                        {{$student->user->first_name}}
-                      </th>
-                      <th scope="row">
-                        {{$student->user->last_name}}
-                      </th>
-                      <th scope="row">
-                        {{$student->user->phone}}
-                      </th>
-                      <th scope="row">
-                        {{$student->user->birth_date}}
-                      </th>
-
                       <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,8 +45,6 @@
                       </td>
                     </tr>
                     @endforeach
-                   
-                   
                   </tbody>
                 </table>
               </div>

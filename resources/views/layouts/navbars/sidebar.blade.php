@@ -82,22 +82,22 @@
                     <a class="nav-link" href="{{ route('home') }}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
-                </li>
+                </li> 
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples-1" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples-1">
+                    <a class="nav-link active" href="#navbar-examples-1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-1">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Alumnos') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples-1">
+                    <div class="collapse " id="navbar-examples-1">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
+                                <a class="nav-link" href="{{ route('student.list') }}">
                                     {{ __('Listado de alumnos') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
+                                <a class="nav-link" href="{{ route('student.create') }}">
                                     {{ __('Nuevos alumnos') }}
                                 </a>
                             </li>
@@ -110,12 +110,12 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples-2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples-2">
+                    <a class="nav-link active" href="#navbar-examples-2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-2">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Maestros') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples-2">
+                    <div class="collapse " id="navbar-examples-2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('profile.edit') }}">
@@ -136,16 +136,31 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples-3">
+                    <a class="nav-link active" href="#navbar-examples-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-3">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Configuración del centro') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples-3">
+                    <div class="collapse " id="navbar-examples-3">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
-                                    {{ __('Configuraciones generales') }}
+                                <a class="nav-link" href="{{ route('school.setting') }}">
+                                    {{ __('Configuraciones generales del centro') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('school.courses') }}">
+                                    {{ __('Grados') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('school.turns') }}">
+                                    {{ __('Turnos') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('school.turns') }}">
+                                    {{ __('Asignaturas') }}
                                 </a>
                             </li>
                             <li class="nav-item">

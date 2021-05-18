@@ -40,5 +40,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('student/detail/{id}', ['as' => 'student.detail', 'uses'=>'App\Http\Controllers\StudentController@detail']);
 	Route::post('student/create', ['as' => 'student.create', 'uses'=>'App\Http\Controllers\StudentController@create']);
 
+	#SchoolRoutes
+	Route::get('school/setting', ['as' => 'school.setting', 'uses' => 'App\Http\Controllers\SchoolInformationController@index']);
+	Route::post('school/create', ['as' => 'school.create', 'uses'=>'App\Http\Controllers\SchoolInformationController@create']);
+
+	#SchoolCourse
+	Route::get('school/courses', ['as' => 'school.courses', 'uses' => 'App\Http\Controllers\CourseController@index']);
+	Route::get('school/courses/new', function() {return view('new_course');});
+	Route::post('school/courses/new', ['as' => 'school.course.new', 'uses' => 'App\Http\Controllers\CourseController@create']);
+
+	#SchoolTurn
+	Route::get('school/turns', ['as' => 'school.turns', 'uses' => 'App\Http\Controllers\TurnController@index']);
+	Route::get('school/turn/new', function() {return view('new_turn');});
+	Route::post('school/turn/new', ['as' => 'school.course.new', 'uses' => 'App\Http\Controllers\TurnController@create']);
+
 });
 
