@@ -2,13 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Student;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class StudentGeneratorSeed extends Seeder
+class TeacherSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,7 +18,7 @@ class StudentGeneratorSeed extends Seeder
     {
         //
         $count = 0;
-        $faker = Factory::create();
+        $faker = Factory::create('es_ES');
         for ($i=0; $i < 100; $i++) { 
                 
                 $first_name = $faker->firstNameMale;
@@ -39,12 +38,12 @@ class StudentGeneratorSeed extends Seeder
                     'updated_at' => now()
                 ]);
 
-                $student = $user->student()->create([
-                    'code' => rand(1000000, 4000000),
+                $student = $user->teacher()->create([
+                    'inss' => rand(1000000, 4000000),
                     'general_observation' => 'test'
                 ]);
                 $count = $count + 1;
-                error_log('Estudiante -> '. $count);
+                error_log('maestro configurado ->'. $count);
         }
     }
 }

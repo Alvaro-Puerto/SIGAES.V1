@@ -8,8 +8,8 @@
             <div class="card">
               <!-- Card header -->
               <div class="card-header border-0 d-flex justify-content-between">
-                <h3 class="mb-0">Lista de estudiantes</h3>
-                <a href= {{ url('student/create', []) }}  class="btn btn-primary"><span class="fa fa-plus"></span> Nuevo alumno</a>
+                <h3 class="mb-0">Lista de maestros</h3>
+                <a href= {{ url('teacher/new', []) }}  class="btn btn-primary"><span class="fa fa-plus"></span> Nuevo maestro</a>
               </div>
               <!-- Light table -->
               <div class="table-responsive">
@@ -26,25 +26,25 @@
                     </tr>
                   </thead>
                   <tbody class="list">
-                    @foreach ($students as $student)
+                    @foreach ($teacher as $teacher)
                     <tr>
                       <th scope="row">
-                        {{$student->id}}
+                        {{$teacher->id}}
                       </th>
                       <th scope="row">
-                        {{$student->code}}
+                        {{$teacher->code}}
                       </th>
                       <th scope="row">
-                        {{$student->user->first_name}}
+                        {{$teacher->user->first_name}}
                       </th>
                       <th scope="row">
-                        {{$student->user->last_name}}
+                        {{$teacher->user->last_name}}
                       </th>
                       <th scope="row">
-                        {{$student->user->phone}}
+                        {{$teacher->user->phone}}
                       </th>
                       <th scope="row">
-                        {{$student->user->birth_date}}
+                        {{$teacher->user->birth_date}}
                       </th>
 
                       <td class="text-right">
@@ -53,7 +53,7 @@
                             <i class="fas fa-ellipsis-v text-primary"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="{{ route('student.detail', ['id'=>$student->id]) }}"  >Ver detalles</a>
+                            <a class="dropdown-item" href="{{ route('teacher.detail', ['id'=>$teacher->id]) }}"  >Ver detalles</a>
                          
                           </div>
                         </div>

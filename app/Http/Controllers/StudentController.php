@@ -40,4 +40,19 @@ class StudentController extends Controller
         error_log($student);
         return view('student_detail')->with(['student' => $student]);
     }
+
+    public function updatePhoto(Request $request) {
+        $user = Student::find($request->id)->user;
+       
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+      $path = $request->file('file')->store('student_picture');
+      $user->picture = $path;
+      $user->save();
+    
+      return back($status = 302);
+    
+    }
 }

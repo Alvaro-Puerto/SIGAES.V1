@@ -9,12 +9,10 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-3 order-lg-2">
                         <div class="card-profile-image">
-                            @if ($student->user->picture)
                             <a href="#">
-                              <img src="{{ url($student->user->picture) }}" alt="" title="" />
-                            </a>      
-                            @else
-                            @endif
+                                {{-- <img src="{{ url($teacher->user->picture) }}" alt="" title="" />
+                                 --}}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -37,23 +35,23 @@
                     </div>
                     <div class="text-center">
                         <h3>
-                           {{$student->user->name}}
+                           {{$teacher->user->name}}
                         </h3>
                         <h3>
-                            {{$student->code}}
+                            {{$teacher->inss}}
                          </h3>
                         <div class="h5 font-weight-300">
-                            {{$student->user->birth_date}}
+                            {{$teacher->user->birth_date}}
                         </div>
                         <div class="h5 font-weight-300">
-                            {{$student->user->gender}}
+                            {{$teacher->user->gender}}
                         </div>
                         <div class="h5 mt-4">
-                            {{$student->user->email}}
+                            {{$teacher->user->email}}
                         </div>
                         
                         <hr class="my-4" />
-                    <p>{{$student->general_observation}}</p>
+                    <p>{{$teacher->general_observation}}</p>
                         <a href="#">{{ __('Show more') }}</a>
                     </div>
                 </div>
@@ -736,7 +734,7 @@
             <form method="POST" enctype="multipart/form-data" action="{{url('student/update/photo')}}">
                 @csrf
                 <div class="form-group">
-                    <input type="number" value={{$student->id}} class="custom-file-input" hidden name="id" >
+                    <input type="number" value={{$teacher->id}} class="custom-file-input" hidden name="id" >
                 </div>
                 <div class="form-group">
                     <div class="custom-file">

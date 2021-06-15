@@ -18,11 +18,14 @@ class SchoolInformationController extends Controller
     }
 
     public function create(Request $request) {
+        $data = $request->all();
+        if(!$request->id) {
+            $data['id'] = 1;
+        }
         SchoolInformation::updateOrCreate(
-            ['id' => $request->id],
-            $request->all()
+            ['id' => $data['id']],
+            $data
         );
-
-        return view('dashboard');
+        return redirect('school/setting');
     }
 }

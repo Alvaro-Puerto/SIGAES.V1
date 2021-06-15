@@ -17,9 +17,12 @@ class TurnController extends Controller
     }
 
     public function index() {
-        $turns = $this->school->turn;
-
-        return view('list_turn', ['turns' => $turns]);
+        if($this->school) {
+            $turns = $this->school->turn;
+            return view('list_turn', ['turns' => $turns]);
+        } else {
+            return redirect('school/setting');
+        }
     }
 
     public function create(Request $request) {

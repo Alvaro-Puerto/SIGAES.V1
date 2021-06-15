@@ -16,7 +16,7 @@
             <div class="form-row">
                 <div class="form-group col-12">
                     <label for="">Id</label>
-                <input type="text" class="form-control" name="id" id="id" value="{{$school->id}}" disabled>
+                    <input type="text" class="form-control" name="id" id="id" value="{{$school->id}}" disabled>
                 </div>
                 <div class="form-group col-6">
                     <label for="">Nombre del centro</label>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group d-flex justify-content-end">
+                <div class="form-group col-12 d-flex justify-content-end">
                     <button class="btn btn-danger">Cancelar</button>
                     <button class="btn btn-success" type="submit">Guardar</button>
                 </div>
