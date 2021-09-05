@@ -31,4 +31,9 @@ class CourseController extends Controller
 
         return Redirect::to('school/courses');
     }
+
+    public function delete($id) {
+        Course::find($id)->delete();
+        return Redirect::to('school/courses');
+    }
 }

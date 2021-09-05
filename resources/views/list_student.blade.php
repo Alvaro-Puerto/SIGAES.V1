@@ -2,18 +2,65 @@
 
 @section('content')
 @include('layouts.headers.cards')
-  <div class="container-fluid mt-6">
-      <div class="row mt-6">
+  <div class="container-fluid mt-2">
+      <div class="row mt-2">
           <div class="col">
             <div class="card">
               <!-- Card header -->
-              <div class="card-header border-0 d-flex justify-content-between">
-                <h3 class="mb-0">Lista de estudiantes</h3>
-                <a href= {{ url('student/create', []) }}  class="btn btn-primary"><span class="fa fa-plus"></span> Nuevo alumno</a>
+              <div class="card-header border-0 ">
+                <div class="row">
+                  <div class="col-4">
+                    <h3 class="mb-0">Lista de estudiantes</h3>
+                  </div>
+                  <div class="col-8 d-flex justify-content-end">
+                    
+                    <button class="btn btn-link mr--3" id="btn-cancel-search"  onclick="hide_or_show(), reload_app()">
+                      <span>
+                        <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                        Cancelar busqúeda
+                      </span>
+                    </button>
+                    <button class="btn btn-link" onclick="hide_or_show()" id="btn-search">
+                      <span><i class="fas fa-search text-warning"></i></span>
+                    </button>
+                    <a href={{ url('student/export')}} class="btn btn-link"> 
+                      <span><i class="fas fa-download text-success"></i></span>
+                      Imprimir reporte
+                    </a>
+                    <a href= {{ url('student/create', []) }}  class="btn btn-primary"><span class="fa fa-plus"></span> Nuevo alumno</a>
+                  </div>
+                </div>
+                
+                
+              </div>
+              <div class="card-header" id="search-student">
+                <form >
+                  <meta name="_token" content="{{ csrf_token() }}">
+                  <div class="form-row">
+                    <div class="form-group col-3">
+                      <label for="">Codigo</label>
+                      <input class="form-control rounded-0 border" name="code" id="input-code">
+                    </div>
+                    <div class="form-group col-4">
+                      <label for="">Nombres</label>
+                      <input class="form-control rounded-0 border" name="first_name" id="input-name">
+                    </div>
+                    <div class="form-group col-4">
+                      <label for="">Apellidos</label>
+                      <input class="form-control rounded-0 border" name="last_name" id="input-last-name">
+                    </div>
+                    <div class="form-group col-1 pt-2">
+                      <button class="btn btn-warning mt-4" type="button" onclick="get_data_form()">
+                        Buscar
+                      </button>
+                    </div>
+                  </div>
+                </form>
+                
               </div>
               <!-- Light table -->
               <div class="table-responsive">
-                <table class="table align-items-center table-flush">
+                <table class="table align-items-center table-flush" id="table-student">
                   <thead class="thead-light">
                     <tr>
                       <th scope="col" class="sort" data-sort="name">Id</th>
@@ -25,7 +72,7 @@
                       <th scope="col" class="sort" data-sort="status">Acciones</th>
                     </tr>
                   </thead>
-                  <tbody class="list">
+                  <tbody class="list" id="tbody-student">
                     @foreach ($students as $student)
                     <tr>
                       <th scope="row">
@@ -58,6 +105,7 @@
                           </div>
                         </div>
                       </td>
+                     
                     </tr>
                     @endforeach
                    
@@ -100,4 +148,6 @@
 @push('js')
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+    
 @endpush
+<script type="text/javascript" src="{{asset('assets/js/student_validation.js')}}"></script>

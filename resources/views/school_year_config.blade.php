@@ -2,8 +2,8 @@
 
 @section('content')
 @include('layouts.headers.cards')
-<div class="container-fluid  mt--6">
-   <div class="card mt--6">
+<div class="container-fluid  mt-2">
+   <div class="card mt-2">
         <div class="card-header">
             <p class="font-weight-bold">Configuracion del curso</p>
             <small >Nombre del ciclo</small>

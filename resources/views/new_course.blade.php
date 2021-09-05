@@ -3,7 +3,7 @@
 @section('content')
 @include('layouts.headers.cards')
 <div class="container-fluid">
-    <div class="card mt--6">
+    <div class="card mt-2">
         <div class="card-header">
             <p class="font-weight-bold">Nuevo curso</p>
         </div>

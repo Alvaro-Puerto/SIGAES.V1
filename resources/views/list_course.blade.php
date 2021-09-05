@@ -2,8 +2,8 @@
 
 @section('content')
 @include('layouts.headers.cards')
-  <div class="container-fluid mt-6">
-      <div class="row mt-6">
+  <div class="container-fluid mt-2">
+      <div class="row mt-2">
           <div class="col">
             <div class="card">
               <!-- Card header -->
@@ -21,21 +21,23 @@
                       <th scope="col" class="sort" data-sort="name">Id</th>
                       <th scope="col" class="sort" data-sort="budget">Nombre del curso</th>
                       <th scope="col" class="sort" data-sort="status">Capacidad</th>
+                      <th scope="col" class="sort" data-sort="status">Acciones</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody class="list">
-                    @foreach ($course as $student)
+                    @foreach ($course as $course)
                     <tr>
                       <th scope="row">
-                        {{$student->id}}
+                        {{$course->id}}
                       </th>
                       <th scope="row">
-                        {{$student->name}}
+                        {{$course->name}}
                       </th>
                       <th scope="row">
-                        {{$student->capacity}}
+                        {{$course->capacity}}
                       </th>
-                      <td class="text-right">
+                      <td class="text-cemter">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v"></i>
@@ -46,6 +48,13 @@
                             <a class="dropdown-item" href="#">Something else here</a>
                           </div>
                         </div>
+                      </td>
+                      <td>
+                        <form action="{{ route('school.course.delete', $course->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                        </form>
                       </td>
                     </tr>
                     @endforeach

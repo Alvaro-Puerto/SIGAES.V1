@@ -2,8 +2,8 @@
 
 @section('content')
 @include('layouts.headers.cards')
-  <div class="container-fluid mt-6">
-      <div class="row mt-6">
+  <div class="container-fluid mt-2">
+      <div class="row mt-2">
           <div class="col">
             <div class="card">
               <!-- Card header -->
@@ -20,18 +20,20 @@
                     <tr>
                       <th scope="col" class="sort" data-sort="name">Id</th>
                       <th scope="col" class="sort" data-sort="budget">Nombre del turno</th>
+                      <th scope="col" class="sort text-center" data-sort="budget">Acciones</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody class="list">
-                    @foreach ($turns as $student)
+                    @foreach ($turns as $turn)
                     <tr>
                       <th scope="row">
-                        {{$student->id}}
+                        {{$turn->id}}
                       </th>
                       <th scope="row">
-                        {{$student->name}}
+                        {{$turn->name}}
                       </th>
-                      <td class="text-right">
+                      <td class="text-center">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v"></i>
@@ -42,6 +44,13 @@
                             <a class="dropdown-item" href="#">Something else here</a>
                           </div>
                         </div>
+                      </td>
+                      <td>
+                        <form action="{{ route('school.turn.delete', $turn->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                        </form>
                       </td>
                     </tr>
                     @endforeach

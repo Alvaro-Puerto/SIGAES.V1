@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StudentExport;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -37,6 +39,7 @@ class StudentController extends Controller
     public function detail($id) {
         $student = Student::find($id);
         $student->user;
+        $student->enrollement;
         error_log($student);
         return view('student_detail')->with(['student' => $student]);
     }
@@ -54,5 +57,16 @@ class StudentController extends Controller
     
       return back($status = 302);
     
+    }
+
+    public function export() {
+        return Excel::download(new StudentExport, 'users.xlsx');
+
+    }
+
+    public function search(Request $request) {
+        if($request->ajax) {
+            
+        }
     }
 }

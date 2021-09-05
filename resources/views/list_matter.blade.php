@@ -2,8 +2,8 @@
 
 @section('content')
 @include('layouts.headers.cards')
-  <div class="container-fluid mt-6">
-      <div class="row mt-6">
+  <div class="container-fluid mt-2">
+      <div class="row mt-2">
           <div class="col">
             <div class="card">
               <!-- Card header -->

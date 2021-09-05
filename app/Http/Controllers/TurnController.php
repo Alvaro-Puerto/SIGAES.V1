@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SchoolInformation;
+use App\Models\Turn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -31,6 +32,11 @@ class TurnController extends Controller
             $request->all()
         );
 
+        return Redirect::to('school/turns');
+    }
+
+    public function delete($id) {
+        Turn::find($id)->delete();
         return Redirect::to('school/turns');
     }
 }

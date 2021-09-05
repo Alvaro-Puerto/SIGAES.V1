@@ -2,7 +2,7 @@
 
 @section('content')
 @include('layouts.headers.cards')
-<div class="container mt--6">
+<div class="container mt-2">
     <div class="card">
         <div class="card-header">
             <p class="font-weight-bold">

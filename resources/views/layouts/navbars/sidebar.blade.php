@@ -1,4 +1,4 @@
-<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light " id="sidenav-main" style="background-color: #88d8f0">
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light " id="sidenav-main" >
     <div class="container-fluid">
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,8 +86,8 @@
                 </li>  --}}
                 <li class="nav-item">
                     <a class="nav-link active" href="#navbar-examples-1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-1">
-                        <i class="fab fa-laravel" style="color: white;"></i>
-                        <span class="nav-link-text" style="color: white;">{{ __('Alumnos') }}</span>
+                        <i class="fas fa-users"></i>
+                        <span class="nav-link-text" style="color: #f4645f;" >{{ __('Alumnos') }}</span>
                     </a>
                     <div class="collapse " id="navbar-examples-1">
                         <ul class="nav nav-sm flex-column">
@@ -149,6 +149,16 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('level.list') }}">
+                                    {{ __('Nivel/Programa') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('modality.list') }}">
+                                    {{ __('Modalidad') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('school.courses') }}">
                                     {{ __('Grados') }}
                                 </a>
@@ -188,11 +198,11 @@
                                     {{ __('Año lectivo') }}
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('student.create') }}">
                                     {{ __('Semetre') }}
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user.index') }}">
                                     {{ __('Horarios') }}

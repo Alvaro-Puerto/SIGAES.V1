@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TeacherExport;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TeacherController extends Controller
 {
@@ -45,5 +47,9 @@ class TeacherController extends Controller
     
       return back($status = 302);
     
+    }
+
+    public function report() {
+        return Excel::download(new TeacherExport, 'teachers.xlsx');
     }
 }

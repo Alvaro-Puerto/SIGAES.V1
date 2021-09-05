@@ -2,13 +2,14 @@
 
 @section('content')
 @include('layouts.headers.cards')
-  <div class="container-fluid mt-6">
-      <div class="row mt-6">
+  <div class="container-fluid mt-2">
+      <div class="row mt-2">
           <div class="col">
             <div class="card">
               <!-- Card header -->
               <div class="card-header border-0 d-flex justify-content-between">
                 <h3 class="mb-0">Lista de maestros</h3>
+                <a href= {{ url('teacher/export') }}  class="btn btn-link"><span class="fa fa-plus"></span> Exportar a excel</a>
                 <a href= {{ url('teacher/new', []) }}  class="btn btn-primary"><span class="fa fa-plus"></span> Nuevo maestro</a>
               </div>
               <!-- Light table -->

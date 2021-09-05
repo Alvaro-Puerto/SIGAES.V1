@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MatterExport;
 use App\Models\Matter;
 use App\Models\SchoolInformation;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MatterController extends Controller
 {
@@ -50,4 +52,7 @@ class MatterController extends Controller
         return view('matter_detail', ['matter' => $matter]);
     }
 
+    public function report() {
+        return Excel::download(new  MatterExport, 'materias.xlsx');
+    }
 }
