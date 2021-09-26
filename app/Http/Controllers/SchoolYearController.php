@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\SchoolInformation;
 use App\Models\SchoolYear;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class SchoolYearController extends Controller
 {
@@ -16,10 +18,19 @@ class SchoolYearController extends Controller
     }
 
     public function create(Request $request) {
-        $this->school->years()->updateOrCreate(
-            ["id" => $request->id] ,
-            $request->all()
-        );
+        if($this->school) {
+            try {
+                $this->school->years()->updateOrCreate(
+                    ["id" => $request->id] ,
+                    $request->all()
+                );
+            } catch (QueryException $th) {
+                return Redirect::back()->withErrors(['msg' => 'Completa los datos por favor']);
+            }
+        } else {
+            return redirect('error/information/school/not_found');
+        }
+        
 
         return redirect('school/year');
     }

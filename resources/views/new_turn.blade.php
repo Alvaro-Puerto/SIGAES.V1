@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="card mt-2">
         <div class="card-header">
-            <p class="font-weight-bold">Nuevo curso</p>
+            <p class="font-weight-bold">Nuevo turno escolar</p>
         </div>
         <div class="card-body">
             <form  method="post" action="{{url('school/turn/new')}}">

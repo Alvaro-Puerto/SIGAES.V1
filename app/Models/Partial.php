@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Partial extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'semester_id',
+        'name',
+        'format',
+        'value'
+    ];
 }

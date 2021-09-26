@@ -27,11 +27,15 @@ class TurnController extends Controller
     }
 
     public function create(Request $request) {
-        $this->school->turn()->updateOrCreate(
-            ['id' => $request->id],
-            $request->all()
-        );
-
+        if($this->school) {
+            $this->school->turn()->updateOrCreate(
+                ['id' => $request->id],
+                $request->all()
+            );
+        } else {
+            return redirect('error/information/school/not_found');
+        }
+        
         return Redirect::to('school/turns');
     }
 

@@ -53,7 +53,15 @@ class User extends Authenticatable
         return $this->hasOne(Student::class);
     }
 
+    public function fullName() {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
     public function teacher() {
         return $this->hasOne(Teacher::class);
+    }
+
+    public function tutor() {
+        return $this->hasOne(ParentStudent::class);
     }
 }

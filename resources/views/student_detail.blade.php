@@ -92,7 +92,7 @@
                                         <th scope="col" class="sort" data-sort="status">Grado</th>
                                         <th scope="col"  class="sort" data-sort="status">Nivel/Programa</th>
                                         <th scope="col" class="sort" data-sort="completion">Modalidad</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" class="sort" data-sort="completion">Fecha de matricula</th>
                                       </tr>
                                     </thead>
                                     <tbody class="list" >
@@ -103,6 +103,7 @@
                                             <td>{{$item->course->name}}</td>
                                             <td>{{$item->level->name}}</td>
                                             <td>{{$item->modality->name}}</td>
+                                            <td>{{$item->created_at}}</td>
                                           </tr>
                                       @endforeach
                                       {{-- <tr>
@@ -717,7 +718,56 @@
                                   </table>
                                 </div>
                           </div>
-                          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae expedita quam tempora cum ipsam! Libero ipsum atque, voluptas aliquid officiis laborum omnis culpa nostrum neque saepe ullam. Labore, reiciendis consequatur.</div>
+                          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="card">
+                              <div class="card-header d-flex justify-content-end">
+                                <a href="{{route('tutor.select', ["id" => $student->id])}}" class="btn btn-primary">
+                                  <span>
+                                    <i class="fa fa-plus text-white" aria-hidden="true"></i>
+                                  </span>
+                                  Añadir tutor
+                                </a>
+                              </div>
+                              <div class="card-body">
+                                <div class="card-deck">
+                                  @foreach ($student->tutor as $tutor)
+                                  <div class="card">
+                                    <div class="card-header">
+                                        <p class="text-dark font-weight-bold">
+                                            Informacion del tutor
+                                        </p>
+                                    </div>
+                                    <div class="card-body">
+                                        <small class="d-block">Cedula de identidad.</small>
+                                        <p class="">{{$tutor->user->dni}}</p>
+                                        <small class="d-block">Nombres completos.</small>
+                                        <p class="">{{$tutor->user->fullName()}}</p>
+                                        <small class="d-block">Email.</small>
+                                        <p class="">{{$tutor->user->email}}</p>
+                                        <small class="d-block">Fecha de nacimiento</small>
+                                        <p class="">{{$tutor->user->birth_date}}</p>
+                                        <small class="d-block">Sexo</small>
+                                        <p class="">{{$tutor->user->gender}}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                      <form action="{{ route('tutor.detach', ["id_student" => $student->id, "id_tutor" => $tutor->id])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit">
+                                          <span>
+                                            <i class="fa fa-times text-white" aria-hidden="true"></i>
+                                          </span>
+                                          Quitar vinculo
+                                        </button>
+                                      </form>
+                                      
+                                    </div>
+                                  </div>
+                                  @endforeach
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                   </div>
                   
@@ -749,11 +799,11 @@
                 <div class="form-group">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="customFile" name="file" >
-                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <label class="custom-file-label" for="customFile">Selecciona la nueva foto</label>
                     </div>
                 </div>
                 <div class="form-group d-flex justify-content-end">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                     <button type="submit"  class="btn btn-primary">Actualizar</button>   
                 </div>
             </form>

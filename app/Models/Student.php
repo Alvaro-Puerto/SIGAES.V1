@@ -21,4 +21,9 @@ class Student extends Model
     public function enrollement() {
         return $this->hasMany(Enrollement::class);
     }
+
+    public function tutor() {
+        return $this->belongsToMany(ParentStudent::class, 'student_parent_relations');
+    }
+
 }

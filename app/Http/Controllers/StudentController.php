@@ -23,7 +23,7 @@ class StudentController extends Controller
         foreach($student as $user) {
             $user->user;
         }
-        error_log($student);
+      
         return view('list_student', ['students' => $student]);
     }
 
@@ -40,6 +40,7 @@ class StudentController extends Controller
         $student = Student::find($id);
         $student->user;
         $student->enrollement;
+        
         error_log($student);
         return view('student_detail')->with(['student' => $student]);
     }
@@ -51,11 +52,11 @@ class StudentController extends Controller
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     
-      $path = $request->file('file')->store('student_picture');
-      $user->picture = $path;
-      $user->save();
-    
-      return back($status = 302);
+        $path = $request->file('file')->store('student_picture');
+        $user->picture = $path;
+        $user->save();
+        
+        return back($status = 302);
     
     }
 

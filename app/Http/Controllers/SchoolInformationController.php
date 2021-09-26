@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SchoolInformation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SchoolInformationController extends Controller
 {
@@ -22,10 +23,20 @@ class SchoolInformationController extends Controller
         if(!$request->id) {
             $data['id'] = 1;
         }
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $path = $request->file('file')->store('storage');
+        $url = Storage::url($path);
+        $data['logo'] = $path;
         SchoolInformation::updateOrCreate(
             ['id' => $data['id']],
             $data
         );
-        return redirect('school/setting');
+       
+      
+        return back($status = 302);
+        //return redirect('school/setting');
     }
 }

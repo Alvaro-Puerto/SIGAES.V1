@@ -7,6 +7,15 @@
         <div class="card-header">
             <p class="font-weight-bold">Nuevo año lectivo</p>
         </div>
+        @if($errors->any())
+        
+            <div class="card-header">
+                <div class="alert alert-danger" role="alert">
+                    {{$errors->first()}}
+                </div>
+            </div>
+        @endif
+        
         <div class="card-body">
             <form  method="post" action="{{url('school/year/new')}}">
                 @csrf

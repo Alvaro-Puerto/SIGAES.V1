@@ -20,6 +20,7 @@ class CreateSchoolInformationTable extends Migration
             $table->string('code');
             $table->string('municipality');
             $table->string('city');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

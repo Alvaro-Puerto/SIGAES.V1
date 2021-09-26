@@ -14,7 +14,8 @@ class SchoolInformation extends Model
         'address',
         'code',
         'city',
-        'municipality'
+        'municipality',
+        'logo'
     ];
 
     public function course() {

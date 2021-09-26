@@ -17,41 +17,63 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-end">
-                <a href="{{ route('semester.new', ['id'=>$year->id]) }}" class="btn btn-primary" >
+                <a href="{{ route('semester.new', ['id'=>$year->id]) }}" class="btn btn-primary mb-2" >
                     <span class="">
                         <i class="fa fa-plus text-white" aria-hidden="true"></i>
                     </span>
                      Añadir semetres
                 </a>
             </div>
-            @foreach ($year->semester as $semester)
-                <div>
-                    <a class="nav-link active" href={{$semester->id}} 
-                                       data-toggle="collapse" 
-                                       role="button" 
-                                       aria-expanded="false" 
-                                       aria-controls="navbar-examples-5"
-                                       >
-                <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                <span class="nav-link-text" style="color: #f4645f;">{{$semester->name }}</span>
-            </a>
-            <div class="collapse " id={{$semester->id}}>
-                <ul class="nav nav-sm flex-column">
-                    <li class="nav-item">
-                       
-                    </li>
-                    <li class="nav-item">
-                       
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.index') }}">
-                            {{ __('Horarios') }}
+            <table class="table align-items-center table-flush" id="table-student">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" class="sort" data-sort="name">Id</th>
+                    <th scope="col" class="sort" data-sort="budget">Nombre del semestre</th>
+                    <th scope="col" class="sort" data-sort="status">Inicia </th>
+                    <th scope="col" class="sort" data-sort="status">Termina</th>
+                    <th scope="col" class="sort" data-sort="status">Fecha de creación</th>
+                
+                    <th scope="col" class="sort" data-sort="status">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="list" id="tbody-student">
+                @foreach ($year->semester as $semester)
+                  <tr>
+                    <th scope="row">
+                      {{$semester->id}}
+                    </th>
+                    <th scope="row">
+                      {{$semester->name}}
+                    </th>
+                    <th scope="row">
+                      {{$semester->start_at}}
+                    </th>
+                    <th scope="row">
+                      {{$semester->end_at}}
+                    </th>
+                    <th scope="row">
+                      {{$semester->created_at}}
+                    </th>
+                   
+                    <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v text-primary"></i>
                         </a>
-                    </li>
-                </ul>
-                </div>
-            @endforeach
-            
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="{{ route('semester.partial.list', ['id'=>$semester->id]) }}"  >Configurar parciales</a>
+                       
+                        </div>
+                      </div>
+                    </td>
+                   
+                  </tr>
+                  @endforeach
+                 
+                 
+                </tbody>
+              </table>
+          
             </div>
         </div>
    </div>

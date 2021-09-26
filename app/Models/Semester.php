@@ -17,5 +17,8 @@ class Semester extends Model
         'school_year_id'
     ];
 
+    public function partials() {
+        return $this->hasMany(Partial::class);
+    }
 
 }

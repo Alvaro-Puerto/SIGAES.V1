@@ -23,6 +23,11 @@ class CourseController extends Controller
     public function create(Request $request) {
         $school = SchoolInformation::offset(0)->limit(1)->first();
         $data = $request->all();
+
+        if(!$school) {
+            return redirect('error/information/school/not_found');
+        }
+        
         $data['school_information_id'] = $school->id;
         $course = Course::updateOrCreate(
             ['id' => $request->id],

@@ -187,6 +187,31 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" href="#navbar-examples-10" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-10">
+                        <i class="fas fa-users"></i>
+                        <span class="nav-link-text" style="color: #f4645f;" >{{ __('Padres de familia') }}</span>
+                    </a>
+                    <div class="collapse " id="navbar-examples-10">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tutor.list') }}">
+                                    {{ __('Listado de tutores') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tutor.create') }}">
+                                    {{ __('Nuevo tutor') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.index') }}">
+                                    {{ __('Informes') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" href="#navbar-examples-5" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-5">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Curso lectivo') }}</span>

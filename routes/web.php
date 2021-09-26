@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Semester;
 use App\Models\Student;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +25,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/search/student', [App\Http\Controllers\SearchController::class, 'search_student']);
+Route::post('/search/tutor', [App\Http\Controllers\SearchController::class, 'search_tutor']);
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
@@ -87,8 +94,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 	#Semester
 	Route::get('school/semester/{id}/new', function($id) {return view('semester_new', ["id" => $id]);})->name('semester.new');
-	Route::post('school/semester/new',  ['as' => 'semester.new', "uses" => 'App\Http\Controllers\SemesterController@create']);
+	Route::post('school/semester/new',  ['as' => 'semester.create', "uses" => 'App\Http\Controllers\SemesterController@create']);
+	Route::post('school/semester/partial/new', ['as' => 'semester.partial.create', 'uses' => 'App\Http\Controllers\PartialController@create']);
+	Route::get('school/semester/{id}/list/partial', function ($id) {
+		$semester = Semester::find($id);
+		return view('semester_partial_list', ["semester" => $semester]);
+	})->name('semester.partial.list');
+	Route::get('school/semester/{id}/list/partial/new', function ($id) {
+		return view('new_partial', ["id" => $id]);
+	})->name('semester.partial.new');
 
+	
 	#Enrollement
 	Route::get('enrollement/{id}', ['as' => 'enrollement.new', "uses" => 'App\Http\Controllers\EnrollementController@get']);
 	Route::post('enrollement/', ['as' => 'enrollement.create', "uses" => 'App\Http\Controllers\EnrollementController@create']);
@@ -104,5 +120,20 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('school/level/{id}', ['as' => 'level.delete', "uses" => 'App\Http\Controllers\LevelController@delete']);
 	Route::post('school/level', ['as' => 'level.create', "uses" => 'App\Http\Controllers\LevelController@store']);
 
+
+	Route::get('tutor/list', ['as' => 'tutor.list',  "uses" => 'App\Http\Controllers\ParentStudentController@get']);
+	Route::get('tutor/new', function() {return view('new_parent');})->name('tutor.create');
+	Route::post('tutor/new', ['as' => 'level.new', "uses" => 'App\Http\Controllers\ParentStudentController@create']);
+	Route::get('tutor/select/{id}', function($id) { return view('tutor_preview_selection', ['id' => $id]);})->name('tutor.select');
+	Route::get('tutor/select/{id}/parent', function($id) { return view('tutor_select_search', ['id' => $id]);})->name('tutor.search');
+	Route::get('tutor/select/{id_student}/{id_tutor}/confirm', ['as' => 'level.preview', "uses" => 'App\Http\Controllers\ParentStudentController@getPreview']);
+	Route::post('tutor/asign/student', ['as' => 'tutor.asign', "uses" => 'App\Http\Controllers\ParentStudentController@asignStudent']);
+	Route::delete('tutor/{id_tutor}/detach/student/{id_student}', ['as' => 'tutor.detach', "uses" => 'App\Http\Controllers\ParentStudentController@removeStudent']);
+
+
+	#Error Page
+	Route::get('error/information/school/not_found', function () {
+		return view('error_page_initial');
+	});
 });
 

@@ -11,7 +11,7 @@
             @endif
         </div> --}}
       <div class="card p-4">
-        <form  method="POST" action="{{url('school/create')}}" >
+        <form  method="POST" enctype="multipart/form-data" action="{{url('school/create')}}" >
             @csrf
             <div class="form-row">
                 <div class="form-group col-12">
@@ -39,6 +39,12 @@
                 <div class="form-group col-6">
                     <label for="">Municipio</label>
                 <input type="text" class="form-control" name="municipality" id="municipality" value="{{$school->municipality}}">
+                </div>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="file" >
+                        <label class="custom-file-label" for="customFile">Selecciona el la insignia del centro</label>
+                    </div>
                 </div>
             </div>
             <div class="form-row">

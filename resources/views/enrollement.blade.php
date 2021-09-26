@@ -99,11 +99,11 @@
                             <div class="form-group col-6">
                                 <label for="" class="d-block">El estudiante es repitente <span class="text-danger">*</span></label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" onclick="isRepeat()" name="is_repeat" id="repeat" value="true">
+                                    <input class="form-check-input" type="radio" onclick="isRepeat()" name="is_repeat" id="repeat" value="1">
                                     <label class="form-check-label" for="inlineRadio1">Si</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" onclick="resetForm()" name="is_repeat" id="inlineRadio2" value="false" checked>
+                                    <input class="form-check-input" type="radio" onclick="resetForm()" name="is_repeat" id="inlineRadio2" value="0" checked>
                                     <label class="form-check-label" for="inlineRadio2">No</label>
                                 </div>
                               
