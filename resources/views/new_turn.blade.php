@@ -21,10 +21,10 @@
                     </div>
                     <div class="form-group col-12">
                         <label for= "">Nombre del turno</label>
-                        <input type="text" name="name" class="form-control " id="name">
+                        <input type="text" name="name" class="form-control " id="name" required>
                     </div>
                     <div class="form-group col-12 d-flex justify-content-end">
-                        <button class="btn btn-danger">Cancelar</button>
+                        <a type="button" href="{{route('school.turns')}}" class="btn btn-danger">Cancelar</a>
                         <button class="btn btn-success">Guardar</button>
                     </div>
                 </div>

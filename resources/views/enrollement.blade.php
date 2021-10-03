@@ -21,7 +21,7 @@
                                         </a>
                                     </span>
                                 </label>
-                                <select class="form-control rounded-0" name="level_id" id="level_id">
+                                <select class="form-control rounded-0" name="level_id" id="level_id" required>
                                     @foreach ($levels as $level)
                                     <option value={{$level->id}}>{{$level->name}} </option>
                                     @endforeach
@@ -35,7 +35,7 @@
                                         </a>
                                     </span>
                                 </label>
-                                <select class="form-control rounded-0" name="modality_id" id="modality_id">
+                                <select class="form-control rounded-0" name="modality_id" id="modality_id" required>
                                     @foreach ($modalities as $modality)
                                     <option value={{$modality->id}}>{{$modality->name}} </option>
                                     @endforeach
@@ -51,7 +51,7 @@
                                         </a>
                                     </span>
                                 </label>
-                                <select class="form-control rounded-0" name="turn_id" id="turn_id">
+                                <select class="form-control rounded-0" name="turn_id" id="turn_id" required>
                                     @foreach ($turns as $turn)
                                         <option value={{$turn->id}}>{{$turn->name}}</option>
                                     @endforeach
@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group col-6">
                                 <label for="">Tipo de matricula <span class="text-danger">*</span></label>
-                                <select class="form-control rounded-0" name="type" id="type">
+                                <select class="form-control rounded-0" name="type" id="type" required>
                                     <option value="Estudiante activo">Estudiante activo</option>
                                     <option value="Nuevo Ingreso">Nuevo Ingreso</option>
                                     <option value="Traslado de colegio">Traslado de colegio</option>
@@ -76,7 +76,7 @@
                                         </a>
                                     </span>
                                 </label>
-                                <select class="form-control" id="course_id" name="course_id">
+                                <select class="form-control" id="course_id" name="course_id" required>
                                     @foreach ($grades as $grade)
                                         <option value={{$grade->id}}>{{$grade->name}} </option>
                                     @endforeach
@@ -90,7 +90,7 @@
                                         </a>
                                     </span>
                                 </label>
-                                <select class="form-control" id="school_year_id" name="school_year_id">
+                                <select class="form-control" id="school_year_id" name="school_year_id" required>
                                     @foreach ($years as $year)
                                         <option value={{$year->id}}>{{$year->name}} </option>
                                     @endforeach

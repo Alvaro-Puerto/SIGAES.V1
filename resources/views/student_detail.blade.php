@@ -99,11 +99,19 @@
                                       @foreach ($student->enrollement as $item)
                                           <tr>
                                             <td>{{$item->id}}</td>
-                                            <td>{{$item->year->name}}</td>
+                                            {{-- <td>{{$item->year->name}}</td> --}} 
                                             <td>{{$item->course->name}}</td>
                                             <td>{{$item->level->name}}</td>
                                             <td>{{$item->modality->name}}</td>
                                             <td>{{$item->created_at}}</td>
+                                            <td>
+                                              <a href="{{route('enrollement.detail', ['id' => $item->id])}}" class="btn btn-success">
+                                                <span>
+                                                  <i class="fa fa-arrow-right text-sucess" aria-hidden="true"></i>
+                                                </span>
+                                                Detalles
+                                              </a>
+                                            </td>
                                           </tr>
                                       @endforeach
                                       {{-- <tr>

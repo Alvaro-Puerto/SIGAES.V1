@@ -30,14 +30,31 @@ class Enrollement extends Model
     }
 
     public function year() {
-        return $this->belongsTo(SchoolYear::class, 'id');
+        return $this->belongsTo(SchoolYear::class, 'school_year_id', 'id');        
     }
     
     public function course() {
         return $this->belongsTo(Course::class);
     }
 
+    public function turn() {
+        return $this->belongsTo(Turn::class);
+    }
+
     public function modality() {
         return $this->belongsTo(Modality::class);   
     }
+
+    public function matters() {
+        return $this->belongsToMany(Matter::class, 'enrollement_matters')->withPivot('id', 'created_at');
+    }
+
+    public function detailMatter() {
+        return $this->belongsToMany(Matter::class, 'enrollement_matters')->using(EnrollementMatterPartial::class);
+    }
+
+    public function student() {
+        return $this->belongsTo(Student::class);
+    }
+  
 }

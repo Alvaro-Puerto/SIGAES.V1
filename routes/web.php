@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Enrollement;
+use App\Models\EnrollementMatter;
 use App\Models\Semester;
 use App\Models\Student;
 use Illuminate\Support\Facades\Artisan;
@@ -104,11 +106,13 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('new_partial', ["id" => $id]);
 	})->name('semester.partial.new');
 
-	
 	#Enrollement
 	Route::get('enrollement/{id}', ['as' => 'enrollement.new', "uses" => 'App\Http\Controllers\EnrollementController@get']);
+	Route::get('enrollement/matter/{id}', ['as' => 'enrollement.matter', "uses" => 'App\Http\Controllers\EnrollementController@getAllMatter']);
 	Route::post('enrollement/', ['as' => 'enrollement.create', "uses" => 'App\Http\Controllers\EnrollementController@create']);
-	
+	Route::post('enrollement/matter/asign', ['as' => 'enrollement_matter.asing', 'uses' => 'App\Http\Controllers\EnrollementMatterController@attachMatter']);
+	Route::post('enrollement/matter/detach', ['as' => 'enrollement_matter.detach', 'uses' => 'App\Http\Controllers\EnrollementMatterController@detachMatter']);
+	Route::get('enrollement/{id}/detail', ['as' => 'enrollement.detail', 'uses' => 'App\Http\Controllers\EnrollementController@detail']);
 
 	#Modality
 	Route::get('school/modality', ['as' => 'modality.list', "uses" => 'App\Http\Controllers\ModalityController@get']);
@@ -130,6 +134,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('tutor/asign/student', ['as' => 'tutor.asign', "uses" => 'App\Http\Controllers\ParentStudentController@asignStudent']);
 	Route::delete('tutor/{id_tutor}/detach/student/{id_student}', ['as' => 'tutor.detach', "uses" => 'App\Http\Controllers\ParentStudentController@removeStudent']);
 
+	#Partial
+	Route::get('matter/partial/{id}/{id_enrollement}/update', function ($id, $id_enrollement) {
+		$student = Enrollement::find($id_enrollement)->student;
+		$enrollement_matter = EnrollementMatter::find($id);
+		$matter = $enrollement_matter->matter;
+		$data = ['student' => $student, 'matter' => $matter, 'enrollement_matter' => $enrollement_matter ];
+		return view('partial_matter_form', $data);
+	})->name('partial.matter.update');
+	Route::post('matter/partial', ['as' => 'matter.partial.asign', 'uses' => 'App\Http\Controllers\EnrollementMatterPartialController@asignCalification']);
 
 	#Error Page
 	Route::get('error/information/school/not_found', function () {

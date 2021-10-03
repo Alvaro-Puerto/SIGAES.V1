@@ -104,11 +104,19 @@
                                       <?php $__currentLoopData = $student->enrollement; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                           <tr>
                                             <td><?php echo e($item->id); ?></td>
-                                            <td><?php echo e($item->year->name); ?></td>
+                                             
                                             <td><?php echo e($item->course->name); ?></td>
                                             <td><?php echo e($item->level->name); ?></td>
                                             <td><?php echo e($item->modality->name); ?></td>
                                             <td><?php echo e($item->created_at); ?></td>
+                                            <td>
+                                              <a href="<?php echo e(route('enrollement.detail', ['id' => $item->id])); ?>" class="btn btn-success">
+                                                <span>
+                                                  <i class="fa fa-arrow-right text-sucess" aria-hidden="true"></i>
+                                                </span>
+                                                Detalles
+                                              </a>
+                                            </td>
                                           </tr>
                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                       

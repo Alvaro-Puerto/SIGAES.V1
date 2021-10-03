@@ -36,7 +36,7 @@ class SchoolInformationController extends Controller
         );
        
       
-        return back($status = 302);
-        //return redirect('school/setting');
+        //return back($status = 302);
+        return redirect('school/setting');
     }
 }

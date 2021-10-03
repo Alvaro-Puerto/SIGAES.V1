@@ -6,6 +6,7 @@ use App\Exports\EnrollementExport;
 use App\Models\Course;
 use App\Models\Enrollement;
 use App\Models\Level;
+use App\Models\Matter;
 use App\Models\Modality;
 use App\Models\SchoolYear;
 use App\Models\Student;
@@ -44,12 +45,31 @@ class EnrollementController extends Controller
     }
 
     public function create(Request $request) {
-        $flat =Enrollement::where('student_id', $request->student_id)->where('school_year_id', $request->school_year_id)->first();
+        /* $flat =Enrollement::where('student_id', $request->student_id)->where('school_year_id', $request->school_year_id)->first();
         if($flat) {
             return redirect('student/detail/'. 4);
-        }
-        Enrollement::create($request->all());
+        } */
+        $enrollement = Enrollement::create($request->all());
 
-        return redirect('student/detail/'. $request->student_id);
+        return redirect()->route('enrollement.matter', ["id" => $enrollement->id]);
+    }
+
+    public function getAllMatter($id) {
+        $enrollement = Enrollement::find($id);
+        $matter_asign = $enrollement->matters;
+        $array_id = [];
+
+        foreach($matter_asign as $matter) {
+            array_push($array_id, $matter->id);
+            error_log($matter->id);
+        }
+        $matters = Matter::whereNotIn('id', $array_id)->get();
+        return view('enrollement_matter', ["matters" => $matters, "id" => $id, "enrollement" => $enrollement]);
+    }
+
+    public function detail($id) {
+        $enrollement = Enrollement::find($id);
+        $year_school = $enrollement->year;
+        return view('detail_enrollement', ['enrollement' => $enrollement, "year_school" => $year_school]);
     }
 }
