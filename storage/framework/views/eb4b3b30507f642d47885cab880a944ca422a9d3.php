@@ -6,6 +6,15 @@
     <div class="card mt--6">
         <div class="card-header">
             <p class="font-weight-bold">Nuevo semestre</p>
+            <?php if($errors->any()): ?>
+        
+            <div class="card-header">
+                <div class="alert alert-danger" role="alert">
+                    <?php echo e($errors->first()); ?>
+
+                </div>
+            </div>
+        <?php endif; ?>
         </div>
         <div class="card-body">
             <form  method="post" action="<?php echo e(url('school/semester/new')); ?>">
@@ -13,7 +22,7 @@
                 <div class="form-row">
                     <div class="form-group col-12">
                         <label for= ""></label>
-                    <input type="text" name="school_year_id" class="form-control " id="school_year_id" hidden value="<?php echo e($id); ?>">
+                    <input type="text" name="school_year_id" class="form-control " id="school_year_id" hidden value="<?php echo e($id); ?>" >
                     </div>
                     <div class="form-group col-12">
                         <label for= "">Id</label>
@@ -21,22 +30,22 @@
                     </div>
                     <div class="form-group col-12">
                         <label for= "">Nombre del semestre</label>
-                        <input type="text" name="name" class="form-control " id="name">
+                        <input type="text" name="name" class="form-control " id="name" required>
                     </div>
                     <div class="form-group col-12">
                         <label for= "">Descripción del semestre</label>
-                        <input type="text" name="description" class="form-control " id="description">
+                        <input type="text" name="description" class="form-control " id="description" required>
                     </div>
                     <div class="form-group col-6">
                         <label for= "">Fecha inicio del semestre</label>
-                        <input type="date" name="start_at" class="form-control " id="start_at">
+                        <input type="date" name="start_at" class="form-control " id="start_at" required>
                     </div>
                     <div class="form-group col-6">
                         <label for= "">Fecha fin del semestre</label>
-                        <input type="date" name="end_at" class="form-control " id="end_at">
+                        <input type="date" name="end_at" class="form-control " id="end_at" required>
                     </div>
                     <div class="form-group col-12 d-flex justify-content-end">
-                        <button class="btn btn-danger">Cancelar</button>
+                        <a  href="<?php echo e(route('year.config', ['id'=>$id])); ?>" class="btn btn-danger">Cancelar</a>
                         <button class="btn btn-success">Guardar</button>
                     </div>
                 </div>

@@ -13,6 +13,12 @@ class Partial extends Model
         'semester_id',
         'name',
         'format',
-        'value'
+        'value',
+        'start_at',
+        'end_at'
     ];
+
+    public function semester() {
+        return $this->belongsTo(Semester::class);
+    }
 }

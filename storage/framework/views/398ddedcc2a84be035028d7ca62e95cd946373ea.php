@@ -21,28 +21,46 @@
                             <p class="font-weight-bold text-dark">
                                 Evaluaciones
                             </p>
-                            <p class="font-weigth-bold">
+                            <p class="font-weight-bold text-dark">
                                 Calificación
                             </p>
                         </div>
                     </div>
                     <div class="row">
                         <?php $__currentLoopData = $enrollement_matter->partials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <div class="col-6 border-bottom">
-                                <p><?php echo e($item->name); ?></p>
+                            <div class="col-6 border-bottom pt-5 ">
+                                <p>
+                                    <?php echo e($item->name); ?>
+
+                                    <?php if($item->format == 'Ingresado'): ?>
+                                        <span class="badge badge-pill badge-success">Valor ingresado</span>                                    
+                                    <?php else: ?> 
+                                        <span class="badge badge-pill badge-danger">Valor promediado</span>
+                                    <?php endif; ?>
+                                </p>
+
+                                <small class="d-block text-success">Habilitado hasta</small>
+                                <small ><?php echo e($item->start_at); ?> - <?php echo e($item->end_at); ?></small>
                             </div>
-                            <?php if($item->pivot->value): ?>
-                            <div class="col-6 border-bottom">
-                                <p><?php echo e($item->pivot->value); ?></p>
+                            <?php if($item->pivot->value != null): ?>
+                            <div class="col-6 border-bottom pt-5 d-flex justify-content-end">
+                                <p class="font-weight-bold text-dark"><?php echo e($item->pivot->value); ?></p>
                             </div>
                             <?php else: ?>
-                            <div class="col-6">
-                                <form action="<?php echo e(route('matter.partial.asign')); ?>"  method="POST" class="form-inline">
+                            <div class="col-6 pt-5 border-bottom d-flex justify-content-end">
+                                <form action="<?php echo e(route('matter.partial.asign')); ?>"  method="POST" class="form-inline  d-flex justify-content-end">
                                     <?php echo csrf_field(); ?>
                                     <input type="hidden" name="id_matter" value="<?php echo e($enrollement_matter->id); ?>">
                                     <input type="hidden" name="id_partial" value="<?php echo e($item->id); ?>">
-                                    <input type="number" class="form-control rounded-0 " name="value">
-                                    <button class="btn btn-link">Confirmar</button>
+                                    <?php if($item->format == 'Ingresado'): ?>
+                                        <input type="number" class="form-control rounded-0 " name="value">
+                                        <button class="btn btn-link text-center ">
+                                            Confirmar resultado
+                                        </button>
+                                    <?php else: ?>
+                                        <input type="number" class="form-control rounded-0 " name="value" disabled>
+                                        
+                                    <?php endif; ?>
                                     
                                 </form>
                             </div>

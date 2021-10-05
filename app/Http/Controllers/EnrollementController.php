@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\EnrollementExport;
 use App\Models\Course;
 use App\Models\Enrollement;
+use App\Models\EnrollementMatter;
 use App\Models\Level;
 use App\Models\Matter;
 use App\Models\Modality;
@@ -12,6 +13,7 @@ use App\Models\SchoolYear;
 use App\Models\Student;
 use App\Models\Turn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EnrollementController extends Controller
@@ -70,6 +72,39 @@ class EnrollementController extends Controller
     public function detail($id) {
         $enrollement = Enrollement::find($id);
         $year_school = $enrollement->year;
-        return view('detail_enrollement', ['enrollement' => $enrollement, "year_school" => $year_school]);
+        $enrollement_matter = $enrollement->matters;
+        $tempo = [];
+        
+        foreach($enrollement_matter as $matter) {
+            $tempo_partial = [];
+            $enrollement_partial = EnrollementMatter::find($matter->pivot->id);
+          
+            foreach($enrollement_partial->partials as $partial) {
+                array_push($tempo_partial, $partial);
+            }
+            $data = [
+                'id_pivot' => $matter->pivot->id,
+                'id_matter' => $matter->id,
+                'name_matter' => $matter->name,
+                'partials' => $tempo_partial
+            ];
+            $data = (object) $data;
+            
+            array_push($tempo, $data);
+        }
+
+        $data = [
+                    'enrollement' => $enrollement, 
+                    "year_school" => $year_school,
+                    'matter_and_partial' => $tempo
+                ];
+        return view('detail_enrollement', $data);
+    }
+
+    public function delete($id) {
+        $enrollement = Enrollement::find($id);
+        $enrollement->delete();
+
+        return Redirect::back();
     }
 }

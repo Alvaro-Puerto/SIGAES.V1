@@ -71,9 +71,9 @@
                           <li class="nav-item">
                             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Matriculas</a>
                           </li>
-                          <li class="nav-item">
+                          <!--<li class="nav-item">
                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Reporte disciplinario</a>
-                          </li>
+                          </li>-->
                           <li class="nav-item">
                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Referencia familiar-</a>
                           </li>
@@ -98,25 +98,43 @@
                                         <th scope="col"  class="sort" data-sort="status">Nivel/Programa</th>
                                         <th scope="col" class="sort" data-sort="completion">Modalidad</th>
                                         <th scope="col" class="sort" data-sort="completion">Fecha de matricula</th>
+                                        <th scope="col" class="sort" data-sort="completion"></th>
+                                        <th scope="col" class="sort" data-sort="completion"></th>
                                       </tr>
                                     </thead>
                                     <tbody class="list" >
                                       <?php $__currentLoopData = $student->enrollement; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                           <tr>
                                             <td><?php echo e($item->id); ?></td>
-                                             
+                                            <td><?php echo e($item->year->name); ?></td>  
                                             <td><?php echo e($item->course->name); ?></td>
                                             <td><?php echo e($item->level->name); ?></td>
                                             <td><?php echo e($item->modality->name); ?></td>
                                             <td><?php echo e($item->created_at); ?></td>
                                             <td>
                                               <a href="<?php echo e(route('enrollement.detail', ['id' => $item->id])); ?>" class="btn btn-success">
+                                               
+                                                Detalles
                                                 <span>
                                                   <i class="fa fa-arrow-right text-sucess" aria-hidden="true"></i>
                                                 </span>
-                                                Detalles
                                               </a>
+                                              <a class="btn btn-link" href="<?php echo e(route('enrollement.matter', $item->id)); ?>">
+                                                <span> <i class="fas fa-pencil-alt text-primary"></i></span>
+                                                Editar 
+                                                
+                                              </a>
+                                             
                                             </td>
+                                            <td> 
+                                              <form class="dropdown-item ml-0 pl-0 pt-2" action="<?php echo e(route('enrollement.delete', $item->id)); ?>" method="post">
+                                              <?php echo csrf_field(); ?>
+                                              <?php echo method_field('DELETE'); ?>
+                                              <button class="btn btn-link  text-dark" type="submit">
+                                                <span><i class="fa fa-times text-danger" aria-hidden="true"></i></span>
+                                                 Eliminar
+                                              </button>
+                                            </form></td>
                                           </tr>
                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                       

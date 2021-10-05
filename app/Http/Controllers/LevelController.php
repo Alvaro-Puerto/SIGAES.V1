@@ -13,7 +13,10 @@ class LevelController extends Controller
     }
 
     public function store(Request $request) {
-        Level::create($request->all());
+        Level::updateOrCreate(
+            ['id' => $request->id],
+            $request->all() 
+        );
 
         return redirect('school/level');
     }
@@ -22,5 +25,10 @@ class LevelController extends Controller
         Level::find($id)->delete();
 
         return redirect('school/level');
+    }
+
+    public function update($id) {
+        $level = Level::find($id);
+        return view('level_update', ['level' => $level]);
     }
 }

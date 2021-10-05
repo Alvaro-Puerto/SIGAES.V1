@@ -6,6 +6,7 @@ use App\Exports\MatterExport;
 use App\Models\Matter;
 use App\Models\SchoolInformation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MatterController extends Controller
@@ -27,12 +28,7 @@ class MatterController extends Controller
         return redirect('matters');
     }
 
-    public function delete($id) {
-        $matter = Matter::find($id);
-        $matter->delete();
-        return redirect('school/matters');
-    }
-
+   
     public function get() {
         if($this->school) {
             $matters = $this->school->matters;
@@ -54,5 +50,15 @@ class MatterController extends Controller
 
     public function report() {
         return Excel::download(new  MatterExport, 'materias.xlsx');
+    }
+
+    public function delete($id) {
+        Matter::find($id)->delete();
+        return Redirect::back();
+    }
+
+    public function update($id) {
+        $matter = Matter::find($id);
+        return view('update_matter', ['matter' => $matter]);
     }
 }

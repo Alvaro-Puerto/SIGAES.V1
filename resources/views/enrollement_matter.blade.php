@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <p class="font-weight-bold">Asignar materias por matriculas</p>
-                    <a href="" class="btn btn-link">
+                    <a href="{{route('student.detail', $enrollement->student_id)}}" class="btn btn-link">
                         <span><i class="fa fa-check text-succcess " aria-hidden="true"></i></span>  
                         Finalizar registro
                     </a>

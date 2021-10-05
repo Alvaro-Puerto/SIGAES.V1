@@ -18,7 +18,7 @@ class StudentController extends Controller
     }
 
     public function index() {
-        $student = Student::all();
+        $student = Student::orderBy('created_at')->get();
 
         foreach($student as $user) {
             $user->user;

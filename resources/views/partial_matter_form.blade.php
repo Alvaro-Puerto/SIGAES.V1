@@ -20,28 +20,45 @@
                             <p class="font-weight-bold text-dark">
                                 Evaluaciones
                             </p>
-                            <p class="font-weigth-bold">
+                            <p class="font-weight-bold text-dark">
                                 Calificación
                             </p>
                         </div>
                     </div>
                     <div class="row">
                         @foreach ($enrollement_matter->partials as $item)
-                            <div class="col-6 border-bottom">
-                                <p>{{$item->name}}</p>
+                            <div class="col-6 border-bottom pt-5 ">
+                                <p>
+                                    {{$item->name}}
+                                    @if ($item->format == 'Ingresado')
+                                        <span class="badge badge-pill badge-success">Valor ingresado</span>                                    
+                                    @else 
+                                        <span class="badge badge-pill badge-danger">Valor promediado</span>
+                                    @endif
+                                </p>
+
+                                <small class="d-block text-success">Habilitado hasta</small>
+                                <small >{{$item->start_at}} - {{$item->end_at}}</small>
                             </div>
-                            @if ($item->pivot->value)
-                            <div class="col-6 border-bottom">
-                                <p>{{$item->pivot->value}}</p>
+                            @if ($item->pivot->value != null)
+                            <div class="col-6 border-bottom pt-5 d-flex justify-content-end">
+                                <p class="font-weight-bold text-dark">{{$item->pivot->value}}</p>
                             </div>
                             @else
-                            <div class="col-6">
-                                <form action="{{route('matter.partial.asign')}}"  method="POST" class="form-inline">
+                            <div class="col-6 pt-5 border-bottom d-flex justify-content-end">
+                                <form action="{{route('matter.partial.asign')}}"  method="POST" class="form-inline  d-flex justify-content-end">
                                     @csrf
                                     <input type="hidden" name="id_matter" value="{{$enrollement_matter->id}}">
                                     <input type="hidden" name="id_partial" value="{{$item->id}}">
-                                    <input type="number" class="form-control rounded-0 " name="value">
-                                    <button class="btn btn-link">Confirmar</button>
+                                    @if ($item->format == 'Ingresado')
+                                        <input type="number" class="form-control rounded-0 " name="value">
+                                        <button class="btn btn-link text-center ">
+                                            Confirmar resultado
+                                        </button>
+                                    @else
+                                        <input type="number" class="form-control rounded-0 " name="value" disabled>
+                                        
+                                    @endif
                                     
                                 </form>
                             </div>

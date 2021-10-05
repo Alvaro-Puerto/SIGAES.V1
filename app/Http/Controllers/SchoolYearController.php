@@ -20,6 +20,11 @@ class SchoolYearController extends Controller
     public function create(Request $request) {
         if($this->school) {
             try {
+                if($request->start_at > $request->end_at) {
+                    return Redirect::back()->withErrors(['msg' => 'Las fecha de inicio es mayor que la fecha fin']);    
+                }
+
+                error_log($request->id . ' ESTE ES EL ID');
                 $this->school->years()->updateOrCreate(
                     ["id" => $request->id] ,
                     $request->all()
@@ -38,7 +43,7 @@ class SchoolYearController extends Controller
     public function delete($id) {
         $matter = SchoolYear::find($id);
         $matter->delete();
-        return redirect('school/matters');
+        return Redirect::back();
     }
 
     public function get() {
@@ -55,5 +60,10 @@ class SchoolYearController extends Controller
         // $year->teachers;
         $year->semesters;
         return view('school_year_config', ['year' => $year]);
+    }
+
+    public function update($id) {
+        $year = SchoolYear::find($id);
+        return view('school_year_update', ['year' => $year]);
     }
 }

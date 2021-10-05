@@ -9,9 +9,9 @@
               <!-- Card header -->
               <div class="card-header border-0 d-flex justify-content-between">
                 <h3 class="mb-0">Lista de las modalidades.</h3>
-                <button  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <a href="<?php echo e(route('modality.new')); ?>" class="btn btn-primary" >
                     <span class="fa fa-plus text-white"> Añadir nueva modalidad</span>
-                </button>
+                </a>
               </div>
               <!-- Light table -->
               <div class="table-responsive">
@@ -21,6 +21,7 @@
                       <th scope="col" class="sort" data-sort="name">Id</th>
                       <th scope="col" class="sort" data-sort="budget">Nombre de la modalidad</th>
                       <th scope="col" class="sort" data-sort="status">Descripción de la modalidad</th>
+                      <th scope="col" class="sort" data-sort="status">Fecha de creación</th>
                       <th scope="col" class="sort" data-sort="status">Acciones</th>
                       <th scope="col" class="sort" data-sort="status"></th>
                     </tr>
@@ -40,25 +41,31 @@
                         <?php echo e($modality->description); ?>
 
                       </th>
+                      <th scope="row">
+                        <?php echo e($modality->created_at); ?>
+
+                      </th>
                       <td class="text-cemter">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="#">Ver detalles</a>
                             
-                            <a class="dropdown-item" href="#">Editar</a>
+                            <a class="dropdown-item" href="<?php echo e(route('modality.update', ['id'=> $modality->id])); ?>">
+                              <span><i class="fas fa-pencil-alt textr-primary"></i></span>
+                              Editar
+                            </a>
+                            <form class="dropdown-item" action="<?php echo e(route('modality.delete', $modality->id)); ?>" method="post">
+                              <?php echo csrf_field(); ?>
+                              <?php echo method_field('DELETE'); ?>
+                              <button class="btn btn-link m-0 p-0 text-dark" type="submit">
+                                <span><i class="fa fa-times text-danger" aria-hidden="true"></i></span>
+                                 Eliminar
+                              </button>
+                            </form>
                           </div>
                         </div>
-                        
-                      </td>
-                      <td>
-                        <form action="<?php echo e(route('modality.delete', $modality->id)); ?>" method="post">
-                            <?php echo csrf_field(); ?>
-                            <?php echo method_field('DELETE'); ?>
-                            <button class="btn btn-danger" type="submit">Eliminar</button>
-                        </form>
                       </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

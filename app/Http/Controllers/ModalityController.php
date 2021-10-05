@@ -13,7 +13,11 @@ class ModalityController extends Controller
     }
 
     public function store(Request $request) {
-        Modality::create($request->all());
+
+        Modality::updateOrCreate(
+            ['id' => $request->id],
+            $request->all()
+        );
 
         return redirect('school/modality');
     }
@@ -22,5 +26,10 @@ class ModalityController extends Controller
         Modality::find($id)->delete();
 
         return redirect('school/modality');
+    }
+
+    public function update($id) {
+        $modality = Modality::find($id);
+        return view('modality_update', ['modality' => $modality]);
     }
 }

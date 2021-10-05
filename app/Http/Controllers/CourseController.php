@@ -41,4 +41,9 @@ class CourseController extends Controller
         Course::find($id)->delete();
         return Redirect::to('school/courses');
     }
+
+    public function update($id) {
+        $course = Course::find($id);
+        return view('course_update', ['course' => $course]);
+    }
 }

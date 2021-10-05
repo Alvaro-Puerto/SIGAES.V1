@@ -21,6 +21,7 @@
                       <th scope="col" class="sort" data-sort="name">Id</th>
                       <th scope="col" class="sort" data-sort="budget">Nombre de la asignatura</th>
                       <th scope="col" class="sort" data-sort="budget">Descripción de la asignatura</th>
+                      <th scope="col" class="sort" data-sort="budget">Fecha de creación</th>
                       <th scope="col" class="sort" data-sort="status">Acciones</th>
                     </tr>
                   </thead>
@@ -39,15 +40,32 @@
                         <?php echo e($matter->description); ?>
 
                       </th>
+                      <th scope="row">
+                        <?php echo e($matter->created_at); ?>
+
+                      </th>
                       <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="<?php echo e(route('matter.detail', ['id'=>$matter->id])); ?>"  >Ver detalles</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="<?php echo e(route('matter.detail', ['id'=>$matter->id])); ?>">
+                              <span><i class="fa fa-cogs text-success" aria-hidden="true"></i></span>
+                              Configurar
+                            </a>
+                            <a class="dropdown-item" href="<?php echo e(route('matter.update', ['id'=>$matter->id])); ?>">
+                              <span><i class="fas fa-pencil-alt textr-primary"></i></span>
+                              Editar
+                            </a>
+                            <form class="dropdown-item" action="<?php echo e(route('matter.delete', $matter->id)); ?>" method="post">
+                              <?php echo csrf_field(); ?>
+                              <?php echo method_field('DELETE'); ?>
+                              <button class="btn btn-link m-0 p-0 text-dark" type="submit">
+                                <span><i class="fa fa-times text-danger" aria-hidden="true"></i></span>
+                                 Eliminar
+                              </button>
+                            </form>
                           </div>
                         </div>
                       </td>

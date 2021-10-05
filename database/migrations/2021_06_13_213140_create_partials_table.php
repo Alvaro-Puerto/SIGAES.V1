@@ -18,7 +18,8 @@ class CreatePartialsTable extends Migration
             $table->string('name');
             $table->string('value');
             $table->string('format');
-            
+            $table->date('start_at');
+            $table->date('end_at');
             $table->foreignId('semester_id');
             $table->foreign('semester_id')
                   ->on('semesters')

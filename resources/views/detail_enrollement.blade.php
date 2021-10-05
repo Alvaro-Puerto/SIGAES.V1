@@ -66,11 +66,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body row">
-                    <div class="col">
+                    <div class="col-2">
 
                     </div>
                     @foreach ($year_school->semester as $item)
-                    <div class="col-4">
+                    <div class="col-5">
                         <p class="font-weight-bold">{{$item->name}}</p>
                         <div class="row">
                             @foreach ($item->partials as $partial)
@@ -82,16 +82,23 @@
                     </div>     
                     @endforeach
                 </div>
-                <div class="card-body row d-block">
-                    @foreach ($enrollement->matters as $item)
-                        <div class="col-12 border-bottom">
-                            <p>{{$item->name}}
-                                <span>
-                                    <a href="{{route('partial.matter.update', ["id" => $item->pivot->id, 'id_enrollement' => $enrollement->id])}}">
-                                        <i class="fas fa-external-link-square-alt text-success"></i>
-                                    </a>
-                                </span>
-                            </p>
+                <div class="card-body ">
+                    @foreach ($matter_and_partial as $item)
+                        <div class="row">
+                            <div class="col-2 border-bottom border-top">
+                                <p>{{$item->name_matter}}
+                                    <span>
+                                        <a href="{{route('partial.matter.update', ["id" => $item->id_pivot, 'id_enrollement' => $enrollement->id])}}">
+                                            <i class="fas fa-external-link-square-alt text-success"></i>
+                                        </a>
+                                    </span>
+                                </p>
+                            </div>
+                            @foreach ($item->partials as $partial)
+                                <div class="col border text-center align-items-center justify-content-center">
+                                    <p class="text-center">{{$partial->pivot->value}}</p>
+                                </div>
+                            @endforeach
                         </div>
                     @endforeach
                 </div>

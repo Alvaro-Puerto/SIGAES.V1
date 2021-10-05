@@ -20,6 +20,7 @@
                     <tr>
                       <th scope="col" class="sort" data-sort="name">Id</th>
                       <th scope="col" class="sort" data-sort="budget">Nombre del turno</th>
+                      <th scope="col" class="sort" data-sort="budget">Fecha de creación</th>
                       <th scope="col" class="sort text-center" data-sort="budget">Acciones</th>
                       <th></th>
                     </tr>
@@ -35,25 +36,34 @@
                         <?php echo e($turn->name); ?>
 
                       </th>
+                     
+                      <th scope="row">
+                        <?php echo e($turn->created_at); ?>
+
+                      </th>
                       <td class="text-center">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="#">Ver detalles</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            
+                            <a class="dropdown-item" href="<?php echo e(route('school.turn.update', ['id'=> $turn->id])); ?>">
+                              <span><i class="fas fa-pencil-alt textr-primary"></i></span>
+                              Editar
+                            </a>
+                            <form class="dropdown-item" action="<?php echo e(route('school.turn.delete', $turn->id)); ?>" method="post">
+                              <?php echo csrf_field(); ?>
+                              <?php echo method_field('DELETE'); ?>
+                              <button class="btn btn-link m-0 p-0 text-dark" type="submit">
+                                <span><i class="fa fa-times text-danger" aria-hidden="true"></i></span>
+                                 Eliminar
+                              </button>
+                            </form>
                           </div>
                         </div>
                       </td>
-                      <td>
-                        <form action="<?php echo e(route('school.turn.delete', $turn->id)); ?>" method="post">
-                            <?php echo csrf_field(); ?>
-                            <?php echo method_field('DELETE'); ?>
-                            <button class="btn btn-danger" type="submit">Eliminar</button>
-                        </form>
-                      </td>
+                 
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </tbody>

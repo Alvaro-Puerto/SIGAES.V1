@@ -9,24 +9,37 @@
                 <div class="card-header  d-flex justify-content-between">
                     
                     <p class="font-weight-bold">
+                        <span><a class="btn btn-link" href="<?php echo e(route('year.config', ["id" => $semester->school_year_id])); ?>"><span><i class="fa fa-arrow-left text-success" aria-hidden="true"></i></span></a></span>
                         <?php echo e($semester->name); ?>
 
                     </p>
-                    <a class="btn btn-link" href="<?php echo e(route('year.config', ["id" => $semester->school_year_id])); ?>"><span><i class="fa fa-arrow-left text-danger" aria-hidden="true"></i></span>Regresar</a>
+                    
                 </div>
                 <div class="card-body">
                     <div class="row p-0 m-0">
                         <div class="col-3">
                             <small class="d-block">
+                                Año lectivo
+                            </small>
+                            <p class="font-weight-bold"><?php echo e($semester->year->name); ?></p>
+                        </div>
+                        <div class="col-3">
+                            <small class="d-block">
                                 Inicio del semestre
                             </small>
-                            <p><?php echo e($semester->start_at); ?></p>
+                            <p class="font-weight-bold"><?php echo e($semester->start_at); ?></p>
                         </div>
                         <div class="col-3">
                             <small class="d-block">
                                 Fin del semestre
                             </small>
-                            <p><?php echo e($semester->end_at); ?></p>
+                            <p class="font-weight-bold"><?php echo e($semester->end_at); ?></p>
+                        </div>
+                        <div class="col-3">
+                            <small class="d-block">
+                                Fecha de creación
+                            </small>
+                            <p class="font-weight-bold"><?php echo e($semester->created_at); ?></p>
                         </div>
                     </div>
                 </div>
@@ -49,8 +62,28 @@
                             <div class="col-2 border border-black text-center">
                                 <small class="d-block">Nombre </small>
                                 <p class="text-dark font-weight-bold pt-2"><?php echo e($item->name); ?></p>
-
+                                
+                                <?php if($item->format == 'Ingresado'): ?>
+                                <span class="badge badge-pill badge-success">Valor ingresado</span>
+                                <?php else: ?>
+                                <span class="badge badge-pill badge-danger">Valor promediado</span>
+                                <?php endif; ?>
                                 <p class="mt-2">Max: <?php echo e($item->value); ?></p>
+
+                                <span>
+                                    <a href="<?php echo e(route('partial.update', ['id' => $item->id])); ?>" class="btn btn-link">
+                                        <i class="fas fa-pencil-alt text-primary"></i>
+                                    </a>
+                                    <form class="dropdown-item" action="<?php echo e(route('partial.delete', $item->id)); ?>" method="post">
+                                        <?php echo csrf_field(); ?>
+                                        <?php echo method_field('DELETE'); ?>
+                                        <button class="btn btn-link m-0 p-0 text-dark" type="submit">
+                                          <span><i class="fa fa-times text-danger" aria-hidden="true"></i></span>
+                                           
+                                        </button>
+                                      </form>
+                                   
+                                </span>
                             </div>    
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>                    

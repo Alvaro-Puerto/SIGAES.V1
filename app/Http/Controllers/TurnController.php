@@ -43,4 +43,9 @@ class TurnController extends Controller
         Turn::find($id)->delete();
         return Redirect::to('school/turns');
     }
+
+    public function update($id) {
+        $turn = Turn::find($id);
+        return view('turn_update', ['turn' => $turn]);
+    }
 }

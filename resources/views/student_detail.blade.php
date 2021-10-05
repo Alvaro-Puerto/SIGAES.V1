@@ -66,9 +66,9 @@
                           <li class="nav-item">
                             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Matriculas</a>
                           </li>
-                          <li class="nav-item">
+                          <!--<li class="nav-item">
                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Reporte disciplinario</a>
-                          </li>
+                          </li>-->
                           <li class="nav-item">
                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Referencia familiar-</a>
                           </li>
@@ -93,25 +93,43 @@
                                         <th scope="col"  class="sort" data-sort="status">Nivel/Programa</th>
                                         <th scope="col" class="sort" data-sort="completion">Modalidad</th>
                                         <th scope="col" class="sort" data-sort="completion">Fecha de matricula</th>
+                                        <th scope="col" class="sort" data-sort="completion"></th>
+                                        <th scope="col" class="sort" data-sort="completion"></th>
                                       </tr>
                                     </thead>
                                     <tbody class="list" >
                                       @foreach ($student->enrollement as $item)
                                           <tr>
                                             <td>{{$item->id}}</td>
-                                            {{-- <td>{{$item->year->name}}</td> --}} 
+                                            <td>{{$item->year->name}}</td>  
                                             <td>{{$item->course->name}}</td>
                                             <td>{{$item->level->name}}</td>
                                             <td>{{$item->modality->name}}</td>
                                             <td>{{$item->created_at}}</td>
                                             <td>
                                               <a href="{{route('enrollement.detail', ['id' => $item->id])}}" class="btn btn-success">
+                                               
+                                                Detalles
                                                 <span>
                                                   <i class="fa fa-arrow-right text-sucess" aria-hidden="true"></i>
                                                 </span>
-                                                Detalles
                                               </a>
+                                              <a class="btn btn-link" href="{{route('enrollement.matter', $item->id)}}">
+                                                <span> <i class="fas fa-pencil-alt text-primary"></i></span>
+                                                Editar 
+                                                
+                                              </a>
+                                             
                                             </td>
+                                            <td> 
+                                              <form class="dropdown-item ml-0 pl-0 pt-2" action="{{ route('enrollement.delete', $item->id)}}" method="post">
+                                              @csrf
+                                              @method('DELETE')
+                                              <button class="btn btn-link  text-dark" type="submit">
+                                                <span><i class="fa fa-times text-danger" aria-hidden="true"></i></span>
+                                                 Eliminar
+                                              </button>
+                                            </form></td>
                                           </tr>
                                       @endforeach
                                       {{-- <tr>

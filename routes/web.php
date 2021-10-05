@@ -62,11 +62,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('school/courses/new', function() {return view('new_course');})->name('school.courses.new');
 	Route::post('school/courses/new', ['as' => 'school.course.new', 'uses' => 'App\Http\Controllers\CourseController@create']);
 	Route::delete('school/courses/{id}', ['as' => 'school.course.delete', 'uses' => 'App\Http\Controllers\CourseController@delete']);
+	Route::get('school/courses/update/{id}', ['as' => 'school.course.update', 'uses' => 'App\Http\Controllers\CourseController@update']);
 
 	#SchoolTurn
 	Route::get('school/turns', ['as' => 'school.turns', 'uses' => 'App\Http\Controllers\TurnController@index']);
 	Route::get('school/turn/new', function() {return view('new_turn');})->name('school.turns.new');
-	Route::post('school/turn/new', ['as' => 'school.course.new', 'uses' => 'App\Http\Controllers\TurnController@create']);
+	Route::post('school/turn/new', ['as' => 'school.turn.new', 'uses' => 'App\Http\Controllers\TurnController@create']);
+	Route::get('school/turn/update/{id}', ['as' => 'school.turn.update', 'uses' => 'App\Http\Controllers\TurnController@update']);
 	Route::delete('school/turn/{id}', ['as' => 'school.turn.delete', 'uses' => 'App\Http\Controllers\TurnController@delete']);
 	
 	#Teacher
@@ -82,7 +84,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('matter/new', ['as' => 'matter.new', 'uses' => 'App\Http\Controllers\MatterController@create']);
 	Route::get('matters', ['as' => 'matter.list', 'uses' => 'App\Http\Controllers\MatterController@get']);
 	Route::get('matter/detail/{id}', ['as' => 'matter.detail', 'uses' => 'App\Http\Controllers\MatterController@detail']);
-
+	Route::delete('matter/{id}', ['as' => 'matter.delete', 'uses' => 'App\Http\Controllers\MatterController@delete']);
+	Route::get('matter/update/{id}', ['as' => 'matter.update', 'uses' => 'App\Http\Controllers\MatterController@update']);
+	
 	#Matter Teacher //Maestros asignaturas
 	Route::get('matter/teacher/{id}', ['as' => 'matter.teacher', 'uses' => 'App\Http\Controllers\MatterTeacherController@get']);
 	Route::put('matter/teacher/assign', ['as' => 'matter.teacher-assign', 'uses' => 'App\Http\Controllers\MatterTeacherController@attach']);
@@ -93,23 +97,32 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('school/year/new', function() {return view('school_year_new');})->name('school.year.new');
 	Route::post('school/year/new', ['as' => 'year.new', "uses" => 'App\Http\Controllers\SchoolYearController@create']);
 	Route::get('school/year/detail/{id}', ['as' => 'year.config', "uses" => 'App\Http\Controllers\SchoolYearController@detail']);
-
+	Route::get('school/year/update/{id}', ['as' => 'year.update', "uses" => 'App\Http\Controllers\SchoolYearController@update']);
+	Route::delete('school/year/{id}', ['as' => 'year.delete', "uses" => 'App\Http\Controllers\SchoolYearController@delete']);
+	
 	#Semester
 	Route::get('school/semester/{id}/new', function($id) {return view('semester_new', ["id" => $id]);})->name('semester.new');
 	Route::post('school/semester/new',  ['as' => 'semester.create', "uses" => 'App\Http\Controllers\SemesterController@create']);
 	Route::post('school/semester/partial/new', ['as' => 'semester.partial.create', 'uses' => 'App\Http\Controllers\PartialController@create']);
+	Route::delete('semester/{id}', ['as' => 'semester.delete', 'uses' => 'App\Http\Controllers\SemesterController@delete']);
+	Route::get('semester/update/{id}', ['as' => 'semester.update', 'uses' => 'App\Http\Controllers\SemesterController@update']);
+	
 	Route::get('school/semester/{id}/list/partial', function ($id) {
 		$semester = Semester::find($id);
 		return view('semester_partial_list', ["semester" => $semester]);
 	})->name('semester.partial.list');
 	Route::get('school/semester/{id}/list/partial/new', function ($id) {
-		return view('new_partial', ["id" => $id]);
+		$semester = Semester::find($id);
+		return view('new_partial', ["id" => $id, 'semester' => $semester]);
 	})->name('semester.partial.new');
+	Route::delete('partial/{id}', ['as' => 'partial.delete', 'uses' => 'App\Http\Controllers\PartialController@delete']);	
+	Route::get('partial/update/{id}', ['as' => 'partial.update', 'uses' => 'App\Http\Controllers\PartialController@update']);	
 
 	#Enrollement
 	Route::get('enrollement/{id}', ['as' => 'enrollement.new', "uses" => 'App\Http\Controllers\EnrollementController@get']);
 	Route::get('enrollement/matter/{id}', ['as' => 'enrollement.matter', "uses" => 'App\Http\Controllers\EnrollementController@getAllMatter']);
 	Route::post('enrollement/', ['as' => 'enrollement.create', "uses" => 'App\Http\Controllers\EnrollementController@create']);
+	Route::delete('enrollement/{id}', ['as' => 'enrollement.delete', "uses" => 'App\Http\Controllers\EnrollementController@delete']);
 	Route::post('enrollement/matter/asign', ['as' => 'enrollement_matter.asing', 'uses' => 'App\Http\Controllers\EnrollementMatterController@attachMatter']);
 	Route::post('enrollement/matter/detach', ['as' => 'enrollement_matter.detach', 'uses' => 'App\Http\Controllers\EnrollementMatterController@detachMatter']);
 	Route::get('enrollement/{id}/detail', ['as' => 'enrollement.detail', 'uses' => 'App\Http\Controllers\EnrollementController@detail']);
@@ -118,16 +131,18 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('school/modality', ['as' => 'modality.list', "uses" => 'App\Http\Controllers\ModalityController@get']);
 	Route::delete('school/modality/{id}', ['as' => 'modality.delete', "uses" => 'App\Http\Controllers\ModalityController@delete']);
 	Route::post('school/modality', ['as' => 'modality.create', "uses" => 'App\Http\Controllers\ModalityController@store']);
+	Route::get('school/modality/update/{id}', ['as' => 'modality.update', "uses" => 'App\Http\Controllers\ModalityController@update']);
+	Route::get('school/modality/new', function() {return view('modality_new');})->name('modality.new');
 
 	#Level
 	Route::get('school/level', ['as' => 'level.list', "uses" => 'App\Http\Controllers\LevelController@get']);
 	Route::delete('school/level/{id}', ['as' => 'level.delete', "uses" => 'App\Http\Controllers\LevelController@delete']);
 	Route::post('school/level', ['as' => 'level.create', "uses" => 'App\Http\Controllers\LevelController@store']);
-
-
+	Route::get('school/level/new', function() {return view('level_new');})->name('level.new');
+	Route::get('school/level/update/{id}', ['as' => 'level.update', "uses" => 'App\Http\Controllers\LevelController@update']);
 	Route::get('tutor/list', ['as' => 'tutor.list',  "uses" => 'App\Http\Controllers\ParentStudentController@get']);
 	Route::get('tutor/new', function() {return view('new_parent');})->name('tutor.create');
-	Route::post('tutor/new', ['as' => 'level.new', "uses" => 'App\Http\Controllers\ParentStudentController@create']);
+	Route::post('tutor/new', ['as' => 'tutor.new', "uses" => 'App\Http\Controllers\ParentStudentController@create']);
 	Route::get('tutor/select/{id}', function($id) { return view('tutor_preview_selection', ['id' => $id]);})->name('tutor.select');
 	Route::get('tutor/select/{id}/parent', function($id) { return view('tutor_select_search', ['id' => $id]);})->name('tutor.search');
 	Route::get('tutor/select/{id_student}/{id_tutor}/confirm', ['as' => 'level.preview', "uses" => 'App\Http\Controllers\ParentStudentController@getPreview']);

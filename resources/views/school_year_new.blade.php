@@ -45,7 +45,7 @@
                         <input type="date" name="end_at" class="form-control " id="end_at">
                     </div>
                     <div class="form-group col-12 d-flex justify-content-end">
-                        <button class="btn btn-danger">Cancelar</button>
+                        <a class="btn btn-danger" href="{{route('year.list')}}">Cancelar</a>
                         <button class="btn btn-success">Guardar</button>
                     </div>
                 </div>

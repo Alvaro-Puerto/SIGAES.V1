@@ -21,4 +21,8 @@ class Semester extends Model
         return $this->hasMany(Partial::class);
     }
 
+    public function year() {
+        return $this->belongsTo(SchoolYear::class, 'school_year_id', 'id');
+    }
+
 }

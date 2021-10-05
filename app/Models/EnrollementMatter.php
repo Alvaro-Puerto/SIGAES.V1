@@ -16,4 +16,8 @@ class EnrollementMatter extends Model
     public function partials() {
         return $this->belongsToMany(Partial::class, 'enrollement_matter_partials')->withPivot('value');
     }
+
+    public function semester() {
+        
+    }
 }

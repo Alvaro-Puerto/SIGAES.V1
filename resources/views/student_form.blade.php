@@ -15,45 +15,45 @@
                     <div class="form-row">
                         <div class="form-group col-md-6 col-lg-6 col-xs-12">
                             <label for="example-text-input" class="form-control-label">Nombres </label>
-                            <input class="form-control" type="text" value="" id="first_name" name="first_name" >
+                            <input class="form-control" type="text" value="" id="first_name" name="first_name" required>
                         </div>
                         <div class="form-group col-md-6 col-lg-6 col-xs-12">
                             <label for="example-search-input" class="form-control-label">Apellidos</label>
-                            <input class="form-control" type="text" value="" id="last_name" name="last_name">
+                            <input class="form-control" type="text" value="" id="last_name" name="last_name" required>
                         </div>
                         <div class="form-group col-md-12 col-lg-12 col-xs-12">
                             <label for="example-search-input" class="form-control-label">Email</label>
-                            <input class="form-control" type="text" value="" id="email" name="email">
+                            <input class="form-control" type="text" value="" id="email" name="email" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6 col-lg-6 col-xs-12">
                             <label for="example-text-input" class="form-control-label">Sexo </label>
-                            <select  class="form-control " id="genre" name="gender">
+                            <select  class="form-control " id="genre" name="gender" required>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Masculino">Femenino</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6 col-lg-6 col-xs-12">
                             <label for="example-search-input" class="form-control-label">Telefono</label>
-                            <input class="form-control" type="text" value="" id="phone" name="phone">
+                            <input class="form-control" type="text" value="" id="phone" name="phone" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6 col-lg-6 col-xs-12">
                             <label for="example-text-input" class="form-control-label">Fecha de nacimiento </label>
-                            <input class="form-control" type="date" id="birth_date" name="birth_date">
+                            <input class="form-control" type="date" id="birth_date" name="birth_date" required>
 
                         </div>
                         <div class="form-group col-md-6 col-lg-6 col-xs-12">
                             <label for="example-search-input" class="form-control-label">Codigo del estudiante <span class="font-weight-bold text-danger">* Requerido</span></label>
-                            <input class="form-control" type="text" value="" id="code" name="code">
+                            <input class="form-control" type="text" value="" id="code" name="code" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-12 form-group ">
-                            <label for="example-search-input" class="form-control-label">Descripción general <span class="font-weight-bold text-danger">* Requerido</span></label>
-                            <textarea class="form-control border" id="general_observation" name="general_observation"></textarea>
+                            <label for="example-search-input" class="form-control-label">Descripción general </label>
+                            <textarea class="form-control border" id="general_observation" name="general_observation" required></textarea>
                         </div>
                     </div>
                     <div class="form-row">

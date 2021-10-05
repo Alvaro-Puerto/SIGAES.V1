@@ -71,11 +71,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body row">
-                    <div class="col">
+                    <div class="col-2">
 
                     </div>
                     <?php $__currentLoopData = $year_school->semester; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="col-4">
+                    <div class="col-5">
                         <p class="font-weight-bold"><?php echo e($item->name); ?></p>
                         <div class="row">
                             <?php $__currentLoopData = $item->partials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $partial): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -88,17 +88,24 @@
                     </div>     
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
-                <div class="card-body row d-block">
-                    <?php $__currentLoopData = $enrollement->matters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="col-12 border-bottom">
-                            <p><?php echo e($item->name); ?>
+                <div class="card-body ">
+                    <?php $__currentLoopData = $matter_and_partial; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="row">
+                            <div class="col-2 border-bottom border-top">
+                                <p><?php echo e($item->name_matter); ?>
 
-                                <span>
-                                    <a href="<?php echo e(route('partial.matter.update', ["id" => $item->pivot->id, 'id_enrollement' => $enrollement->id])); ?>">
-                                        <i class="fas fa-external-link-square-alt text-success"></i>
-                                    </a>
-                                </span>
-                            </p>
+                                    <span>
+                                        <a href="<?php echo e(route('partial.matter.update', ["id" => $item->id_pivot, 'id_enrollement' => $enrollement->id])); ?>">
+                                            <i class="fas fa-external-link-square-alt text-success"></i>
+                                        </a>
+                                    </span>
+                                </p>
+                            </div>
+                            <?php $__currentLoopData = $item->partials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $partial): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="col border text-center align-items-center justify-content-center">
+                                    <p class="text-center"><?php echo e($partial->pivot->value); ?></p>
+                                </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
