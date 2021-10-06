@@ -40,11 +40,15 @@
                     <label for="">Municipio</label>
                 <input type="text" class="form-control" name="municipality" id="municipality" value="{{$school->municipality}}">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-6">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="customFile" name="file" >
                         <label class="custom-file-label" for="customFile">Selecciona el la insignia del centro</label>
                     </div>
+                </div>
+                <div class="form-group col-6">
+                    <img src="{{ url($school->logo) }}" alt="" title="" />
+                    
                 </div>
             </div>
             <div class="form-row">
