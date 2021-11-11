@@ -149,6 +149,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('tutor/asign/student', ['as' => 'tutor.asign', "uses" => 'App\Http\Controllers\ParentStudentController@asignStudent']);
 	Route::delete('tutor/{id_tutor}/detach/student/{id_student}', ['as' => 'tutor.detach', "uses" => 'App\Http\Controllers\ParentStudentController@removeStudent']);
 
+	#Calendar
+	Route::get('calendar', function () { return view('calendar');})->name('calendar');
+
 	#Partial
 	Route::get('matter/partial/{id}/{id_enrollement}/update', function ($id, $id_enrollement) {
 		$student = Enrollement::find($id_enrollement)->student;

@@ -2,7 +2,7 @@
 
 @section('content')
 @include('layouts.headers.cards')
-  <div class="container-fluid mt-7">
+  <div class="container mt-2">
       <div class="row">
           <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
               <div class="card card-profile shadow">
@@ -35,26 +35,38 @@
                               </div>
                           </div>
                       </div>
-                      <div class="text-center">
-                          <h3>
-                            {{$student->user->name}}
-                          </h3>
-                          <h3>
-                              {{$student->code}}
-                          </h3>
-                          <div class="h5 font-weight-300">
-                              {{$student->user->birth_date}}
-                          </div>
-                          <div class="h5 font-weight-300">
-                              {{$student->user->gender}}
-                          </div>
-                          <div class="h5 mt-4">
+                      <div class="text">
+                        <small class="d-block">Username</small>
+                        <p class="font-weight-bold">
+                          {{$student->user->name}}
+                        </p>
+                        <small class="d-block">Nombres </small>
+                        <p class="font-weight-bold">
+                          {{$student->user->first_name}}
+                        </p>
+                        <small class="d-block">Apellidos</small>
+                        <p class="font-weight-bold">
+                          {{$student->user->last_name}}
+                        </p>
+
+                        <small class="d-block">Codigo del estudiante</small>
+                        <p class="font-weight-bold">
+                          {{$student->code}}
+                        </p>
+                        <small class="d-block">Fecha de nacimiento</small>
+                        <p class="font-weight-bold">
+                          {{$student->user->birth_date}}
+                        </p>
+                        <small class="d-block">Sexo</small>
+                        <p class="font-weight-bold">
+                          {{$student->user->gender}}
+                        </p>
+                        <small class="d-block">Correo electronico</small>
+                          <p class="font-weight-bold text-success">
                               {{$student->user->email}}
-                          </div>
-                          
+                          </p>                          
                           <hr class="my-4" />
-                      <p>{{$student->general_observation}}</p>
-                          <a href="#">{{ __('Show more') }}</a>
+                    
                       </div>
                   </div>
               </div>
@@ -74,7 +86,7 @@
                           </li>
                       </ul>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" style="min-height: 300px">
                       <div class="tab-content" id="pills-tabContent">
                           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="container-fluid d-flex justify-content-end">
@@ -795,19 +807,14 @@
                             </div>
                           </div>
                         </div>
-                  </div>
-                  
-                
-              </div>
-                  
+                  </div> 
+              </div>                  
               </div>
           </div>
       </div>
   </div>
-{{-- @include('layouts.footers.auth') --}}
-@endsection
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -838,3 +845,7 @@
       </div>
     </div>
   </div>
+
+{{-- @include('layouts.footers.auth') --}}
+@endsection
+

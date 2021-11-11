@@ -1,6 +1,7 @@
-<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light " id="sidenav-main" >
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md bg-white " id="sidenav-main" >
     <div class="container-fluid">
         <!-- Toggler -->
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,9 +50,9 @@
             </li>
         </ul>
         <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse  navbar-light mt--4" id="sidenav-collapse-main">
             <!-- Collapse header -->
-            <div class="navbar-collapse-header d-md-none">
+            <div class="navbar-collapse-header navbar-light d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
@@ -78,31 +79,30 @@
                 </div>
             </form>
             <!-- Navigation -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ">
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Panel de control') }}
                     </a>
                 </li>  --}}
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples-1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-1">
-                        <i class="fas fa-users"></i>
-                        <span class="nav-link-text" style="color: #f4645f;" >{{ __('Alumnos') }}</span>
+                    <a class="nav-link font-weight-bold text-primary-link border-bottom" style="color: #42526E" href="#navbar-examples-1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-1">                       
+                        <span class="nav-link-text"  >{{ __('Alumnos') }}</span>
                     </a>
-                    <div class="collapse " id="navbar-examples-1">
+                    <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-1">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('student.list') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('student.list') }}">
                                     {{ __('Listado de alumnos') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('student.create') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('student.create') }}">
                                     {{ __('Nuevos alumnos') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('user.index') }}">
                                     {{ __('Informes') }}
                                 </a>
                             </li>
@@ -110,20 +110,18 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples-2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-2">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Maestros') }}</span>
+                    <a class="nav-link border-bottom  font-weight-bold"  style="color: #42526E" href="#navbar-examples-2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-2">                       
+                        <span class="nav-link-text" >{{ __('Maestros') }}</span>
                     </a>
-
-                    <div class="collapse " id="navbar-examples-2">
+                    <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('teacher.all') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('teacher.all') }}">
                                     {{ __('Listado de maestros') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('teacher/new', []) }}">
+                                <a class="nav-link font-weight-bold" href="{{ url('teacher/new', []) }}">
                                     {{ __('Añadir maestro') }}
                                 </a>
                             </li>
@@ -136,75 +134,69 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-3">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Configuración del centro') }}</span>
+                    <a class="nav-link   border-bottom  font-weight-bold" style="color: #42526E" href="#navbar-examples-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-3">                        
+                        <span class="nav-link-text" >{{ __('Configuración del centro') }}</span>
                     </a>
 
-                    <div class="collapse " id="navbar-examples-3">
+                    <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-3">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('school.setting') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('school.setting') }}">
                                     {{ __('Configuraciones generales del centro') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('level.list') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('level.list') }}">
                                     {{ __('Nivel/Programa') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('modality.list') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('modality.list') }}">
                                     {{ __('Modalidad') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('school.courses') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('school.courses') }}">
                                     {{ __('Grados') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('school.turns') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('school.turns') }}">
                                     {{ __('Turnos') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('matter.list') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('matter.list') }}">
                                     {{ __('Asignaturas') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
+                                <a class="nav-link font-weight-bold" href="#">
                                     {{ __('Permisos y accesos') }}
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
-                                    {{ __('') }}
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples-10" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-10">
-                        <i class="fas fa-users"></i>
-                        <span class="nav-link-text" style="color: #f4645f;" >{{ __('Padres de familia') }}</span>
+                    <a class="nav-link  border-bottom  font-weight-bold" style="color: #42526E" href="#navbar-examples-10" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-10">                        
+                        <span class="nav-link-text"  >{{ __('Padres de familia') }}</span>
                     </a>
-                    <div class="collapse " id="navbar-examples-10">
+                    <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-10">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tutor.list') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('tutor.list') }}">
                                     {{ __('Listado de tutores') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tutor.create') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('tutor.create') }}">
                                     {{ __('Nuevo tutor') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('user.index') }}">
                                     {{ __('Informes') }}
                                 </a>
                             </li>
@@ -212,14 +204,13 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples-5" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-5">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Curso lectivo') }}</span>
+                    <a class="nav-link  border-bottom  font-weight-bold" style="color: #42526E" href="#navbar-examples-5" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-5">                        
+                        <span class="nav-link-text">{{ __('Curso lectivo') }}</span>
                     </a>
-                    <div class="collapse " id="navbar-examples-5">
+                    <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-5">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('year.list') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('year.list') }}">
                                     {{ __('Año lectivo') }}
                                 </a>
                             </li>
@@ -229,7 +220,7 @@
                                 </a>
                             </li> --}}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('calendar') }}">
                                     {{ __('Horarios') }}
                                 </a>
                             </li>
@@ -264,9 +255,7 @@
                 </li> --}}
             </ul>
             <!-- Divider -->
-            <hr class="my-3">
-            <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Documentation</h6>
+           
             <!-- Navigation -->
             {{-- <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">

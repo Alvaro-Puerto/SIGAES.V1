@@ -10942,4 +10942,6 @@ a.text-dark:focus {
   }
 }
 
-
+.text-primary-link {
+  color: #516079;
+}

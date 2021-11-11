@@ -83,37 +83,3 @@
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
 @endpush
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form method="POST" action="{{url('school/level')}}">
-        @csrf
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo nivel o programa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="">
-                            Nombre del programa/nivel
-                        </label>
-                        <input class="form-control rounded-0 border" name="name" id="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="">
-                            Descripción del programa/nivel
-                        </label>
-                        <input class="form-control rounded-0 border" name="description" id="description">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </form>
-  </div>

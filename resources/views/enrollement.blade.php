@@ -2,7 +2,7 @@
 
 @section('content')
 @include('layouts.headers.cards')
-<div class="container-fluid mt-4">
+<div class="container mt-2">
     <div class="row">
         <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
             <div class="card">
@@ -147,14 +147,7 @@
                             @endif
                         </div>
                     </div>
-                </div>
-                <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                    <div class="d-flex justify-content-between">
-                        {{-- <a href="#" class="btn btn-sm btn-info mr-4">{{ __('Cambiar foto de perfil') }}</a> --}}
-                        
-                        {{-- <a href="#" class="btn btn-sm btn-default float-right">{{ __('Message') }}</a> --}}
-                    </div>
-                </div>
+                </div>                
                 <div class="card-body pt-0 pt-md-4">
                     <div class="row">
                         <div class="col">
@@ -163,26 +156,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <h3>
-                          {{$student->user->name}}
-                        </h3>
-                        <h3>
-                            {{$student->code}}
-                        </h3>
-                        <div class="h5 font-weight-300">
-                            {{$student->user->birth_date}}
-                        </div>
-                        <div class="h5 font-weight-300">
-                            {{$student->user->gender}}
-                        </div>
-                        <div class="h5 mt-4">
+                    <div class="text">
+                      <small class="d-block">Username</small>
+                      <p class="font-weight-bold">
+                        {{$student->user->name}}
+                      </p>
+                      <small class="d-block">Nombres </small>
+                      <p class="font-weight-bold">
+                        {{$student->user->first_name}}
+                      </p>
+                      <small class="d-block">Apellidos</small>
+                      <p class="font-weight-bold">
+                        {{$student->user->last_name}}
+                      </p>
+
+                      <small class="d-block">Codigo del estudiante</small>
+                      <p class="font-weight-bold">
+                        {{$student->code}}
+                      </p>
+                      <small class="d-block">Fecha de nacimiento</small>
+                      <p class="font-weight-bold">
+                        {{$student->user->birth_date}}
+                      </p>
+                      <small class="d-block">Sexo</small>
+                      <p class="font-weight-bold">
+                        {{$student->user->gender}}
+                      </p>
+                      <small class="d-block">Correo electronico</small>
+                        <p class="font-weight-bold text-success">
                             {{$student->user->email}}
-                        </div>
-                        
+                        </p>                          
                         <hr class="my-4" />
-                    <p>{{$student->general_observation}}</p>
-                        <a href="#">{{ __('Show more') }}</a>
+                   
                     </div>
                 </div>
             </div>
