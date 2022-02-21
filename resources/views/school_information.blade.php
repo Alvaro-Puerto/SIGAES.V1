@@ -16,7 +16,7 @@
             <div class="form-row">
                 <div class="form-group col-12">
                     <label for="">Id</label>
-                    <input type="text" class="form-control" name="id" id="id" value="{{$school->id}}" disabled>
+                    <input type="text" class="form-control" name="id" id="id" value="{{$school->id }}" disabled>
                 </div>
                 <div class="form-group col-6">
                     <label for="">Nombre del centro</label>
@@ -24,21 +24,21 @@
                 </div>
                 <div class="form-group col-6">
                     <label for="">Codigo unico del establecimiento</label>
-                <input type="text" class="form-control" name="code" id="code"  value="{{$school->code}}">
+                <input type="text" class="form-control" name="code" id="code"  value="{{$school->code or ''}}">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-12">
                     <label for="">Dirección del centro</label>
-                <input type="text" class="form-control" name="address" id="address"  value="{{$school->address}}">
+                <input type="text" class="form-control" name="address" id="address"  value="{{$school->address }}">
                 </div>
                 <div class="form-group col-6">
                     <label for="">Ciudad</label>
-                <input type="text" class="form-control" name="city" id="city" value="{{$school->city}}">
+                <input type="text" class="form-control" name="city" id="city" value="{{$school->city }}">
                 </div>
                 <div class="form-group col-6">
                     <label for="">Municipio</label>
-                <input type="text" class="form-control" name="municipality" id="municipality" value="{{$school->municipality}}">
+                <input type="text" class="form-control" name="municipality" id="municipality" value="{{$school->municipality }}">
                 </div>
                 <div class="form-group col-6">
                     <div class="custom-file">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="form-group col-6">
-                    <img src="{{ url($school->logo) }}" alt="" title="" />
+                    <img src="#" alt="" title="" />
                     
                 </div>
             </div>

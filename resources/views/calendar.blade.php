@@ -43,19 +43,45 @@
   </style>
   <div class="container-fluid mt-2">
     <div class="card">
-      <div class="card-header">
-        <p class="font-weight-bold">Horarios</p>
-      </div>
       <div class="card-header d-flex justify-content-between">
-        <form class="form-inline">
-          <div class="form-group">
-            <label class="sr-only" for="inlineFormInputName2">Name</label>
-            <select name="" class="form-control rounded-0 w-25" id=""></select>        
-          </div>        
-        </form>
-        <button class="btn btn-primary" id="myBtn">
+        <p class="font-weight-bold">Horarios</p>
+        <button class="btn btn-primary " id="myBtn">
           Nuevo evento
         </button>
+      </div>
+      <div class="card-header ">
+        <div class="row">
+          <div class="col-8">
+            <form class="form">
+              <div class="form-row">
+                <div class="form-group col-5">
+                  <label for="">Anyo lectivo</label>
+                  <select name="school_year_id" class="form-control" id="school_year_id">
+                    @foreach ($school_years as $item)
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach  
+                  </select>        
+                </div>
+                <div class="form-group col-5">
+                  <label for="">Curso lectivo</label>
+                  <select name="course_id" class="form-control rounded-0" id="course_id">
+                    @foreach ($courses as $item)
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+                  </select>        
+                </div>
+                <div class="form-group col-2 pt-2">
+                  <button class="btn btn-success mt-4" type="button" onclick="getEvent()">Buscar</button>
+                </div>
+              </div>
+               
+            </form>
+          </div>
+          <div class="col-4 d-flex justify-content-end">
+           
+          </div>
+        </div>
+      
         
 
       </div>
@@ -70,7 +96,41 @@
     <!-- Modal content -->
     <div class="modal-content">
       <span class="close">&times;</span>
-      <p>Some text in the Modal..</p>
+       <div class="card">
+         <div class="card-header">
+           <p class="font-weight-bold">Nuevo horario</p>
+         </div>
+         <div class="card-body">
+           <div class="form-row">
+            <div class="form-group col">
+              <label for="">Selecciona una materia</label>
+              <select name="matter_id" id="matter_id" class="form-control rounded-0"></select>
+            </div>
+            
+           </div>
+           <div class="form-row">
+                <div class="form-group col">
+                  <label for="">Hora inicio</label>
+                  <input type="datetime-local" class="form-control rounded-0">
+                </div>
+                <div class="form-group col">
+                  <label for="">Hora Fin</label>
+                  <input type="datetime-local" class="form-control rounded-0">
+                </div>
+                <div class="form-group col">
+                  <label for="">Hora inicio</label>
+                  <select name="" id="" multiple>
+                    <option value="">Lunes</option>
+                    <option value="">Martes</option>
+                    <option value="">Miercoles</option>
+                    <option value="">Jueves</option>
+                    <option value="">Viernes</option>
+                  </select>
+                </div>
+
+           </div>
+         </div>
+       </div>
     </div>
   
   </div>
@@ -78,6 +138,7 @@
 
  
 @push('js')
+<script type="text/javascript" src="{{asset('assets/js/calendar.js')}}"></script>
 <script>
 
   document.addEventListener('DOMContentLoaded', function() {

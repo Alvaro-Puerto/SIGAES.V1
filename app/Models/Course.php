@@ -18,4 +18,8 @@ class Course extends Model
     public function school() {
         return $this->belongsTo(SchoolInformation::class, 'school_information_id', 'id');
     }
+
+    public function pensum() {
+        return $this->hasMany(Pensum::class, 'course_id');
+    }
 }

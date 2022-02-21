@@ -47,7 +47,10 @@
                             <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            
+                            <a class="dropdown-item" href="{{ route('course.pensum', ['id'=>$course->id]) }}">
+                              <span><i class="fas fa-pencil-alt textr-primary"></i></span>
+                              Ver pensum
+                            </a>
                             <a class="dropdown-item" href="{{ route('school.course.update', ['id'=>$course->id]) }}">
                               <span><i class="fas fa-pencil-alt textr-primary"></i></span>
                               Editar

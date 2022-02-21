@@ -220,7 +220,7 @@
                                 </a>
                             </li> --}}
                             <li class="nav-item">
-                                <a class="nav-link font-weight-bold" href="{{ route('calendar') }}">
+                                <a class="nav-link font-weight-bold" href="{{ route('event.index') }}">
                                     {{ __('Horarios') }}
                                 </a>
                             </li>

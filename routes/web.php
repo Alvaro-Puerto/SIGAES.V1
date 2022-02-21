@@ -150,8 +150,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('tutor/{id_tutor}/detach/student/{id_student}', ['as' => 'tutor.detach', "uses" => 'App\Http\Controllers\ParentStudentController@removeStudent']);
 
 	#Calendar
-	Route::get('calendar', function () { return view('calendar');})->name('calendar');
-
+	Route::get('calendar',  ['as' => 'event.index', "uses" => 'App\Http\Controllers\EventController@index']);
+	Route::get('calendar/{course_id}/{school_year_id}',  ['as' => 'event.all', "uses" => 'App\Http\Controllers\EventController@getEventByAjax']);
+	
+	#Pensum
+	Route::get('course/{id}/pensum', ['as' => 'course.pensum', "uses" => 'App\Http\Controllers\PensumController@detail']);
+	Route::get('course/{id}/pensum/new', ['as' => 'course.pensum.new', "uses" => 'App\Http\Controllers\PensumController@pensumCreateStep1']);
+	
+	
 	#Partial
 	Route::get('matter/partial/{id}/{id_enrollement}/update', function ($id, $id_enrollement) {
 		$student = Enrollement::find($id_enrollement)->student;
