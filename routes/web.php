@@ -156,7 +156,9 @@ Route::group(['middleware' => 'auth'], function () {
 	#Pensum
 	Route::get('course/{id}/pensum', ['as' => 'course.pensum', "uses" => 'App\Http\Controllers\PensumController@detail']);
 	Route::get('course/{id}/pensum/new', ['as' => 'course.pensum.new', "uses" => 'App\Http\Controllers\PensumController@pensumCreateStep1']);
-	
+	Route::post('course/{id}/pensum/new', ['as' => 'course.pensum.create', "uses" => 'App\Http\Controllers\PensumController@pensumCreateStep1Post']);
+	Route::get('course/{id}/pensum/{id_pensum}/matter', ['as' => 'course.pensum.matter', "uses" => 'App\Http\Controllers\PensumController@pensumCreateStep2']);
+	Route::post('course/pensum/matter', ["uses" =>  'App\Http\Controllers\PensumController@pensumCreateStep2Post']);
 	
 	#Partial
 	Route::get('matter/partial/{id}/{id_enrollement}/update', function ($id, $id_enrollement) {

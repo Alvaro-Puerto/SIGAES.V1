@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Matter;
 use App\Models\Pensum;
+use App\Models\PensumMatter;
 use App\Models\SchoolYear;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class PensumController extends Controller
     public function pensumCreateStep1Post(Request $request) {
         $pensum = Pensum::create($request->all());
 
-        return redirect('/course/' . $request->id_course . '/pensum/' . $pensum->id . '/matter');
+        return redirect('course/' . $request->course_id . '/pensum/' . $pensum->id . '/matter');
     }
 
     public function pensumCreateStep2($id_course, $id_pensum) {
@@ -36,8 +37,15 @@ class PensumController extends Controller
         $teachers = Teacher::all();
         return view('pensum_matter_asign', 
                     ['course' => $course, 
-                     'school_years' => $matters,
-                     'teachers' => $teachers
+                     'matters' => $matters,
+                     'teachers' => $teachers,
+                     'id_pensum' => $id_pensum
                     ]);
+    }
+    
+    public function pensumCreateStep2Post(Request $request) {
+        PensumMatter::create($request->all());
+
+        return response()->json('ok');
     }
 }

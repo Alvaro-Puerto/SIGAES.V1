@@ -34,16 +34,26 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col" class="sort" data-sort="name">Id</th>
-                    <th scope="col" class="sort" data-sort="budget">Nombre del semestre</th>
-                    <th scope="col" class="sort" data-sort="status">Inicia </th>
-                    <th scope="col" class="sort" data-sort="status">Termina</th>
+                    <th scope="col" class="sort" data-sort="budget">Nombre del pensum</th>
+                    <th scope="col" class="sort" data-sort="status">Ciclo vigente </th>
+                   
                     <th scope="col" class="sort" data-sort="status">Fecha de creación</th>
                 
                     <th scope="col" class="sort" data-sort="status">Acciones</th>
                   </tr>
                 </thead>
                 <tbody class="list" id="tbody-student">
-              
+                  @foreach ($course->pensum as $pensum)
+                  <tr>
+                    <td>
+                      {{$pensum->id}}
+                    </td>
+                    <th scope="row">{{$pensum->nombre}}</th>
+                    <td>{{$pensum->school_year}}</td>
+                    <td>{{$pensum->created_at}}</td>
+                    
+                  </tr>
+                  @endforeach
               </table>
           
             </div>

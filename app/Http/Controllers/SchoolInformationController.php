@@ -23,13 +23,13 @@ class SchoolInformationController extends Controller
         if(!$request->id) {
             $data['id'] = 1;
         }
-        $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        #$request->validate([
+        #    'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        #]);
     
-        $path = $request->file('file')->store('storage');
-        $url = Storage::url($path);
-        $data['logo'] = $path;
+        #$path = $request->file('file')->store('storage');
+        #$url = Storage::url($path);
+        #$data['logo'] = $path;
         SchoolInformation::updateOrCreate(
             ['id' => $data['id']],
             $data

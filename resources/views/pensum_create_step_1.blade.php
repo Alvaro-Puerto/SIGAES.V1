@@ -57,15 +57,17 @@
         </div>
         <div class="card-body">
             <form action="" method="POST">
+                @csrf
                 <div class="form-group">
                     <label for="">Nombre del pensum</label>
-                    <input type="text" name="name" id="" class="form-control rounded-0">
+                    <input type="text" name="nombre" id="" class="form-control rounded-0">
                 </div>
                 <div class="form-group">
+                    <input type="hidden" value="{{$course->id}}" name="course_id">
                     <label for="">Anyo lectivo</label>
                     <select name="school_year_id" class="form-control rounded-0" id="">
                         @foreach ($school_years as $item)
-                            <option value="">{{$item->name}}</option>
+                            <option value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
