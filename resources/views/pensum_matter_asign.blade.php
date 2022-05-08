@@ -54,7 +54,7 @@
                                 <p class="text-center font-weight-bold">{{$item->name}}</p>
                             </div>
                             <div class="card-footer">
-                                <button type="button" class="btn btn-link" data-toggle="modal"  onclick="addPensumTeacher({{$item->id}})" data-target="#exampleModal">
+                                <button type="button" class="btn btn-link" data-toggle="modal"  onclick="addPensumTeacher('{{$item->id}}')" data-target="#exampleModal">
                                     <span class=" d-block"><i class="fa fa-plus text-success"></i></span>
                                     Seleccionar
                                 </button>
@@ -65,8 +65,49 @@
                 </div>
                 <div class="col-6">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-content-between">
                             <p class="font-weight-bold">Materias adjuntadas</p>
+                            <a href="{{ route('course.pensum.finish', ['id'=>$pensum->id]) }}" class="btn btn-success">Finalizar</a>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush" >
+                            @foreach($pensum->matter as $item)
+                                <li class="list-group-item p-0">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <p class="font-weight-bold"> {{$item->matter->name}}</p>
+                                            <form action='/course/pensum/matter/detach' method="POST">
+                                                @csrf
+                                                <input type="hidden" name="matter_id" value="{{$item->matter->id}}">
+                                                <input type="hidden" name="pensum_id" value="{{$pensum->id}}">
+                                                <button class="btn btn-link">
+                                                    <span class="fa fa-times text-danger"></span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-12">
+                                            <ul class="list-group" >
+                                                @foreach($item->teachers as $teacher)
+                                                    <li class="list-group-item p-1 d-flex justify-content-between">
+                                                        <small>{{$teacher->user->fullName()}}</small>
+                                                        <form action='/course/pensum/matter/teacher/detach' method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="matter_pensum_id" value="{{$item->id}}">
+                                                            <input type="hidden" name="teacher_id" value="{{$teacher->id}}">
+                                                            <button class="btn btn-link">
+                                                                <span class="fa fa-times text-danger"></span>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </li>
+                            @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -89,19 +130,26 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <div class="card-header" id="">
+            <p class="font-weight-bold text-danger" id="alert-header"></p>
+        </div>
         <div class="modal-body">
            <div class="form">
             <input type="hidden" name="matter_id" id="matter_id">   
             <input type="hidden" name="pensum_id" id="pensum_id">
                <div class="form-group">
                    <label for="">Seleccione el maestro a asociar</label>
-                   <select class="form-control rounded-0"  name="teacher_id" id="teacher_id">
-                       @foreach ($teachers as $item)
-                           <option value="{{$item->id}}">{{$item->user->name}}</option>
-                       @endforeach
-                   </select>
+                   <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Ingrese el nombre" id="search-teacher">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="" onclick="search()">Buscar</button>
+                        </div>
+                    </div>
                </div>
            </div>
+            <ul class="list-group" id="list-teacher">
+               
+            </ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -112,7 +160,11 @@
   </div>
 @endsection
 
+<script type="text/javascript">
+    window.CSRF_TOKEN = '{{ csrf_token() }}';
+</script>
 @push('js')
+    <script type="text/javascript" src="{{asset('assets/js/teacher.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/matter_pensum.js')}}"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>

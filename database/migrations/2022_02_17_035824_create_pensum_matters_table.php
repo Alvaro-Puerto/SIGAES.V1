@@ -20,11 +20,6 @@ class CreatePensumMattersTable extends Migration
                   ->on('matters')
                   ->references('id')
                   ->onDelete('cascade');
-            $table->foreignId('teacher_id');
-            $table->foreign('teacher_id')
-                  ->on('teachers')
-                  ->references('id')
-                  ->onDelete('cascade');
             $table->foreignId('pensum_id');
             $table->foreign('pensum_id')
                   ->on('pensums')

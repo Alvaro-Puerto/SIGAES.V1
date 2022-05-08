@@ -5,11 +5,14 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- Brand -->
+        <x-logo-component/>
+
+
+        <!-- Brand
         {{-- <a class="navbar-brand font-weight-bold pt-0" href="{{ route('home') }}">
             SIGAES
-        </a> --}}
-        <h1 class="nav-link font-weight-bold">SIGAES</h1>
+        </a> --}} 
+        <h1 class="nav-link font-weight-bold">SIGAES</h1>  -->
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
@@ -87,23 +90,22 @@
                 </li>  --}}
                 <li class="nav-item">
                     <a class="nav-link font-weight-bold text-primary-link border-bottom" style="color: #42526E" href="#navbar-examples-1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-1">                       
-                        <span class="nav-link-text"  >{{ __('Alumnos') }}</span>
+                        <span class="nav-link-text"  >
+                        <i class="fas fa-user-graduate"></i>
+                        {{ __('Alumnos') }}</span>
                     </a>
                     <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-1">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold" href="{{ route('student.list') }}">
-                                    {{ __('Listado de alumnos') }}
+                                   <span class="text-success"><i class="fas fa-list mr-1"></i></span> {{ __('Listado de alumnos') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold" href="{{ route('student.create') }}">
-                                    {{ __('Nuevos alumnos') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link font-weight-bold" href="{{ route('user.index') }}">
-                                    {{ __('Informes') }}
+                                    <span class="text-success">
+                                    <i class="fas fa-plus mr-1"></i>
+                                    </span> {{ __('Nuevos alumnos') }}
                                 </a>
                             </li>
                         </ul>
@@ -111,53 +113,64 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link border-bottom  font-weight-bold"  style="color: #42526E" href="#navbar-examples-2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-2">                       
-                        <span class="nav-link-text" >{{ __('Maestros') }}</span>
+                        <span class="nav-link-text" >
+                        <i class="fas fa-chalkboard-teacher"></i>    
+                        {{ __('Maestros') }}</span>
                     </a>
                     <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
+                           
                                 <a class="nav-link font-weight-bold" href="{{ route('teacher.all') }}">
+                                <span class="text-success"><i class="fas fa-list mr-1"></i></span>
                                     {{ __('Listado de maestros') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold" href="{{ url('teacher/new', []) }}">
-                                    {{ __('Añadir maestro') }}
+                                <span class="text-success">
+                                    <i class="fas fa-plus mr-1"></i>  
+                                </span>  
+                                {{ __('Añadir maestro') }}
                                 </a>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
-                                    {{ __('Informes') }}
-                                </a>
-                            </li> --}}
+                      
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link   border-bottom  font-weight-bold" style="color: #42526E" href="#navbar-examples-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-3">                        
-                        <span class="nav-link-text" >{{ __('Configuración del centro') }}</span>
+                        <span class="nav-link-text" ><i class="fas fa-school"></i> {{ __('Configuración del centro') }}</span>
                     </a>
 
                     <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-3">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold" href="{{ route('school.setting') }}">
+                                    <span class="text-success"><i class="fas fa-cog mr-1"></i></span>
                                     {{ __('Configuraciones generales del centro') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold" href="{{ route('level.list') }}">
-                                    {{ __('Nivel/Programa') }}
+                                <span class="text-success">
+                                <i class="fas fa-layer-group mr-1"></i>
+                                </span>    
+                                {{ __('Nivel/Programa') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold" href="{{ route('modality.list') }}">
-                                    {{ __('Modalidad') }}
+                                <span class="text-success">
+                                <i class="fas fa-moon mr-1"></i>
+                                </span>    
+                                {{ __('Modalidad') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold" href="{{ route('school.courses') }}">
-                                    {{ __('Grados') }}
+                                <span><i class="fas fa-layer-group mr-1 text-success"></i></span>    
+                                {{ __('Grados') }}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -181,7 +194,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  border-bottom  font-weight-bold" style="color: #42526E" href="#navbar-examples-10" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-10">                        
-                        <span class="nav-link-text"  >{{ __('Padres de familia') }}</span>
+                        <span class="nav-link-text"  > <i class="fas fa-user-friends"></i> {{ __('Padres de familia') }}</span>
                     </a>
                     <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-10">
                         <ul class="nav nav-sm flex-column">
@@ -205,7 +218,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  border-bottom  font-weight-bold" style="color: #42526E" href="#navbar-examples-5" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-5">                        
-                        <span class="nav-link-text">{{ __('Curso lectivo') }}</span>
+                        <span class="nav-link-text"> <i class="fas fa-layer-group"></i> {{ __('Curso lectivo') }}</span>
                     </a>
                     <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-5">
                         <ul class="nav nav-sm flex-column">

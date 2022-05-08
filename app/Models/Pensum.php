@@ -23,4 +23,12 @@ class Pensum extends Model
     public function matter() {
         return $this->hasMany(PensumMatter::class, 'pensum_id', 'id');
     }
+
+    public function validateMatterTeacher($teacher_id, $matter_id) {
+        return $this->belongsToMany(PensumMatter::class, 'pensum_id', 'id')
+                    ->wherePivot('teacher_id', $teacher_id)
+                    ->wherePivot('matter_id', $matter_id)
+                    ->get();
+    }
+
 }

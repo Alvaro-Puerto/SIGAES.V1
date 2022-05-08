@@ -48,10 +48,30 @@
                     <td>
                       {{$pensum->id}}
                     </td>
-                    <th scope="row">{{$pensum->nombre}}</th>
-                    <td>{{$pensum->school_year}}</td>
+                    <td >{{$pensum->nombre}}</td>
+                    <td>{{$pensum->school_year->name}}</td>
                     <td>{{$pensum->created_at}}</td>
-                    
+                     <td>
+                     <div class="dropdown">
+                          <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                            <a class="dropdown-item" href="{{ route('pensum.detail', ['id'=>$pensum->id]) }}">
+                              <span><i class="fas fa-pencil-alt textr-primary"></i></span>
+                              Ver detalles 
+                            </a>
+                            <form class="dropdown-item" action="{{ route('school.course.delete', $course->id)}}" method="post">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-link m-0 p-0 text-dark" type="submit">
+                                <span><i class="fa fa-times text-danger" aria-hidden="true"></i></span>
+                                 Eliminar
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                     </td>
                   </tr>
                   @endforeach
               </table>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\TeacherExport;
 use App\Models\Teacher;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -51,5 +52,19 @@ class TeacherController extends Controller
 
     public function report() {
         return Excel::download(new TeacherExport, 'teachers.xlsx');
+    }
+
+    public function search($name) {
+        $username = $name;
+        error_log($name);
+        $teachers = Teacher::whereHas('user', function ($query) use ($username){
+            $query->where('first_name', 'like', "%{$username}%");
+        })->get();
+
+        foreach ($teachers as $teacher ) {
+            $teacher->user;
+        }
+
+        return response()->json($teachers);
     }
 }

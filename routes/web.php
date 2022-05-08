@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('teacher/create', ['as' => 'teacher.create', 'uses' => 'App\Http\Controllers\TeacherController@create']);
 	Route::get('teacher/detail/{id}', ['as' => 'teacher.detail', 'uses'=>'App\Http\Controllers\TeacherController@detail']);
 	Route::get('teacher/export', ['as' => 'teacher.export', 'uses' => 'App\Http\Controllers\TeacherController@report']);
-
+	Route::get('teacher/search/{name}', ['as' => 'teacher.search', 'uses' => 'App\Http\Controllers\TeacherController@search']);
 	#Matter //Asignaturas
 	Route::get('matter/new', function() {return view('new_matter');});
 	Route::post('matter/new', ['as' => 'matter.new', 'uses' => 'App\Http\Controllers\MatterController@create']);
@@ -159,7 +159,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('course/{id}/pensum/new', ['as' => 'course.pensum.create', "uses" => 'App\Http\Controllers\PensumController@pensumCreateStep1Post']);
 	Route::get('course/{id}/pensum/{id_pensum}/matter', ['as' => 'course.pensum.matter', "uses" => 'App\Http\Controllers\PensumController@pensumCreateStep2']);
 	Route::post('course/pensum/matter', ["uses" =>  'App\Http\Controllers\PensumController@pensumCreateStep2Post']);
-	
+	Route::post('course/pensum/matter/detach', ['as' => 'course.pensum.matter.detach', 'uses' => 'App\Http\Controllers\PensumMatterController@detach']);
+	Route::post('course/pensum/matter/teacher/detach', ['as' => 'course.pensum.matter.teacher.detach', 'uses' => 'App\Http\Controllers\PensumMatterController@detachTeacher']);
+	Route::get('course/pensum/{id}/finish', ['as' => 'course.pensum.finish', "uses" =>  'App\Http\Controllers\PensumController@pensumCreateStep3']);
+	Route::get('pensum/{id}', ['as' => 'pensum.detail', "uses" =>  'App\Http\Controllers\PensumController@pensumDetail']);
 	#Partial
 	Route::get('matter/partial/{id}/{id_enrollement}/update', function ($id, $id_enrollement) {
 		$student = Enrollement::find($id_enrollement)->student;

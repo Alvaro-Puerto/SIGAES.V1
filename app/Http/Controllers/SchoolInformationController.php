@@ -30,6 +30,15 @@ class SchoolInformationController extends Controller
         #$path = $request->file('file')->store('storage');
         #$url = Storage::url($path);
         #$data['logo'] = $path;
+
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $path = $request->file('file')->store('student_picture');
+        $path;
+        $data['logo'] = $path;
+        
         SchoolInformation::updateOrCreate(
             ['id' => $data['id']],
             $data
