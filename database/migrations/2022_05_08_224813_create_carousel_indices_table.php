@@ -15,6 +15,7 @@ class CreateCarouselIndicesTable extends Migration
     {
         Schema::create('carousel_indices', function (Blueprint $table) {
             $table->id();
+            $table->string('url');
             $table->timestamps();
         });
     }

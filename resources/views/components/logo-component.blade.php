@@ -3,6 +3,8 @@
     @if ($logo)
     <a href="#">
         <img src="{{ url($logo) }}" alt="60" height="60" title="" />
-    </a>      
+    </a>
+    @else 
+        <h1>SIGAES</h1>     
     @endif
 </div>
