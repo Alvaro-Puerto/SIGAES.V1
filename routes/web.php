@@ -29,6 +29,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/search/student', [App\Http\Controllers\SearchController::class, 'search_student']);
 Route::post('/search/tutor', [App\Http\Controllers\SearchController::class, 'search_tutor']);
 
+Route::post('carousel/add', [App\Http\Controllers\CarouselIndexController::class, 'create']);
+
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });

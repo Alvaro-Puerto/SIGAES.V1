@@ -30,7 +30,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form method="POST" enctype="multipart/form-data" action="{{url('student/update/photo')}}">
+            <form method="POST" enctype="multipart/form-data" action="{{url('carousel/add')}}">
                 @csrf
               
                 <div class="form-group">
