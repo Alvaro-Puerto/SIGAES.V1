@@ -23,7 +23,12 @@ class LogoComponent extends Component
         if(!$school) {
             $this->logo = 'SIGAES';
         } else {
-            $this->logo = $school->logo;
+            if($this->school->logo) {
+                $this->logo = $school->logo;
+            } else {
+                $this->logo = 'SIGAES';
+            }
+        
         }
         
     }
