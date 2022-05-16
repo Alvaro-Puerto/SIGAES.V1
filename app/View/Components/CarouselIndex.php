@@ -18,11 +18,7 @@ class CarouselIndex extends Component
     public function __construct()
     {
         //
-        $result = ModelsCarouselIndex::all();
-
-        foreach ($result as $item) {
-            array_push($this->urls, $item->url);
-        }
+       
     }
 
     /**
