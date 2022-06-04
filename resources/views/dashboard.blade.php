@@ -5,7 +5,6 @@
     <div class="container-fluid mt-2">
         <div class="row">
             <div class="col-5">
-                <x-carousel-index/>
             </div>
             <div class="col-7">
                 <div class="row">
