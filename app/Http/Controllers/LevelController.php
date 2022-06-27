@@ -9,10 +9,18 @@ class LevelController extends Controller
 {
     //
     public function get() {
-        return view('level_list', ['levels' => Level::all()]);
+        return view('level_list', ['levels' => Level::paginate(15)]);
     }
 
     public function store(Request $request) {
+
+        $request->validate([
+            'name' => 'required|min:3',
+            'description' => 'required'
+        ], [
+            'name.required' => 'El nombre es requerido',
+            'description.required' => 'La descripcion es requerido',
+        ]);
         Level::updateOrCreate(
             ['id' => $request->id],
             $request->all() 

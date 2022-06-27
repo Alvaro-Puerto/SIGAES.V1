@@ -2,18 +2,26 @@
 
 @section('content')
     @include('layouts.headers.cards')
-    <div class="container-fluid mt-2">
-        <div class="row">
-            <div class="col-5">
+    <div class="container-fluid">
+        <div class="row mt--5">
+            <div class="col-6">
+            <x-carousel-index></x-carousel-index>
             </div>
-            <div class="col-7">
-                <div class="row">
-                    <div class="col-12">
-                            <button type="button" class="btn btn-sm btn-info mr-4" data-toggle="modal" data-target="#exampleModal">
-                              Añadir imagen
-                            </button>
-                    </div>
+            <div class="col-6">
+                <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                    <p class="font-weight-bold text-dark">
+                      Configuracion de slider
+                    </p>
+                    <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">
+                        Añadir imagen
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <x-setting-carousel></x-setting-carousel>
+                  </div>
                 </div>
+               
             </div>
         </div>
         @include('layouts.footers.auth')

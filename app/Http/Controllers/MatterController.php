@@ -20,6 +20,15 @@ class MatterController extends Controller
     }
 
     public function create(Request $request) {
+        $request->validate([
+            'name' => 'required|min:3',
+            'description' => 'required'
+        ], [
+            'name.required' => 'El nombre es requerido',
+            'description.required' => 'La descripcion es requerido',
+        ]);
+        
+        
         $this->school->matters()->updateOrCreate(
             ["id" => $request->id] ,
             $request->all()
@@ -31,7 +40,7 @@ class MatterController extends Controller
    
     public function get() {
         if($this->school) {
-            $matters = $this->school->matters;
+            $matters = $this->school->matters()->paginate(15);
             return view('list_matter', ['matters' => $matters]);
         } else {
             return redirect('school/setting');

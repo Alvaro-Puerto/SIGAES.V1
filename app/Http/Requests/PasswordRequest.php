@@ -31,6 +31,17 @@ class PasswordRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'old_password.required' => 'La contrasena actual es requerida',
+            'old_password.min' => 'La contrasena debe tener al menos 6 caracteres',
+            'password.min' => 'La contrasena debe tener al menos 6 caracteres',
+            'password.different' => 'La contrasena  debe ser diferente a tu contrasena anterior',
+            'password_confirmation' => 'La confirmacion de contrasena es requerida'
+        ];
+    }
+
     /**
      * Get the validation attributes that apply to the request.
      *

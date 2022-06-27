@@ -20,6 +20,22 @@ class SemesterController extends Controller
 
     public function create(Request $request) {
         $school_year = SchoolYear::find($request->school_year_id);
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'start_at' => 'required|before:end_at',
+            'end_at' => 'required|after:start_date'
+        ],
+        [
+            'name.required' => 'El nombre es requerido',
+            'description.required' => 'La descripcion es requerida',
+            'start_at.required' => 'La fecha de inicio es requerida',
+            'end_at.required' => 'La fecha de finalizacion es requerida',
+            'end_at.after' => 'La fecha de finalizacion es invalida',
+            'start_at.before' => 'La fecha de inicio es invalida'
+        ]
+        );
+
         if($request->start_at > $request->end_at) {
             return Redirect::back()->withErrors(['msg' => 'Las fecha de inicio es mayor que la fecha fin']);    
         }

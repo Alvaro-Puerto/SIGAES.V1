@@ -2,6 +2,7 @@
 
 use App\Models\Enrollement;
 use App\Models\EnrollementMatter;
+use App\Models\SchoolYear;
 use App\Models\Semester;
 use App\Models\Student;
 use Illuminate\Support\Facades\Artisan;
@@ -29,7 +30,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/search/student', [App\Http\Controllers\SearchController::class, 'search_student']);
 Route::post('/search/tutor', [App\Http\Controllers\SearchController::class, 'search_tutor']);
 
-Route::post('carousel/add', [App\Http\Controllers\CarouselIndexController::class, 'create']);
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
@@ -39,6 +39,9 @@ Auth::routes();
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
+	Route::post('carousel/add', [App\Http\Controllers\CarouselIndexController::class, 'create']);
+	Route::delete('carousel/{id}', ['as ' => 'carousel.delete', 'uses' => 'App\Http\Controllers\CarouselIndexController@delete']);
+
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
@@ -50,11 +53,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 	#Route Student
 	Route::get('student', ['as' => 'student.list', 'uses'=>'App\Http\Controllers\StudentController@index']);
+	Route::get('student/config', ['as' => 'student.config', 'uses'=>'App\Http\Controllers\StudentController@config']);
 	Route::get('student/create', function () {return view('student_form');});
 	Route::get('student/detail/{id}', ['as' => 'student.detail', 'uses'=>'App\Http\Controllers\StudentController@detail']);
 	Route::post('student/create', ['as' => 'student.create', 'uses'=>'App\Http\Controllers\StudentController@create']);
 	Route::post('student/update/photo', ['as' => 'student.picture', 'uses' => 'App\Http\Controllers\StudentController@updatePhoto']);
 	Route::get('student/export', ['as' => 'student.export', 'uses' => 'App\Http\Controllers\StudentController@export']);
+	Route::get('student/{id}/update', ['as' => 'student.update.form', 'uses' => 'App\Http\Controllers\StudentController@update']);
+	Route::post('student/update/form', ['as' => 'student.update.put', 'uses' => 'App\Http\Controllers\StudentController@put']);
 	#SchoolRoutes
 	Route::get('school/setting', ['as' => 'school.setting', 'uses' => 'App\Http\Controllers\SchoolInformationController@index']);
 	Route::post('school/create', ['as' => 'school.create', 'uses'=>'App\Http\Controllers\SchoolInformationController@create']);
@@ -103,7 +109,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('school/year/{id}', ['as' => 'year.delete', "uses" => 'App\Http\Controllers\SchoolYearController@delete']);
 	
 	#Semester
-	Route::get('school/semester/{id}/new', function($id) {return view('semester_new', ["id" => $id]);})->name('semester.new');
+	Route::get('school/semester/{id}/new', function($id) {
+		$year = SchoolYear::find($id);
+		return view('semester_new', ["id" => $id, "year" => $year]);
+	})->name('semester.new');
 	Route::post('school/semester/new',  ['as' => 'semester.create', "uses" => 'App\Http\Controllers\SemesterController@create']);
 	Route::post('school/semester/partial/new', ['as' => 'semester.partial.create', 'uses' => 'App\Http\Controllers\PartialController@create']);
 	Route::delete('semester/{id}', ['as' => 'semester.delete', 'uses' => 'App\Http\Controllers\SemesterController@delete']);

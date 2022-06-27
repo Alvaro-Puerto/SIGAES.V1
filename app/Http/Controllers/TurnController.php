@@ -19,7 +19,7 @@ class TurnController extends Controller
 
     public function index() {
         if($this->school) {
-            $turns = $this->school->turn;
+            $turns = $this->school->turn()->paginate(15);
             return view('list_turn', ['turns' => $turns]);
         } else {
             return redirect('school/setting');
@@ -27,6 +27,12 @@ class TurnController extends Controller
     }
 
     public function create(Request $request) {
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'El nombre es requerido'
+        ]);
+        
         if($this->school) {
             $this->school->turn()->updateOrCreate(
                 ['id' => $request->id],

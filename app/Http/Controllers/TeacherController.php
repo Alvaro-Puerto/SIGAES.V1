@@ -12,26 +12,60 @@ use Maatwebsite\Excel\Facades\Excel;
 class TeacherController extends Controller
 {
     public function create(Request $request) {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:users',
+            'birth_date' => 'required',
+            'gender' => 'required',
+            'inss' => 'required',
+           // 'inss' => 'required'
+        ], [
+            'first_name.required' => 'El primer nombre es requerido',
+            'last_name.required' => 'El apellido es requerido',
+            'email.required' => 'El correo electronico es requerido',
+            'email.unique' => 'Ya existe un correo electronico',
+            'gender.required' => 'El sexo es requerido',
+            
+            'inss.required' => 'El INSS es requerido',
+            'birth_date.required' => 'La fecha de nacimiento es requerida',
+            
+        ]);
         $data = $request->all();
+       
         $data['password'] = bcrypt('secret');
         $data['name'] = $request->first_name . ' ' . $request->last_name;
         $user = User::create($data);
+
+        if($request->file) {
+            $path = $request->file('file')->store('student_picture');
+            $user->picture = $path;
+        }
+        
+        $user->save();
+
         $user->teacher()->create($data);
         return redirect('/teacher');
     }
 
     public function index() {
-        $teacher = Teacher::all();
+        $teachers = Teacher::paginate(15);
 
-        foreach($teacher as $user) {
+        foreach($teachers as $user) {
             $user->user;
         }
-        return view('teacher-list', ['teacher' => $teacher]);
+        return view('teacher-list', ['teachers' => $teachers]);
     }
 
     public function detail($id) {
         $teacher = Teacher::find($id);
         $teacher->user;
+
+        $pensum = $teacher->pensum;
+
+        foreach ($pensum as $item) { 
+            $item->pensum;
+        }
         return view('teacher_detail')->with(['teacher' => $teacher]);
     }
 
@@ -67,4 +101,6 @@ class TeacherController extends Controller
 
         return response()->json($teachers);
     }
+
+    
 }

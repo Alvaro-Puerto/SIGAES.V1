@@ -16,29 +16,44 @@
             <div class="form-row">
                 <div class="form-group col-12">
                     <label for="">Id</label>
-                    <input type="text" class="form-control" name="id" id="id" value="{{$school->id }}" disabled>
+                    <input type="text" class="form-control" name="id" id="id" value="{{$school->id }}" hidden>
                 </div>
                 <div class="form-group col-6">
                     <label for="">Nombre del centro</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{$school->name}}">
+                    @error('name')
+                        <small class="font-weight-bold text-danger">{{$message}}</small>
+                    @enderror
                 </div>
                 <div class="form-group col-6">
                     <label for="">Codigo unico del establecimiento</label>
-                <input type="text" class="form-control" name="code" id="code"  value="{{$school->code or ''}}">
+                    <input type="text" class="form-control" name="code" id="code"  value="{{$school->code}}">
+                    @error('code')
+                        <small class="font-weight-bold text-danger">{{$message}}</small>
+                    @enderror
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-12">
                     <label for="">Dirección del centro</label>
-                <input type="text" class="form-control" name="address" id="address"  value="{{$school->address }}">
+                    <input type="text" class="form-control" name="address" id="address"  value="{{$school->address }}">
+                    @error('address')
+                        <small class="font-weight-bold text-danger">{{$message}}</small>
+                    @enderror
                 </div>
                 <div class="form-group col-6">
                     <label for="">Ciudad</label>
-                <input type="text" class="form-control" name="city" id="city" value="{{$school->city }}">
+                    <input type="text" class="form-control" name="city" id="city" value="{{$school->city }}">
+                    @error('city')
+                        <small class="font-weight-bold text-danger">{{$message}}</small>
+                    @enderror
                 </div>
                 <div class="form-group col-6">
                     <label for="">Municipio</label>
-                <input type="text" class="form-control" name="municipality" id="municipality" value="{{$school->municipality }}">
+                    <input type="text" class="form-control" name="municipality" id="municipality" value="{{$school->municipality }}">
+                    @error('municipality')
+                        <small class="font-weight-bold text-danger">{{$message}}</small>
+                    @enderror
                 </div>
                 <div class="form-group col-6">
                     <div class="custom-file">

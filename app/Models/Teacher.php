@@ -21,4 +21,8 @@ class Teacher extends Model
     public function matters() {
         return $this->belongsToMany(Matter::class, 'matter_teachers'); //Relacion muchos a muchos
     }
+
+    public function pensum() {
+        return $this->hasMany(PensumMatterTeacher::class);
+    }
 }

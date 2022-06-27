@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-<div class="container-fluid mt-2 ">
+@include('users.partials.header', [
+        'title' => '',
+        'description' => '',
+        'class' => 'col-lg-12 '
+  ]) 
+<div class="container-fluid mt--7 ">
     <div class="row">
         <div class="col-12">
             <div class="card">

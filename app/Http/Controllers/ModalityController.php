@@ -9,11 +9,19 @@ class ModalityController extends Controller
 {
     //
     public function get() {
-        return view('modality_list', ['modalities' => Modality::all()]);
+        return view('modality_list', ['modalities' => Modality::paginate(15)]);
     }
 
     public function store(Request $request) {
 
+        $request->validate([
+            'name' => 'required|min:3',
+            'description' => 'required'
+        ], [
+            'name.required' => 'El nombre es requerido',
+            'description.required' => 'La descripcion es requerido',
+        ]);
+        
         Modality::updateOrCreate(
             ['id' => $request->id],
             $request->all()

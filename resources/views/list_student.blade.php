@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-  <div class="container mt-2">
+@include('users.partials.header', [
+        'title' =>'',
+        'description' => '',
+        'class' => 'col-lg-7'
+    ])   
+
+
+  <div class="container mt--7">
       <div class="row mt-2">
           <div class="col">
             <div class="card">
@@ -13,16 +19,6 @@
                     <h3 class="mb-0">Lista de estudiantes</h3>
                   </div>
                   <div class="col-8 d-flex justify-content-end">
-                    
-                    <button class="btn btn-link mr--3" id="btn-cancel-search"  onclick="hide_or_show(), reload_app()">
-                      <span>
-                        <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        Cancelar busqúeda
-                      </span>
-                    </button>
-                    <button class="btn btn-link" onclick="hide_or_show()" id="btn-search">
-                      <span><i class="fas fa-search text-warning"></i></span>
-                    </button>
                     <a href={{ url('student/export')}} class="btn btn-link"> 
                       <span><i class="fas fa-download text-success"></i></span>
                       Imprimir reporte
@@ -33,7 +29,7 @@
                 
                 
               </div>
-              <div class="card-header" id="search-student">
+              <div class="card-header" id="">
                 <form >
                   <meta name="_token" content="{{ csrf_token() }}">
                   <div class="form-row">
@@ -57,6 +53,11 @@
                   </div>
                 </form>
                 
+              </div>
+              <div class="card-header d-flex justify-content-end">
+              
+                {{ $students->links() }}
+              
               </div>
               <!-- Light table -->
               <div class="table-responsive">
@@ -101,6 +102,7 @@
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                             <a class="dropdown-item" href="{{ route('student.detail', ['id'=>$student->id]) }}"  >Ver detalles</a>
+                            <a class="dropdown-item" href="{{ route('student.update.form', ['id'=>$student->id]) }}"  >Editar</a>
                          
                           </div>
                         </div>
@@ -114,30 +116,8 @@
                 </table>
               </div>
               <!-- Card footer -->
-              <div class="card-footer py-4">
-                <nav aria-label="...">
-                  <ul class="pagination justify-content-end mb-0">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" tabindex="-1">
-                        <i class="fas fa-angle-left"></i>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">
-                        <i class="fas fa-angle-right"></i>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+              <div class="card-footer py-4 d-flex justify-content-end">
+                {{ $students->links() }}
               </div>
             </div>
           </div>

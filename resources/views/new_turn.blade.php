@@ -5,7 +5,9 @@
 <div class="container-fluid">
     <div class="card mt-2">
         <div class="card-header">
-            <p class="font-weight-bold">Nuevo turno escolar</p>
+            <p class="font-weight-bold text-dark">
+                <span><i class="fa fa-plus"></i></span>
+                Nuevo turno escolar</p>
         </div>
         <div class="card-body">
             <form  method="post" action="{{url('school/turn/new')}}">
@@ -16,12 +18,15 @@
                         <input type="text" name="school_information_id" class="form-control " id="" hidden>
                     </div>
                     <div class="form-group col-12">
-                        <label for= "">Id</label>
-                        <input type="text" name="id" class="form-control " id="" disabled>
+                     
+                        <input type="text" name="id" class="form-control " id="" hidden>
                     </div>
                     <div class="form-group col-12">
-                        <label for= "">Nombre del turno</label>
-                        <input type="text" name="name" class="form-control " id="name" required>
+                        <label for= "">Nombre del turno <span class="font-weight-bold text-danger">*</span></label>
+                        <input type="text" name="name" class="form-control " id="name" >
+                        @error('name')
+                            <small class="font-weight-bold text-danger">El nombre es requerido </small>
+                        @enderror
                     </div>
                     <div class="form-group col-12 d-flex justify-content-end">
                         <a type="button" href="{{route('school.turns')}}" class="btn btn-danger">Cancelar</a>

@@ -14,10 +14,15 @@ class CarouselIndex extends Component
      * @return void
      */
 
-    public array $urls; 
+    public $urls = []; 
     public function __construct()
     {
         //
+        $carousel = ModelsCarouselIndex::all();
+
+        foreach ($carousel as $item) {
+            array_push($this->urls, $item->url);
+        }
        
     }
 

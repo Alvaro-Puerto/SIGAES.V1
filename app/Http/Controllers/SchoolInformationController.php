@@ -23,16 +23,20 @@ class SchoolInformationController extends Controller
         if(!$request->id) {
             $data['id'] = 1;
         }
-        #$request->validate([
-        #    'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        #]);
-    
-        #$path = $request->file('file')->store('storage');
-        #$url = Storage::url($path);
-        #$data['logo'] = $path;
-
+       
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'name' => 'required|min:3|max:100',
+            'address' => 'required',
+            'code' => 'required',
+            'municipality' => 'required',
+            'city' => 'required' 
+        ], [
+            'name.required' => 'El campo nombre es requerido',
+            'address.required' => 'El campo direccion es requerido',
+            'code.required' => 'El codigo del centro es requerido',
+            'municipality' => 'La municipalidad es requerida',
+            'city.required' => 'La ciudad es requerida'
         ]);
     
         $path = $request->file('file')->store('student_picture');

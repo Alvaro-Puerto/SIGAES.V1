@@ -13,6 +13,9 @@
                     <span class="fa fa-plus text-white"> Añadir nuevo nivel/programa</span>
                 </a>
               </div>
+              <div class="card-header">
+                {{$levels->links()}}
+              </div>
               <!-- Light table -->
               <div class="table-responsive">
                 <table class="table align-items-center table-flush">
@@ -71,6 +74,9 @@
                 </table>
               </div>
               <!-- Card footer -->
+              <div class="card-footer py-4 d-flex justify-content-end">
+                {{$levels->links()}}
+              </div>
              
             </div>
           </div>

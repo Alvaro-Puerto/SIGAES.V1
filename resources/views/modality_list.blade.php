@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-  <div class="container-fluid mt-2">
+
+@include('users.partials.header', [
+        'title' => '',
+        'description' => ' ',
+        'class' => 'col-lg-7 '
+  ])   
+
+  <div class="container-fluid mt--7">
       <div class="row mt-2">
           <div class="col">
             <div class="card">
@@ -12,6 +18,9 @@
                 <a href="{{route('modality.new')}}" class="btn btn-primary" >
                     <span class="fa fa-plus text-white"> Añadir nueva modalidad</span>
                 </a>
+              </div>
+              <div class="card-header d-flex justify-content-end">
+                {{$modalities->links()}}
               </div>
               <!-- Light table -->
               <div class="table-responsive">
@@ -69,7 +78,9 @@
                 </table>
               </div>
               <!-- Card footer -->
-             
+              <div class="card-footer py-4 d-flex justify-content-end">
+                {{$modalities->links()}}
+              </div>
             </div>
           </div>
         </div>

@@ -62,6 +62,7 @@ class SearchController extends Controller
                         '</a>'.
                         '<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">'.
                             '<a class="dropdown-item" '. 'href="'. "student/detail/".$student->id.'">' . 'Ver detalles</a>'.
+                            '<a class="dropdown-item" '. 'href="'. "student/".$student->id.'/update">' . 'Editar</a>'.
                         '</div>'.
                 '</td>'.
                 '</tr>';

@@ -25,8 +25,6 @@ class LogoComponent extends Component
         } else {
           
                 $this->logo = $school->logo;
-           
-        
         }
         
     }

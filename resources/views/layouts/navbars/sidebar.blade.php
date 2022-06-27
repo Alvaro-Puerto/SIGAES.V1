@@ -108,6 +108,13 @@
                                     </span> {{ __('Nuevos alumnos') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link font-weight-bold" href="{{ route('student.config') }}">
+                                    <span class="text-success">
+                                    <i class="fas fa-cog mr-1"></i>
+                                    </span> {{ __('Configuracion del modulo') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -232,11 +239,7 @@
                                     {{ __('Semetre') }}
                                 </a>
                             </li> --}}
-                            <li class="nav-item">
-                                <a class="nav-link font-weight-bold" href="{{ route('event.index') }}">
-                                    {{ __('Horarios') }}
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </li>
@@ -266,6 +269,36 @@
                         <i class="ni ni-cloud-download-95"></i> Upgrade to PRO
                     </a>
                 </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link  border-bottom  font-weight-bold" style="color: #42526E" href="#navbar-examples-6" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples-6">                        
+                        <span class="nav-link-text"> <i class="fas fa-calendar"></i> {{ __('Calendario') }}</span>
+                    </a>
+                    <div class="collapse " style="background-color: #F8F9FE" id="navbar-examples-6">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link font-weight-bold" href="{{ route('event.index') }}">
+                                    <span>
+                                        <i class="fas fa-calculator text-success mr-2"></i>
+                                    </span>
+                                    {{ __('Calendario academico') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link font-weight-bold" href="{{ route('event.index') }}">
+                                    <span>
+                                        <i class="fas fa-calendar-times text-success mr-2"></i>
+                                    </span>
+                                    {{ __('Configuracion de horarios') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link font-weight-bold" href="{{ route('event.index') }}">
+                                    {{ __('') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
             <!-- Divider -->
            

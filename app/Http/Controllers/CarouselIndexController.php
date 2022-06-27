@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CarouselIndex;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CarouselIndexController extends Controller
 {
@@ -18,5 +19,11 @@ class CarouselIndexController extends Controller
         CarouselIndex::create(['url' => $path]);
         
         return back($status = 302);
+    }
+
+    public function delete($id) {
+        CarouselIndex::delete($id);
+
+        return Redirect::back();
     }
 }

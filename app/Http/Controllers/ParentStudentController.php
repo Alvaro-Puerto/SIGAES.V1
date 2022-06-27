@@ -13,7 +13,7 @@ class ParentStudentController extends Controller
     //
 
     public function get() {
-        $parents = ParentStudent::all();
+        $parents = ParentStudent::paginate(15);
         foreach($parents as $parent) {
             $parent->user;
         }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -15,7 +17,9 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile.edit');
+        $user = User::find(Auth::user()->id);
+        error_log($user);
+        return view('profile.edit')->with(['user' => $user]);
     }
 
     /**
@@ -43,6 +47,7 @@ class ProfileController extends Controller
      */
     public function password(PasswordRequest $request)
     {
+        
         if (auth()->user()->id == 1) {
             return back()->withErrors(['not_allow_password' => __('You are not allowed to change the password for a default user.')]);
         }

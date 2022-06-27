@@ -19,19 +19,26 @@ class SchoolYearController extends Controller
 
     public function create(Request $request) {
         if($this->school) {
-            try {
-                if($request->start_at > $request->end_at) {
-                    return Redirect::back()->withErrors(['msg' => 'Las fecha de inicio es mayor que la fecha fin']);    
-                }
 
-                error_log($request->id . ' ESTE ES EL ID');
-                $this->school->years()->updateOrCreate(
-                    ["id" => $request->id] ,
-                    $request->all()
-                );
-            } catch (QueryException $th) {
-                return Redirect::back()->withErrors(['msg' => 'Completa los datos por favor']);
-            }
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+                'start_at' => 'required|before:end_at',
+                'end_at' => 'required|after:start_date'
+            ],
+            [
+                'name.required' => 'El nombre es requerido',
+                'description.required' => 'La descripcion es requerida',
+                'start_at.required' => 'La fecha de inicio es requerida',
+                'end_at.required' => 'La fecha de finalizacion es requerida',
+                'end_at.after' => 'La fecha de finalizacion es invalida',
+                'start_at.before' => 'La fecha de inicio es invalida'
+            ]);
+
+            $this->school->years()->updateOrCreate(
+                ["id" => $request->id] ,
+                $request->all()
+            );
         } else {
             return redirect('error/information/school/not_found');
         }
@@ -48,7 +55,7 @@ class SchoolYearController extends Controller
 
     public function get() {
         if($this->school) {
-            $years = $this->school->years;
+            $years = $this->school->years()->paginate(15);
             return view('school_year_list', ['years' => $years]);
         } else {
             return redirect('school/setting');

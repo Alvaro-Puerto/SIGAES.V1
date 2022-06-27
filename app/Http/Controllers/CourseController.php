@@ -22,7 +22,19 @@ class CourseController extends Controller
 
     public function create(Request $request) {
         $school = SchoolInformation::offset(0)->limit(1)->first();
+
+
         $data = $request->all();
+
+        $request->validate([
+            'name' => 'required',
+            'capacity' => 'required'
+        ], [
+            'name.required' => 'El nombre es requerido',
+            'capacity.required' => 'La capacidad es requeridad',
+            'capacity.min' => 'La capacidad minima es de 15 estudiantes',
+            'capacity.max' => 'La capacidad maxima es de 60 estudiantes',
+        ]);
 
         if(!$school) {
             return redirect('error/information/school/not_found');

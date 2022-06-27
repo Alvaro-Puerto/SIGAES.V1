@@ -11,8 +11,23 @@ class PartialController extends Controller
 {
     //
     public function create(Request $request) {
-        $data = $request->all();
         $semester = Semester::find($request->semester_id);
+        $request->validate([
+            'name' => 'required',
+            'start_at' => 'required|before:end_at|after_or_equal:'.$semester->start_at,
+            'end_at' => 'required|after:start_at|before_or_equal:'.$semester->end_at
+        ], [
+            'name.required' => 'Este campo es requerido',
+            'start_at.required' => 'Este campo es requerido',
+            'end_at.required' => 'Este campo es requerido',
+            'start_at.before' => 'La fecha de inicio es invalida',
+            'start_at.after_or_equal' => 'La fecha de inicio esta fuera del rango del semestre',
+            'end_at.before' => 'La fecha de finalizacion es invalida',
+            'end_at.before_or_equal' => 'La fecha de finalizacion esta fuera del rango del semestre',
+        ]);
+        $data = $request->all();
+      
+
         if($request->start_at > $request->end_at) {
             return redirect()->back()->withErrors(['msg' => 'La fecha de inicio es mayor que la fecha limite']);
         }
