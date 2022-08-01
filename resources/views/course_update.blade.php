@@ -6,7 +6,7 @@
     <div class="card mt-2">
         <div class="card-header">
             <p class="font-weight-bold">
-            <span><i class="fas fa-pencil-alt fa-1x text-warning"></i></span> Editar curso</p>
+            <span><i class="fas fa-pencil-alt text-warning fa-1x text-warning"></i></span> Editar curso</p>
         </div>
         <div class="card-body">
             <form  method="post" action="{{route('school.course.new')}}">

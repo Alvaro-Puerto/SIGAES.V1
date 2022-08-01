@@ -54,11 +54,11 @@
                      <td>
                      <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v"></i>
+                            <i class="fas fa-ellipsis-v text-primary"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                             <a class="dropdown-item" href="{{ route('pensum.detail', ['id'=>$pensum->id]) }}">
-                              <span><i class="fas fa-pencil-alt textr-primary"></i></span>
+                              <span><i class="fas fa-pencil-alt text-warning textr-primary"></i></span>
                               Ver detalles 
                             </a>
                             <form class="dropdown-item" action="{{ route('school.course.delete', $course->id)}}" method="post">

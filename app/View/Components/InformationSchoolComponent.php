@@ -18,10 +18,10 @@ class InformationSchoolComponent extends Component
     {
         $school = SchoolInformation::offset(0)->limit(1)->first();
         if(!$school) {
-            return redirect('/school/setting');
+            $this->information = '';
+            //return redirect('/school/setting');
         } else {
-          
-                $this->information = $school->name;
+            $this->information = $school->name;
         }
     }
 

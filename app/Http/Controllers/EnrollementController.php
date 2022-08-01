@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Exports\EnrollementExport;
+use App\Factory\Clases\StudentClass;
 use App\Models\Course;
 use App\Models\Enrollement;
 use App\Models\EnrollementMatter;
 use App\Models\Level;
 use App\Models\Matter;
 use App\Models\Modality;
+use App\Models\Pensum;
 use App\Models\SchoolYear;
 use App\Models\Student;
 use App\Models\Turn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class EnrollementController extends Controller
 {
@@ -47,10 +51,7 @@ class EnrollementController extends Controller
     }
 
     public function create(Request $request) {
-        /* $flat =Enrollement::where('student_id', $request->student_id)->where('school_year_id', $request->school_year_id)->first();
-        if($flat) {
-            return redirect('student/detail/'. 4);
-        } */
+     
         $enrollement = Enrollement::create($request->all());
 
         return redirect()->route('enrollement.matter', ["id" => $enrollement->id]);
@@ -58,47 +59,37 @@ class EnrollementController extends Controller
 
     public function getAllMatter($id) {
         $enrollement = Enrollement::find($id);
-        $matter_asign = $enrollement->matters;
-        $array_id = [];
-
-        foreach($matter_asign as $matter) {
-            array_push($array_id, $matter->id);
-            error_log($matter->id);
+        $pensum = Pensum::where('course_id', $enrollement->course_id)->where('school_year_id', $enrollement->school_year_id)->first();        
+        
+        foreach ($pensum->matter as $item) {
+            EnrollementMatter::create(
+                [
+                    'enrollement_id' => $enrollement->id,
+                    'matter_id' => $item->matter_id,
+                    'pensum_id' => $pensum->id
+                ]
+                );
         }
-        $matters = Matter::whereNotIn('id', $array_id)->get();
-        return view('enrollement_matter', ["matters" => $matters, "id" => $id, "enrollement" => $enrollement]);
+
+
+        //return view('enrollement_matter', ["matters" => $matters, "id" => $id, "enrollement" => $enrollement]);
     }
 
     public function detail($id) {
-        $enrollement = Enrollement::find($id);
-        $year_school = $enrollement->year;
-        $enrollement_matter = $enrollement->matters;
-        $tempo = [];
+        $student = new StudentClass($id);
+        $data = $student->getData();
         
-        foreach($enrollement_matter as $matter) {
-            $tempo_partial = [];
-            $enrollement_partial = EnrollementMatter::find($matter->pivot->id);
-          
-            foreach($enrollement_partial->partials as $partial) {
-                array_push($tempo_partial, $partial);
-            }
-            $data = [
-                'id_pivot' => $matter->pivot->id,
-                'id_matter' => $matter->id,
-                'name_matter' => $matter->name,
-                'partials' => $tempo_partial
-            ];
-            $data = (object) $data;
-            
-            array_push($tempo, $data);
-        }
-
-        $data = [
-                    'enrollement' => $enrollement, 
-                    "year_school" => $year_school,
-                    'matter_and_partial' => $tempo
-                ];
         return view('detail_enrollement', $data);
+    }
+
+
+    public function print($id) {
+        $student = new StudentClass($id);
+        $data = $student->getData();
+        //view()->share($data);
+       // $pdf = Pdf::loadView('enrollement_print');
+       // return $pdf->download('matricula.pdf');
+        return view('enrollement_print', $data);
     }
 
     public function delete($id) {

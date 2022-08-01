@@ -11,6 +11,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
+                        <span><i class="fa fa-plus text-primary"></i></span>
                         <p class="font-weight-bold">Nuevo parcial</p>
                        
                     </div>

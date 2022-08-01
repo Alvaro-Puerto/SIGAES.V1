@@ -6,7 +6,7 @@
        <div class="card">
            <div class="card-header">
                <p class="font-weight-bold text-dark">
-                  <span><i class="fas fa-pencil-alt fa-1x text-warning"></i></span>  Editar nivel</p>
+                  <span><i class="fas fa-pencil-alt text-warning fa-1x text-warning"></i></span>  Editar nivel</p>
            </div>
            <div class="card-body">
             <form method="POST" action="{{url('school/level')}}">

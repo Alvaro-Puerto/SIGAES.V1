@@ -2,6 +2,7 @@
 
 use App\Models\Enrollement;
 use App\Models\EnrollementMatter;
+use App\Models\ParentStudent;
 use App\Models\SchoolYear;
 use App\Models\Semester;
 use App\Models\Student;
@@ -29,6 +30,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/search/student', [App\Http\Controllers\SearchController::class, 'search_student']);
 Route::post('/search/tutor', [App\Http\Controllers\SearchController::class, 'search_tutor']);
+Route::post('/search/teacher', [App\Http\Controllers\SearchController::class, 'search_teacher']);
 
 
 Route::get('/linkstorage', function () {
@@ -61,6 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('student/export', ['as' => 'student.export', 'uses' => 'App\Http\Controllers\StudentController@export']);
 	Route::get('student/{id}/update', ['as' => 'student.update.form', 'uses' => 'App\Http\Controllers\StudentController@update']);
 	Route::post('student/update/form', ['as' => 'student.update.put', 'uses' => 'App\Http\Controllers\StudentController@put']);
+	Route::get('student/down/{id}', ['as' => 'student.down', 'uses' => 'App\Http\Controllers\StudentController@inactiveUser']);
+	Route::get('student/active/{id}', ['as' => 'student.active', 'uses' => 'App\Http\Controllers\StudentController@activeUser']);
+	
 	#SchoolRoutes
 	Route::get('school/setting', ['as' => 'school.setting', 'uses' => 'App\Http\Controllers\SchoolInformationController@index']);
 	Route::post('school/create', ['as' => 'school.create', 'uses'=>'App\Http\Controllers\SchoolInformationController@create']);
@@ -87,6 +92,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('teacher/detail/{id}', ['as' => 'teacher.detail', 'uses'=>'App\Http\Controllers\TeacherController@detail']);
 	Route::get('teacher/export', ['as' => 'teacher.export', 'uses' => 'App\Http\Controllers\TeacherController@report']);
 	Route::get('teacher/search/{name}', ['as' => 'teacher.search', 'uses' => 'App\Http\Controllers\TeacherController@search']);
+	Route::get('teacher/{id}/update', ['as' => 'teacher.update', 'uses' => 'App\Http\Controllers\TeacherController@update']);
+	Route::post('teacher/update/form', ['as' => 'teacher.update.put', 'uses' => 'App\Http\Controllers\TeacherController@put']);
 	#Matter //Asignaturas
 	Route::get('matter/new', function() {return view('new_matter');});
 	Route::post('matter/new', ['as' => 'matter.new', 'uses' => 'App\Http\Controllers\MatterController@create']);
@@ -137,6 +144,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('enrollement/matter/asign', ['as' => 'enrollement_matter.asing', 'uses' => 'App\Http\Controllers\EnrollementMatterController@attachMatter']);
 	Route::post('enrollement/matter/detach', ['as' => 'enrollement_matter.detach', 'uses' => 'App\Http\Controllers\EnrollementMatterController@detachMatter']);
 	Route::get('enrollement/{id}/detail', ['as' => 'enrollement.detail', 'uses' => 'App\Http\Controllers\EnrollementController@detail']);
+	Route::get('enrollement/{id}/print', ['as' => 'enrollement.print', 'uses' => 'App\Http\Controllers\EnrollementController@print']);
 
 	#Modality
 	Route::get('school/modality', ['as' => 'modality.list', "uses" => 'App\Http\Controllers\ModalityController@get']);
@@ -153,7 +161,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('school/level/update/{id}', ['as' => 'level.update', "uses" => 'App\Http\Controllers\LevelController@update']);
 	Route::get('tutor/list', ['as' => 'tutor.list',  "uses" => 'App\Http\Controllers\ParentStudentController@get']);
 	Route::get('tutor/new', function() {return view('new_parent');})->name('tutor.create');
+	Route::get('tutor/{id}/update', function($id) { $parent = ParentStudent::find($id); return view('update_parent', ['student' => $parent]);})->name('tutor.update');
 	Route::post('tutor/new', ['as' => 'tutor.new', "uses" => 'App\Http\Controllers\ParentStudentController@create']);
+	Route::post('tutor/update', ['as' => 'tutor.update.post', "uses" => 'App\Http\Controllers\ParentStudentController@put']);
 	Route::get('tutor/select/{id}', function($id) { return view('tutor_preview_selection', ['id' => $id]);})->name('tutor.select');
 	Route::get('tutor/select/{id}/parent', function($id) { return view('tutor_select_search', ['id' => $id]);})->name('tutor.search');
 	Route::get('tutor/select/{id_student}/{id_tutor}/confirm', ['as' => 'level.preview', "uses" => 'App\Http\Controllers\ParentStudentController@getPreview']);

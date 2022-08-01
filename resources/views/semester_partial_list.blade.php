@@ -75,7 +75,7 @@
 
                                 <span>
                                     <a href="{{route('partial.update', ['id' => $item->id])}}" class="btn btn-link">
-                                        <i class="fas fa-pencil-alt text-primary"></i>
+                                        <i class="fas fa-pencil-alt text-warning text-primary"></i>
                                     </a>
                                     <form class="dropdown-item" action="{{ route('partial.delete', $item->id)}}" method="post">
                                         @csrf

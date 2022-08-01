@@ -38,5 +38,5 @@ function get_data_form() {
 }
 
 function replaceRow(data) {
-    document.getElementById('tag-id').innerHTML = data;
+    document.getElementById('table-tutor').innerHTML = data;
 }

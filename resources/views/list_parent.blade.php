@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-  <div class="container-fluid mt-2">
-      <div class="row mt-2">
+  @include('users.partials.header', [
+        'title' => '',
+        'description' => 'Lista de tutores por estudiantes',
+        'class' => 'col-lg-12 '
+  ])   
+  <div class="container-fluid mt--8">
+      <div class="row ">
           <div class="col">
             <div class="card">
               <!-- Card header -->
@@ -14,26 +18,18 @@
                   </div>
                   <div class="col-8 d-flex justify-content-end">
                     
-                    <button class="btn btn-link mr--3" id="btn-cancel-search"  onclick="hide_or_show(), reload_app()">
-                      <span>
-                        <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        Cancelar busqúeda
-                      </span>
-                    </button>
-                    <button class="btn btn-link" onclick="hide_or_show()" id="btn-search">
-                      <span><i class="fas fa-search text-warning"></i></span>
-                    </button>
+                    
                     <a href={{ url('student/export')}} class="btn btn-link"> 
                       <span><i class="fas fa-download text-success"></i></span>
                       Imprimir reporte
                     </a>
-                    <a href= {{ url('student/create', []) }}  class="btn btn-primary"><span class="fa fa-plus"></span> Nuevo tutor</a>
+                    <a href="{{ route('tutor.create') }}"  class="btn btn-primary"><span class="fa fa-plus"></span> Nuevo tutor</a>
                   </div>
                 </div>
                 
                 
               </div>
-              <div class="card-header" id="search-student">
+              <div class="card-header" id="">
                 <form >
                   <meta name="_token" content="{{ csrf_token() }}">
                   <div class="form-row">
@@ -75,7 +71,7 @@
                       <th scope="col" class="sort" data-sort="status">Acciones</th>
                     </tr>
                   </thead>
-                  <tbody class="list" id="tbody-student">
+                  <tbody class="list" id="table-tutor">
                     @foreach ($parents as $student)
                     <tr>
                       <th scope="row">
@@ -100,10 +96,17 @@
                       <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v text-primary"></i>
+                            <i class="fas fa-ellipsis-v text-primary text-primary"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="{{ route('student.detail', ['id'=>$student->id]) }}"  >Ver detalles</a>
+                            <a class="dropdown-item" href="{{ route('student.detail', ['id'=>$student->id]) }}">
+                              <span><i class="fas fa-info-circle text-primary" ></i></span>
+                              Ver detalles
+                            </a>
+                            <a class="dropdown-item" href="{{ route('tutor.update', ['id'=>$student->id]) }}">
+                              <span><i class="fas fa-info-circle text-primary" ></i></span>
+                              Editar
+                            </a>
                          
                           </div>
                         </div>
@@ -131,4 +134,4 @@
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
     
 @endpush
-<script type="text/javascript" src="{{asset('assets/js/student_validation.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/js/tutor_search.js')}}"></script>

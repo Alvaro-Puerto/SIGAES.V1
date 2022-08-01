@@ -1,12 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-    <div class="container-fluid mt-2">
+@include('users.partials.header', [
+        'title' => '',
+        'description' => 'Editar  recurrencia de sesion',
+        'class' => 'col-lg-12 '
+  ])   
+    <div class="container-fluid mt--7">
        <div class="card">
             <div class="card-header">
                <p class="font-weight-bold text-dark">
-                  <span><i class="fas fa-pencil-alt fa-1x text-warning"></i></span>  Editar modalidad</p>
+                  <span><i class="fas fa-pencil-alt text-warning fa-1x text-warning"></i></span>  Editar modalidad</p>
            </div>
            <div class="card-body">
             <form method="POST" action="{{url('school/modality')}}">

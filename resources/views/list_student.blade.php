@@ -60,7 +60,7 @@
               
               </div>
               <!-- Light table -->
-              <div class="table-responsive">
+              <div class="">
                 <table class="table align-items-center table-flush" id="table-student">
                   <thead class="thead-light">
                     <tr>
@@ -70,6 +70,7 @@
                       <th scope="col" class="sort" data-sort="status">Apellidos</th>
                       <th scope="col" class="sort" data-sort="status">Telefono</th>
                       <th scope="col" class="sort" data-sort="status">Fecha de nacimiento</th>
+                      <th scope="col" class="sort" data-sort="status">Estado</th>
                       <th scope="col" class="sort" data-sort="status">Acciones</th>
                     </tr>
                   </thead>
@@ -94,15 +95,29 @@
                       <th scope="row">
                         {{$student->user->birth_date}}
                       </th>
+                      <th scope="row">
+                        @if($student->user->status) 
+                          <span class="badge badge-success">Activo</span>
+                        @else
+                        <span class="badge badge-danger">Inactivo</span>
+                        @endif
+                      </th>
 
                       <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v text-primary"></i>
+                            <i class="fas fa-ellipsis-v text-primary text-primary"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="{{ route('student.detail', ['id'=>$student->id]) }}"  >Ver detalles</a>
-                            <a class="dropdown-item" href="{{ route('student.update.form', ['id'=>$student->id]) }}"  >Editar</a>
+                            <a class="dropdown-item" href="{{ route('student.detail', ['id'=>$student->id]) }}" >
+                              <span><i class="fas fa-info-circle text-primary" ></i></span>
+                              Ver detalles
+                            </a>
+                            <a class="dropdown-item" href="{{ route('student.update.form', ['id'=>$student->id]) }}">
+                              <span><i class="fas fa-pencil-alt text-warning text-warning"></i></span>
+                              Editar
+                            </a>
+                            <x-user-active-component status="{{$student->user->status}}" id="{{$student->user->id}}"/>
                          
                           </div>
                         </div>

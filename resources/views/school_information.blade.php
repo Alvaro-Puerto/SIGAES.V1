@@ -1,21 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-    <div class="container-fluid mt-2">
-        {{-- <div class="card">
-            @if($errors->has())
-                @foreach ($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                @endforeach
-            @endif
-        </div> --}}
+
+@include('users.partials.header', [
+        'title' => '',
+        'description' => __('Configuracion inicial del centro'),
+        'class' => 'col-lg-12 '
+    ])   
+
+    <div class="container-fluid mt--8">
       <div class="card p-4">
         <form  method="POST" enctype="multipart/form-data" action="{{url('school/create')}}" >
             @csrf
             <div class="form-row">
                 <div class="form-group col-12">
-                    <label for="">Id</label>
+                    
                     <input type="text" class="form-control" name="id" id="id" value="{{$school->id }}" hidden>
                 </div>
                 <div class="form-group col-6">
@@ -62,8 +61,7 @@
                     </div>
                 </div>
                 <div class="form-group col-6">
-                    <img src="#" alt="" title="" />
-                    
+                <img src="{{ url($school->logo) }}" alt="" title="" />
                 </div>
             </div>
             <div class="form-row">

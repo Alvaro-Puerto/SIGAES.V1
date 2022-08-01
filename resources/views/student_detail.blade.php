@@ -21,13 +21,23 @@
                   <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                       <div class="d-flex justify-content-between">
                           {{-- <a href="#" class="btn btn-sm btn-info mr-4">{{ __('Cambiar foto de perfil') }}</a> --}}
+                          @if($student->user->status) 
                           <button type="button" class="btn btn-sm btn-info mr-4" data-toggle="modal" data-target="#exampleModal">
                               Cambiar foto de perfil
                           </button>
+                          @endif
+                          
+                          
                           {{-- <a href="#" class="btn btn-sm btn-default float-right">{{ __('Message') }}</a> --}}
                       </div>
+                     
                   </div>
                   <div class="card-body pt-0 pt-md-4">
+                      @if(!$student->user->status)
+                        <div class="alert alert-danger" role="alert">
+                          Este estudiante esta inactivo.
+                        </div>
+                      @endif
                       <div class="row">
                           <div class="col">
                               <div class="card-profile-stats d-flex justify-content-center mt-md-5">
@@ -82,7 +92,7 @@
                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Reporte disciplinario</a>
                           </li>-->
                           <li class="nav-item">
-                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Referencia familiar-</a>
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Referencia familiar </a>
                           </li>
                       </ul>
                   </div>
@@ -90,10 +100,12 @@
                       <div class="tab-content" id="pills-tabContent">
                           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="container-fluid d-flex justify-content-end">
-                              <a  href="{{ route('enrollement.new', ['id'=>$student->id]) }}" class="btn btn-primary mr-0">
+                              @if($student->user->status) 
+                              <a aria-disabled="true"  href="{{ route('enrollement.new', ['id'=>$student->id]) }}" class="btn btn-primary mr-0">
                                   <span><i class="fa fa-plus text-white" aria-hidden="true"></i></span>
                                   Nueva matricula
                               </a>
+                              @endif
                             </div>
                               <div class="table-responsive mt-4">
                                   <table class="table align-items-center table-light table-flush">
@@ -127,7 +139,7 @@
                                                 </span>
                                               </a>
                                               <a class="btn btn-link" href="{{route('enrollement.matter', $item->id)}}">
-                                                <span> <i class="fas fa-pencil-alt text-primary"></i></span>
+                                                <span> <i class="fas fa-pencil-alt text-warning text-primary"></i></span>
                                                 Editar 
                                                 
                                               </a>
@@ -193,7 +205,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -252,7 +264,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -311,7 +323,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -370,7 +382,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -429,7 +441,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -506,7 +518,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -565,7 +577,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -624,7 +636,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -683,7 +695,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -742,7 +754,7 @@
                                         <td class="text-right">
                                           <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                              <i class="fas fa-ellipsis-v text-primary"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                               <a class="dropdown-item" href="#">Action</a>
@@ -759,12 +771,15 @@
                           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div class="card">
                               <div class="card-header d-flex justify-content-end">
+                              @if($student->user->status) 
                                 <a href="{{route('tutor.select', ["id" => $student->id])}}" class="btn btn-primary">
                                   <span>
                                     <i class="fa fa-plus text-white" aria-hidden="true"></i>
                                   </span>
                                   Añadir tutor
                                 </a>
+                              @endif
+                                
                               </div>
                               <div class="card-body">
                                 <div class="card-deck">
@@ -791,12 +806,16 @@
                                       <form action="{{ route('tutor.detach', ["id_student" => $student->id, "id_tutor" => $tutor->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">
+
+                                        @if($student->user->status) 
+                                        <button class="btn btn-danger" type="submit" >
                                           <span>
                                             <i class="fa fa-times text-white" aria-hidden="true"></i>
                                           </span>
                                           Quitar vinculo
                                         </button>
+                                        @endif
+                                        
                                       </form>
                                       
                                     </div>

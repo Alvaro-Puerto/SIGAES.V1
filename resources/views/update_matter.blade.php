@@ -7,7 +7,7 @@
         <div class="card-header">
             <p class="font-weight-bold text-dark">
                 <span>
-                    <i class="fas fa-pencil-alt fa-1x text-warning"></i>
+                    <i class="fas fa-pencil-alt text-warning fa-1x text-warning"></i>
                 </span>
                 Editar asignatura
             </p>

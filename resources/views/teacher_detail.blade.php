@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-<div class="container-fluid mt-2">
+
+@include('users.partials.header', [
+        'title' => '',
+        'description' => __('Detalle'),
+        'class' => 'col-lg-12 '
+    ])   
+
+<div class="container-fluid mt--8">
     <div class="row">
         <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
             <div class="card card-profile shadow">
@@ -63,10 +69,47 @@
               Materias asignadas por pensum
             </p>
           </div>
-          <div class="card-body">
-            
+          <div class="card-body bg-white">
+            <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                        <th scope="col" class="sort" data-sort="name">Id</th>
+                        <th scope="col" class="sort" data-sort="budget">Nombre</th>
+                        <th scope="col" class="sort" data-sort="">Ciclo lectivo</th>
+                        <th scope="col" class="sort" data-sort="status">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="list">
+                        @foreach ($pensums as $pensum)
+                        <tr>
+                        <th scope="row">
+                            {{$pensum->id}}
+                        </th>
+                        <th scope="row">
+                            {{$pensum->nombre}}
+                        </th>
+                        <th>
+                            {{$pensum->name}}
+                        </th>
+                        <th scope="row">
+                            <a class="btn btn-link">
+                                Ver detalles
+                            </a>
+                        </th>
+                        </tr>
+                        @endforeach
+                    
+                    
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+            {{$pensums->links()}}
           </div>
-        </div>
+          </div>
+          
     </div>
 </div>
 

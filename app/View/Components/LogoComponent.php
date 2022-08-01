@@ -21,10 +21,9 @@ class LogoComponent extends Component
         //
         $school = SchoolInformation::offset(0)->limit(1)->first();
         if(!$school) {
-            $this->logo = 'SIGAES';
+            $this->logo = '';
         } else {
-          
-                $this->logo = $school->logo;
+          $this->logo = $school->logo;
         }
         
     }

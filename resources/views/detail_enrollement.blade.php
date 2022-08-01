@@ -5,13 +5,35 @@
 <div class="container-fluid mt-4">
     <div class="row">
         <div class="col-12">
-            <div class="card ">
-                <div class="card-header">
+            <div class="card border-bottom-0">
+                <div class="card-header d-flex justify-content-between" >
                     <p class="font-weight-bold">
                         Detalles de la matricula
                     </p>
+                    <a href="{{ route('enrollement.print', ['id'=> $enrollement->id]) }}" target="_blank" class="btn btn-success">Imprimir</a>
                 </div>
                 <div class="card-body">
+                <div class="row">
+                        <div class="col-md-3">
+                            <small class="d-block">Nombres completos</small>
+                            <p class="font-weight-bold">
+                                {{$enrollement->student->user->fullName()}}
+                            </p>
+                        </div>
+                        <div class="col-md-3">
+                            <small>Codigo de estudiante</small>
+                            <p class="font-weight-bold">
+                               {{$enrollement->student->code}}
+                            </p>
+                        </div>
+                        <div class="col-md-3">
+                            <small class="d-block">Sexo</small>
+                            <p class="font-weight-bold">
+                                {{$enrollement->student->user->gender}}
+                             </p>
+                        </div>
+                        
+                    </div>
                     <div class="row">
                         <div class="col-md-3">
                             <small class="d-block">Año lectivo</small>
@@ -62,8 +84,8 @@
         </div>
         
     </div>
-    <div class="row bg-white">
-        <div class="col-12">
+    <div class="row">
+        {{--<div class="col-12">
             <div class="card">
                 <div class="card-body row">
                     <div class="col-2">
@@ -75,24 +97,24 @@
                         <div class="row">
                             @foreach ($item->partials as $partial)
                                 <div class="col">
-                                    {{$partial->name}}
+                                    <small>{{$partial->name}}</small>
                                 </div>
                             @endforeach
                         </div>
                     </div>     
                     @endforeach
                 </div>
-                <div class="card-body ">
+                <div class="card-body mt--2 ">
                     @foreach ($matter_and_partial as $item)
-                        <div class="row">
-                            <div class="col-2 border-bottom border-top">
-                                <p>{{$item->name_matter}}
+                        <div class="row ">
+                            <div class="col-2 p-2 d-flex justify-content-end border-bottom border-top">
+                                <small>{{$item->name_matter}}
                                     <span>
                                         <a href="{{route('partial.matter.update', ["id" => $item->id_pivot, 'id_enrollement' => $enrollement->id])}}">
                                             <i class="fas fa-external-link-square-alt text-success"></i>
                                         </a>
                                     </span>
-                                </p>
+                                </small>
                             </div>
                             @foreach ($item->partials as $partial)
                                 <div class="col border text-center align-items-center justify-content-center">
@@ -103,8 +125,41 @@
                     @endforeach
                 </div>
             </div>
-        </div>
-       
+        </div> --}}
+       <div class="col-12">
+           <div class="card border-top-0">
+               <div class="card-body">
+               <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="border-right">Asignaturas</th>
+                        @foreach ($year_school->semester as $item)
+                            @foreach ($item->partials as $partial)
+                                <th class="border-right" scope="col "><small>{{$partial->name}}</small></th>
+                            @endforeach
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    @foreach ($matter_and_partial as $item)
+                        <tr>
+                            <td class="d-flex justify-content-end border-right">
+                            <small>{{$item->name_matter}}
+                                <span>
+                                    <a href="{{route('partial.matter.update', ["id" => $item->id_pivot, 'id_enrollement' => $enrollement->id])}}">
+                                        <i class="fas fa-external-link-square-alt text-success"></i>
+                                    </a>
+                                </span>
+                            </small>
+                            </td>
+                        </tr> 
+                    @endforeach
+                </tbody>
+            </table>
+               </div>
+           </div>
+       </div>
         
     </div>
 </div>

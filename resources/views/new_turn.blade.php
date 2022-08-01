@@ -1,12 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-<div class="container-fluid">
-    <div class="card mt-2">
+@include('users.partials.header', [
+        'title' => '',
+        'description' => 'Nuevo turno',
+        'class' => 'col-lg-12 '
+  ])   
+<div class="container-fluid mt--8">
+    <div class="card m">
         <div class="card-header">
             <p class="font-weight-bold text-dark">
-                <span><i class="fa fa-plus"></i></span>
+                <span><i class="fa fa-plus text-primary"></i></span>
                 Nuevo turno escolar</p>
         </div>
         <div class="card-body">

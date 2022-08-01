@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('dni')->nullable();
             $table->string('description', 1000)->nullable();
             $table->boolean('is_change')->default(false);
+            $table->boolean('status')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

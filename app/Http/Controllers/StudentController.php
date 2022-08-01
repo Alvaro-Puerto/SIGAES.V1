@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\StudentExport;
+use App\Http\Traits\UserTrait;
 use App\Models\Student;
 use App\Models\User;
 use Facade\FlareClient\Http\Response;
@@ -11,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
-    //
+    use UserTrait;
 
     public function __construct()
     {

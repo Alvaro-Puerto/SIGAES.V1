@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TeacherExport;
+use App\Models\Pensum;
 use App\Models\Teacher;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TeacherController extends Controller
@@ -60,13 +62,16 @@ class TeacherController extends Controller
     public function detail($id) {
         $teacher = Teacher::find($id);
         $teacher->user;
+        
+        $result = DB::table('pensums')
+            ->join('pensum_matters', 'pensums.id', '=', 'pensum_matters.pensum_id')
+            ->join('pensum_matter_teachers', 'pensum_matters.id', '=', 'pensum_matter_teachers.pensum_matter_id')
+            ->join('school_years', 'pensums.school_year_id', '=', 'school_years.id')
+            ->where('pensum_matter_teachers.teacher_id', '=', $id)
+            ->select('pensums.*', 'school_years.name')->paginate(5);
 
-        $pensum = $teacher->pensum;
-
-        foreach ($pensum as $item) { 
-            $item->pensum;
-        }
-        return view('teacher_detail')->with(['teacher' => $teacher]);
+         
+        return view('teacher_detail')->with(['teacher' => $teacher, 'pensums' => $result]);
     }
 
     public function updatePhoto(Request $request) {
@@ -102,5 +107,50 @@ class TeacherController extends Controller
         return response()->json($teachers);
     }
 
+    public function update($id) {
+
+        $teacher = Teacher::find($id);
+        return view('teacher_update', ['teacher' => $teacher]);
+    }
+
+    public function put(Request $request) {
+        $teacher = Teacher::find($request->id);
+
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'birth_date' => 'required',
+            'gender' => 'required',
+            'inss' => 'required',
+           
+        ], [
+            'first_name.required' => 'El primer nombre es requerido',
+            'last_name.required' => 'El apellido es requerido',
+            'email.required' => 'El correo electronico es requerido',
+            'email.unique' => 'Ya existe un correo electronico',
+            'gender.required' => 'El sexo es requerido',
+            'inss.required' => 'El codigo es requerido',
+            
+            'birth_date.required' => 'La fecha de nacimiento es requerida',
+           
+        ]);
+
+        $teacher->inss = $request->inss;
+        $teacher->general_observation = $request->general_observation;
+        $teacher->save();
+
+        $user = $teacher->user;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->birth_date = $request->birth_date;
+        $user->gender = $request->gender;
+        $user->phone = $request->phone;
+        $user->save();
+        return Response()->redirectTo('/teacher');
+
+        
+    }
     
 }

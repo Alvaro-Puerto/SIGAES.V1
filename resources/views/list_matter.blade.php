@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-  <div class="container-fluid mt-2">
-      <div class="row mt-2">
+@include('users.partials.header', [
+        'title' => '',
+        'description' => 'Todas las asignaturas',
+        'class' => 'col-lg-12 '
+  ])   
+  <div class="container-fluid mt--8">
+      <div class="row ">
           <div class="col">
             <div class="card">
               <!-- Card header -->
@@ -46,7 +50,7 @@
                       <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v"></i>
+                            <i class="fas fa-ellipsis-v text-primary"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                             <a class="dropdown-item" href="{{ route('matter.detail', ['id'=>$matter->id]) }}">
@@ -54,7 +58,7 @@
                               Configurar
                             </a>
                             <a class="dropdown-item" href="{{ route('matter.update', ['id'=>$matter->id]) }}">
-                              <span><i class="fas fa-pencil-alt textr-primary"></i></span>
+                              <span><i class="fas fa-pencil-alt text-warning textr-primary"></i></span>
                               Editar
                             </a>
                             <form class="dropdown-item" action="{{ route('matter.delete', $matter->id)}}" method="post">

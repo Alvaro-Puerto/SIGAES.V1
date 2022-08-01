@@ -9,6 +9,12 @@ class EnrollementMatter extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'enrollement_id',
+        'matter_id',
+        'pensum_id'
+    ];
+
     public function matter() {
         return $this->belongsTo(Matter::class);
     }

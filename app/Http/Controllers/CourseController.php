@@ -15,9 +15,9 @@ class CourseController extends Controller
         if(!$school) {
             return Redirect::to('school/setting')->withErrors('message' ,'Se necesita configurar');
         }
-        $courses = $school->course;
+        $courses = $school->course()->paginate(10);
         error_log($courses);
-        return view('list_course', ['course' => $courses]);
+        return view('list_course', ['courses' => $courses]);
     }
 
     public function create(Request $request) {

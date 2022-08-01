@@ -1,3 +1,5 @@
+const Http = new XMLHttpRequest();
+
 function search() {
     var el = document.getElementById('list-teacher');
     let teacherName = document.getElementById('search-teacher').value;
@@ -25,4 +27,45 @@ function search() {
             el.innerHTML += strEl;
         }
     })
+}
+
+
+
+function get_data_form() {
+    let data = {
+        'code': document.getElementById('input-code').value,
+        'first_name': document.getElementById('input-name').value,
+        'last_name': document.getElementById('input-last-name').value
+    }
+    
+    const url='search/teacher';
+    console.log(data);
+    Http.open("POST", url);
+    Http.setRequestHeader('X-CSRF-Token', $('meta[name="_token"]').attr('content'));
+    Http.setRequestHeader("Accept", "application/json");
+    Http.setRequestHeader("Content-Type", "application/json");
+    Http.send(JSON.stringify(data));
+
+    Http.onreadystatechange = (e) => {
+        console.log(Http.response)
+        replaceRow(Http.response)
+    }, err => {
+        console.log(err);
+    }
+
+}
+
+function replaceRow(data) {
+
+    let tbody = document.getElementById('tbody-student');
+    let table = document.getElementById('table-student').getElementsByTagName('tbody')[0];
+    // while (tbody.hasChildNodes()) {
+    //     tbody.removeChild(tbody.lastChild);
+    // }
+
+    $('#table-student tbody').empty();
+    
+    $('#table-student tbody').html(data);
+
+
 }

@@ -13,6 +13,13 @@ class SchoolInformationController extends Controller
         $school = SchoolInformation::offset(0)->limit(1)->first();
         if(!$school) {
             $school = new SchoolInformation();
+            $school->logo = '';
+            $school->name = '';
+            $school->address = '';
+            $school->code = '';
+            $school->municipality = '';
+            $school->city = '';
+
             return view('school_information', ['school' => $school]);
         }
         return view('school_information', ['school' => $school]);

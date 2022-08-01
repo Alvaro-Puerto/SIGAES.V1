@@ -24,7 +24,7 @@
                   <meta name="_token" content="{{ csrf_token() }}">
                   <div class="form-row">
                     <div class="form-group col-3">
-                      <label for="">Codigo</label>
+                      <label for="">Inss</label>
                       <input class="form-control rounded-0 border" name="code" id="input-code">
                     </div>
                     <div class="form-group col-4">
@@ -49,7 +49,7 @@
               </div>
               <!-- Light table -->
               <div class="table-responsive">
-                <table class="table align-items-center table-flush">
+                <table class="table align-items-center table-flush" id="table-student">
                   <thead class="thead-light">
                     <tr>
                       <th scope="col" class="sort" data-sort="name">Id</th>
@@ -61,7 +61,7 @@
                       <th scope="col" class="sort" data-sort="status">Acciones</th>
                     </tr>
                   </thead>
-                  <tbody class="list">
+                  <tbody class="list" id="tbody-student">
                     @foreach ($teachers as $teacher)
                     <tr>
                       <th scope="row">
@@ -86,10 +86,11 @@
                       <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v text-primary"></i>
+                            <i class="fas fa-ellipsis-v text-primary text-primary"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                             <a class="dropdown-item" href="{{ route('teacher.detail', ['id'=>$teacher->id]) }}"  >Ver detalles</a>
+                            <a class="dropdown-item" href="{{ route('teacher.update', ['id'=>$teacher->id]) }}"  >Editar</a>
                          
                           </div>
                         </div>
@@ -114,4 +115,5 @@
 @push('js')
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+    <script type="text/javascript" src="{{asset('assets/js/teacher.js')}}"></script>
 @endpush

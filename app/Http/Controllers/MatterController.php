@@ -40,7 +40,7 @@ class MatterController extends Controller
    
     public function get() {
         if($this->school) {
-            $matters = $this->school->matters()->paginate(15);
+            $matters = $this->school->matters()->paginate(10);
             return view('list_matter', ['matters' => $matters]);
         } else {
             return redirect('school/setting');

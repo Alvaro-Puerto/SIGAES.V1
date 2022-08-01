@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
-    <div class="container-fluid mt-2">
+@include('users.partials.header', [
+        'title' => '',
+        'description' => 'Nueva  recurrencia de sesion',
+        'class' => 'col-lg-12 '
+  ])   
+
+    <div class="container-fluid mt--8">
        <div class="card">
            <div class="card-header">
                <p class="font-weight-bold ">

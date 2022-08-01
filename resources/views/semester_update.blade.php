@@ -6,7 +6,7 @@
     <div class="card mt-2">
         <div class="card-header">
             <p class="font-weight-bold text-dark">
-            <span><i class="fas fa-pencil-alt fa-1x text-warning"></i></span>
+            <span><i class="fas fa-pencil-alt text-warning fa-1x text-warning"></i></span>
                 Editar semestre
             </p>
             @if($errors->any())
