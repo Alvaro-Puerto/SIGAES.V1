@@ -19,6 +19,7 @@ class CreateSchoolYearsTable extends Migration
             $table->string('description')->nullable();
             $table->date('start_at');
             $table->date('end_at');
+            $table->boolean('status')->default(false);
             $table->foreignId('school_information_id');
             $table->foreign('school_information_id')
                   ->on('school_information')

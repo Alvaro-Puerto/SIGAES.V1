@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\TeacherExport;
 use App\Models\Pensum;
+use App\Models\SchoolYear;
 use App\Models\Teacher;
 use App\Models\User;
 
@@ -61,17 +62,29 @@ class TeacherController extends Controller
 
     public function detail($id) {
         $teacher = Teacher::find($id);
-        $teacher->user;
+        $user = $teacher->user;
         
         $result = DB::table('pensums')
             ->join('pensum_matters', 'pensums.id', '=', 'pensum_matters.pensum_id')
             ->join('pensum_matter_teachers', 'pensum_matters.id', '=', 'pensum_matter_teachers.pensum_matter_id')
             ->join('school_years', 'pensums.school_year_id', '=', 'school_years.id')
             ->where('pensum_matter_teachers.teacher_id', '=', $id)
-            ->select('pensums.*', 'school_years.name')->paginate(5);
+            ->select('school_years.id','school_years.name',  'school_years.start_at',  'school_years.end_at')
+            ->groupBy(  'school_years.id',
+                        'school_years.name', 
+                        'school_years.start_at',
+                        'school_years.end_at'
+            )->paginate(5);
 
-         
-        return view('teacher_detail')->with(['teacher' => $teacher, 'pensums' => $result]);
+        $school_year_active = SchoolYear::where('status', true)->limit(1)->get();
+        $school_year = SchoolYear::all();
+        
+        return view('teacher_detail')
+                    ->with([    'teacher' => $teacher, 
+                                'pensums' => $result,
+                                'events' => $this->getEvent($user->id, $school_year_active[0]->id),
+                                'school_year' => $school_year
+                            ]);
     }
 
     public function updatePhoto(Request $request) {
@@ -153,4 +166,12 @@ class TeacherController extends Controller
         
     }
     
+    public function getEventByClycle($user_id, $ciclo) {
+        return response()->json($this->getEvent($user_id, $ciclo));
+    }
+
+    private function getEvent($user_id, $ciclo) {
+        $user = User::find($user_id);
+        return  $events = $user->events()->where('school_year_id',$ciclo)->get();
+    }
 }

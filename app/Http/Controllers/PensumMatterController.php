@@ -23,4 +23,17 @@ class PensumMatterController extends Controller
 
         return Redirect::back();
     }
+
+    public function detail($id) {
+        $pensumMatter = PensumMatter::find($id);
+        $teachers = $pensumMatter->teachers;
+
+        $data = [];
+
+        foreach ($teachers as $teacher) {
+            array_push($data, $teacher->user);
+        }
+
+        return response()->json($data);
+    }
 }

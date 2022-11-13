@@ -99,12 +99,12 @@
                             <i class="fas fa-ellipsis-v text-primary text-primary"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="{{ route('student.detail', ['id'=>$student->id]) }}">
+                            <!--<a class="dropdown-item" href="{{ route('student.detail', ['id'=>$student->id]) }}">
                               <span><i class="fas fa-info-circle text-primary" ></i></span>
                               Ver detalles
-                            </a>
+                            </a>-->
                             <a class="dropdown-item" href="{{ route('tutor.update', ['id'=>$student->id]) }}">
-                              <span><i class="fas fa-info-circle text-primary" ></i></span>
+                            <span><i class="fas fa-pencil-alt text-warning text-warning"></i></span>
                               Editar
                             </a>
                          

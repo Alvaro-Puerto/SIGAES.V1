@@ -22,8 +22,7 @@ class SearchController extends Controller
         }
 
         if($request->first_name) {
-            error_log('primer nombre');
-            //$student->without('user')->where('first_name', "LIKE", "%{$request->first_name}%");
+            
             $first_name = $request->first_name;
             $students->whereHas('user', function($q) use($first_name) {
                 $q->where('first_name', "LIKE", "%{$first_name}%");
@@ -223,5 +222,12 @@ class SearchController extends Controller
         } else {
             $output.='<tr><td colspan="3" class="text-center" scope="row"> No se encontraron registros</td></tr>';
         }
+    }
+
+    public function search(Request $request) {
+        $query = $request->get('query');
+        $result = User::where('first_name', "LIKE", "%{$query}%")->get();
+
+        return response()->json($result);
     }
 }

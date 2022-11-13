@@ -31,7 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/search/student', [App\Http\Controllers\SearchController::class, 'search_student']);
 Route::post('/search/tutor', [App\Http\Controllers\SearchController::class, 'search_tutor']);
 Route::post('/search/teacher', [App\Http\Controllers\SearchController::class, 'search_teacher']);
-
+Route::get('/search/all', [App\Http\Controllers\SearchController::class, 'search']);
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
@@ -94,6 +94,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('teacher/search/{name}', ['as' => 'teacher.search', 'uses' => 'App\Http\Controllers\TeacherController@search']);
 	Route::get('teacher/{id}/update', ['as' => 'teacher.update', 'uses' => 'App\Http\Controllers\TeacherController@update']);
 	Route::post('teacher/update/form', ['as' => 'teacher.update.put', 'uses' => 'App\Http\Controllers\TeacherController@put']);
+
+	Route::get('teacher/{user_id}/event/{ciclo}', ['as' => 'teacher.event', 'uses' => 'App\Http\Controllers\TeacherController@getEventByClycle']);
+
 	#Matter //Asignaturas
 	Route::get('matter/new', function() {return view('new_matter');});
 	Route::post('matter/new', ['as' => 'matter.new', 'uses' => 'App\Http\Controllers\MatterController@create']);
@@ -114,7 +117,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('school/year/detail/{id}', ['as' => 'year.config', "uses" => 'App\Http\Controllers\SchoolYearController@detail']);
 	Route::get('school/year/update/{id}', ['as' => 'year.update', "uses" => 'App\Http\Controllers\SchoolYearController@update']);
 	Route::delete('school/year/{id}', ['as' => 'year.delete', "uses" => 'App\Http\Controllers\SchoolYearController@delete']);
-	
+	Route::get('school/year/{id}/status',['as' => 'year.status', "uses" => 'App\Http\Controllers\SchoolYearController@status']);
+	Route::get('school/year/search/{query}',['as' => 'year.search', "uses" => 'App\Http\Controllers\SchoolYearController@search']);
 	#Semester
 	Route::get('school/semester/{id}/new', function($id) {
 		$year = SchoolYear::find($id);
@@ -170,10 +174,25 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('tutor/asign/student', ['as' => 'tutor.asign', "uses" => 'App\Http\Controllers\ParentStudentController@asignStudent']);
 	Route::delete('tutor/{id_tutor}/detach/student/{id_student}', ['as' => 'tutor.detach', "uses" => 'App\Http\Controllers\ParentStudentController@removeStudent']);
 
+	#Roles
+	Route::get('roles', ['as' => 'roles', 'uses' => 'App\Http\Controllers\RolController@index']);
+	Route::post('roles', ['as' => 'roles.store', 'uses' => 'App\Http\Controllers\RolController@store']);
+	
+	#RolesConfig
+	Route::get('roles/{id}', ['as' => 'roles.show', 'uses' => 'App\Http\Controllers\RolConfigController@show']);
+	Route::post('roles/permission', ['as' => 'roles.store', 'uses' => 'App\Http\Controllers\RolConfigController@store']);
+	Route::post('roles/user/add', ['as' => 'roles.add.user', 'uses' => 'App\Http\Controllers\RolConfigController@addUser']);
+	Route::post('roles/user/quit', ['as' => 'roles.quit.user', 'uses' => 'App\Http\Controllers\RolConfigController@removeUser']);
+	
 	#Calendar
 	Route::get('calendar',  ['as' => 'event.index', "uses" => 'App\Http\Controllers\EventController@index']);
 	Route::get('calendar/{course_id}/{school_year_id}',  ['as' => 'event.all', "uses" => 'App\Http\Controllers\EventController@getEventByAjax']);
+	Route::post('event', ['as' => 'event.create', 'uses' => 'App\Http\Controllers\EventController@create']);
+	Route::get('calendar/config', ["as" => 'calendar.config', 'uses' => 'App\Http\Controllers\CalendarConfigController@index']);
+	Route::get('calendar/config/{id}/detail', ["as" => 'calendar.config.detail', 'uses' => 'App\Http\Controllers\CalendarConfigController@detail']);
 	
+	#CalendarUser
+	Route::get('calendar/user/all/{id}', ['as' => 'event.user', 'uses' => 'App\Http\Controllers\UserEventController@detail']);
 	#Pensum
 	Route::get('course/{id}/pensum', ['as' => 'course.pensum', "uses" => 'App\Http\Controllers\PensumController@detail']);
 	Route::get('course/{id}/pensum/new', ['as' => 'course.pensum.new', "uses" => 'App\Http\Controllers\PensumController@pensumCreateStep1']);
@@ -181,6 +200,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('course/{id}/pensum/{id_pensum}/matter', ['as' => 'course.pensum.matter', "uses" => 'App\Http\Controllers\PensumController@pensumCreateStep2']);
 	Route::post('course/pensum/matter', ["uses" =>  'App\Http\Controllers\PensumController@pensumCreateStep2Post']);
 	Route::post('course/pensum/matter/detach', ['as' => 'course.pensum.matter.detach', 'uses' => 'App\Http\Controllers\PensumMatterController@detach']);
+	Route::get('course/pensum/matter/{id}', ['as' => 'course.pensum.matter.get', 'uses' => 'App\Http\Controllers\PensumMatterController@detail']);
 	Route::post('course/pensum/matter/teacher/detach', ['as' => 'course.pensum.matter.teacher.detach', 'uses' => 'App\Http\Controllers\PensumMatterController@detachTeacher']);
 	Route::get('course/pensum/{id}/finish', ['as' => 'course.pensum.finish', "uses" =>  'App\Http\Controllers\PensumController@pensumCreateStep3']);
 	Route::get('pensum/{id}', ['as' => 'pensum.detail', "uses" =>  'App\Http\Controllers\PensumController@pensumDetail']);

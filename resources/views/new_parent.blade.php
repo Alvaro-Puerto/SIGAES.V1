@@ -93,7 +93,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-12 form-group d-flex justify-content-end">
-                            <button class="btn btn-danger">Cancelar</button>
+                            <a href="/tutor/list" class="btn btn-danger">Cancelar</a>
                             <button type="submit" class="btn btn-success">Guardar</button>
                         </div>
                     </div>

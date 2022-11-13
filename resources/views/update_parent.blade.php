@@ -104,12 +104,10 @@
                     </div>
                     <div class="form-row">
                         <div class="col-12 form-group d-flex justify-content-end">
-                            <a href="/student" class="btn btn-danger">Cancelar</a>
+                            <a href="/tutor/list" class="btn btn-danger">Cancelar</a>
                             <button type="submit" class="btn btn-success">Guardar</button>
                         </div>
                     </div>
-                    
-                   
                 </form>
         </div>
     </div>

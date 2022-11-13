@@ -16,12 +16,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             //UsersTableSeeder::class,
             //StudentGeneratorSeed::class,
-            TeacherSeed::class,
+            #TeacherSeed::class,
             //TutorSeed::class,
             //SchoolInformation::class,
             #SchoolYear::class,
             #AsignaturasSeed::class,
             #GradeYear::class
+            Permision::class
             ]);
     }
 }

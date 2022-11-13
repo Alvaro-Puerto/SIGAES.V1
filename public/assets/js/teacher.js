@@ -1,5 +1,5 @@
 const Http = new XMLHttpRequest();
-
+var calendarGlobal = null;
 function search() {
     var el = document.getElementById('list-teacher');
     let teacherName = document.getElementById('search-teacher').value;
@@ -28,8 +28,6 @@ function search() {
         }
     })
 }
-
-
 
 function get_data_form() {
     let data = {
@@ -68,4 +66,20 @@ function replaceRow(data) {
     $('#table-student tbody').html(data);
 
 
+}
+
+function searchEvent() {
+    let user_id = document.getElementById('user_id').value;
+    let ciclo = document.getElementById('ciclo').value;
+    calendarGlobal.removeAllEvents();
+    fetch('/teacher/'+user_id+'/event/' + ciclo, {
+        method: 'GET'
+    }).then(res => res.json())
+      .then(res => {
+          res.forEach(event => {
+            calendarGlobal.addEvent(event);
+          });
+      }).catch(err => {
+        console.log(err);
+      });
 }

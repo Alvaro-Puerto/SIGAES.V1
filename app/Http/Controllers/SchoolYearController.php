@@ -73,4 +73,17 @@ class SchoolYearController extends Controller
         $year = SchoolYear::find($id);
         return view('school_year_update', ['year' => $year]);
     }
+
+    public function status($id) {
+        $school_year = SchoolYear::find($id);
+        $school_year->status = !$school_year->status;
+        $school_year->save();
+        return Redirect::back();
+    }
+
+    public function search($query) {
+        $query = SchoolYear::where('name', 'like', "%{$query}%")->get();
+
+        return response()->json($query);
+    }
 }

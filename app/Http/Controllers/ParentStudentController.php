@@ -42,13 +42,13 @@ class ParentStudentController extends Controller
             'birth_date.required' => 'La fecha de nacimiento es requerida',
             
         ]);
-
+ 
         $data = $request->all();
         $data['password'] = bcrypt('secret');
         $data['name'] = $request->first_name . ' ' . $request->last_name;
         $user = User::create($data);
         $user->tutor()->create($data);
-        return redirect('/student');
+        return redirect('/tutor/list');
     }
 
     public function put(Request $request) {
